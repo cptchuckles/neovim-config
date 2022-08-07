@@ -20,7 +20,7 @@ local options = {
 	swapfile = false,          -- create a swapfile while editing
 	termguicolors = true,      -- set term gui colors (well supported)
 	timeoutlen = 200,          -- leader timeout in msec
-	undofile = true,           -- persistent undo file
+	undofile = false,          -- persistent undo file
 	updatetime = 200,          -- faster completion (400ms default)
 	writebackup = false,       -- when a file is open by other program
 	expandtab = false,         -- auto turn tabs to spaces
@@ -46,3 +46,6 @@ for k, v in pairs(options) do
 end
 
 vim.opt.iskeyword:append "-"      -- add '-' to iskeyword chars
+
+vim.cmd [[colorscheme darkblue]]
+vim.cmd [[highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a]]
