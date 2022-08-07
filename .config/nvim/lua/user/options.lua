@@ -35,17 +35,44 @@ local options = {
 	scrolloff = 4,             -- top/bottom line margin from cursor
 	sidescrolloff = 8,         -- horizontal margin from cursor (no wrap)
 	shortmess = "a",           -- how to display messages in the msg line
-	guifont = "firacode:h12",  -- font to use in graphical nvim frontends
+	guifont = "fira\\ code",    -- font to use in graphical nvim frontends
 	list = true,
 	listchars = "tab:→ ,lead:·,trail:¶",
 	formatoptions = "n2ljp",   -- magic!
 }
+vim.opt.iskeyword:append "-"   -- add '-' to iskeyword chars
 
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
-vim.opt.iskeyword:append "-"      -- add '-' to iskeyword chars
 
-vim.cmd [[colorscheme darkblue]]
-vim.cmd [[highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a]]
+-- netrw settings
+vim.cmd [[
+	let g:netrw_liststyle=3     " tree style listing
+	let g:netrw_browse_split=4  " open file in previous window
+	let g:netrw_banner=0        " no banner
+	let g:netrw_usetab=1        " use netrw-<C-Tab> mapping
+	let g:netrw_wiw=32          " window width (cols)
+
+	" Don't let netrw create [No Name] buffers
+	augroup AutoDeleteNetrwHiddenBuffers
+		au!
+		au FileType netrw setlocal bufhidden=wipe
+	augroup end
+]]
+
+-- terminal settings
+vim.cmd [[
+	augroup TerminalSettings
+		au!
+		au TermOpen * setl nonumber norelativenumber nocursorline nolist modifiable | startinsert
+		au BufEnter * if &buftype == 'terminal' | startinsert | endif
+	augroup end
+]]
+
+-- theme settings
+vim.cmd [[
+	colorscheme darkblue
+	highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
+]]

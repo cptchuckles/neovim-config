@@ -14,11 +14,14 @@ vim.g.maplocalleader = "\\"
 -- Normal --
 -- Better window navigation
 keymap("n", "<M-h>", "<C-w>h", opts)
---keymap("n", "<M-j>", "<C-w>j", opts)
---keymap("n", "<M-k>", "<C-w>k", opts)
+keymap("n", "<M-j>", "<C-w>j", opts)
+keymap("n", "<M-k>", "<C-w>k", opts)
 keymap("n", "<M-l>", "<C-w>l", opts)
 
-keymap("n", "<leader>e", ":Lex 32<CR>", opts)
+keymap("n", "ZZ", ":wqa<CR>", opts)
+keymap("n", "ZQ", ":qa!<CR>", opts)
+
+keymap("n", "<leader>e", ":Lex 30<CR>", opts)
 keymap("n", "<leader>s", ":set hls!<CR>", opts)
 
 -- Window resizing with CTRL-Arrowkey
