@@ -46,6 +46,17 @@ return packer.startup(function(use)
 
 	use 'kyazdani42/nvim-web-devicons'  -- more icons and shit
 
+	-- cmp plugins
+	use 'hrsh7th/nvim-cmp'    -- The completion engine plugin
+	use 'hrsh7th/cmp-buffer'  -- buffer completion
+	use 'hrsh7th/cmp-path'    -- path completion
+	use 'hrsh7th/cmp-cmdline' -- command line completion
+	use 'saadparwaiz1/cmp_luasnip'  -- snippet completion
+
+	-- snippet engines
+	use 'L3MON4D3/LuaSnip'    -- snippet engine
+	use 'rafamadriz/friendly-snippets'  -- a bunch of snippets
+
 	-- markdown previewer in web browser
 	use {
 		'iamcco/markdown-preview.nvim',
