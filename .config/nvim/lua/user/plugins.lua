@@ -44,6 +44,35 @@ return packer.startup(function(use)
 	use "nvim-lua/popup.nvim"    -- Nvim implementation of Vim Popup API
 	use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
 
+	use 'kyazdani42/nvim-web-devicons'  -- more icons and shit
+
+	-- markdown previewer in web browser
+	use {
+		'iamcco/markdown-preview.nvim',
+		run = 'cd app && yarn install',
+		cmd = 'MarkdownPreview',
+		opt = true,
+	}
+
+	-- better % operator (keywords and shit)
+	use { 'andymass/vim-matchup', event = "VimEnter" }
+
+	-- git gutter indicator thing
+	use {
+		'lewis6991/gitsigns.nvim',
+		requires = {'nvim-lua/plenary.nvim'},
+		config = function()
+			require('gitsigns').setup()
+		end,
+	}
+
+	-- Sickass statusline thing (TODO)
+	-- use {
+	-- 'glepnir/galaxyline.nvim',
+	-- 	branch = 'main',
+	-- 	requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+	-- }
+
 	-- Automatically set configuration after cloning packer.nvim
 	-- Keep this at the end
 	if PACKER_BOOTSTRAP then

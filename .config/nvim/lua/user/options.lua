@@ -75,4 +75,6 @@ vim.cmd [[
 vim.cmd [[
 	colorscheme darkblue
 	highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
+	highlight SignColumn ctermbg=NONE guibg=NONE
+	highlight Todo ctermbg=Yellow guibg=Yellow
 ]]
