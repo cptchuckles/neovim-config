@@ -22,6 +22,9 @@ keymap("n", "ZQ", ":qa!<CR>", opts)
 keymap("n", "<leader>e", ":Lex 30<CR>", opts)
 keymap("n", "<leader>s", ":set hls!<CR>", opts)
 
+keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
+keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+
 -- Window resizing with CTRL-Arrowkey
 keymap("n", "<C-Up>", "2<C-w>-", opts)
 keymap("n", "<C-Down>", "2<C-w>+", opts)

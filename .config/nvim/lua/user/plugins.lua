@@ -68,6 +68,10 @@ return packer.startup(function(use)
 	use 'neovim/nvim-lspconfig'  -- enable LSP
 	use 'williamboman/nvim-lsp-installer'  -- nice lsp server installer
 
+	-- Telescoppe
+	use 'nvim-telescope/telescope.nvim'
+	use 'nvim-telescope/telescope-media-files.nvim'
+
 	-- markdown previewer in web browser
 	use {
 		'iamcco/markdown-preview.nvim',
