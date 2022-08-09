@@ -57,10 +57,16 @@ return packer.startup(function(use)
 	use 'hrsh7th/cmp-path'    -- path completion
 	use 'hrsh7th/cmp-cmdline' -- command line completion
 	use 'saadparwaiz1/cmp_luasnip'  -- snippet completion
+	use 'hrsh7th/cmp-nvim-lsp' -- LSP support for nvim-cmd
+	use 'hrsh7th/cmp-nvim-lua' -- Lua support for nvim-cmd
 
 	-- snippet engines
 	use 'L3MON4D3/LuaSnip'    -- snippet engine
 	use 'rafamadriz/friendly-snippets'  -- a bunch of snippets
+
+	-- LSP
+	use 'neovim/nvim-lspconfig'  -- enable LSP
+	use 'williamboman/nvim-lsp-installer'  -- nice lsp server installer
 
 	-- markdown previewer in web browser
 	use {

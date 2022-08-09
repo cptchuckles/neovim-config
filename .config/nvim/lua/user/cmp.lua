@@ -101,6 +101,8 @@ cmp.setup({
 			vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
 
 			vim_item.menu = ({
+				nvim_lsp = '[LSP]',
+				nvim_lua = '[NvimLua]',
 				luasnip = '[LuaSnip]',
 				buffer = '[Buffer]',
 				path = '[Path]',
@@ -111,18 +113,16 @@ cmp.setup({
 	},
 
 	sources = {
-		{ name = 'buffer' },
+		{ name = 'nvim_lsp' },
+		{ name = 'nvim_lua' },
 		{ name = 'luasnip' },
+		{ name = 'buffer' },
 		{ name = 'path' },
 	},
 
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
-	},
-
-	window = {
-		documentation = cmp.config.window.bordered(),
 	},
 
 	experimental = {
@@ -141,10 +141,9 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
-		{ name = 'path' }
-	}, {
 		{ name = 'cmdline' }
+	}, {
+		{ name = 'path' }
 	}),
 })
-
 
