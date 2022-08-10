@@ -72,6 +72,15 @@ return packer.startup(function(use)
 	use 'nvim-telescope/telescope.nvim'
 	use 'nvim-telescope/telescope-media-files.nvim'
 
+	-- Treesitter
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		run = function()
+			require('nvim-treesitter.install').update({ with_sync = true })
+		end,
+	}
+	use 'p00f/nvim-ts-rainbow'  -- Bracket color matching
+
 	-- markdown previewer in web browser
 	use {
 		'iamcco/markdown-preview.nvim',
