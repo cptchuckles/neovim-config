@@ -46,6 +46,7 @@ return packer.startup(function(use)
 
 	use 'kyazdani42/nvim-web-devicons'  -- more icons and shit
 	use 'numToStr/Comment.nvim'         -- auto-commenting
+	use 'JoosepAlviste/nvim-ts-context-commentstring'
 
 	-- cmp plugins
 	use 'hrsh7th/nvim-cmp'    -- The completion engine plugin
