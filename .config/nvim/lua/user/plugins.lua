@@ -63,7 +63,8 @@ return packer.startup(function(use)
 
 	-- LSP
 	use 'neovim/nvim-lspconfig'  -- enable LSP
-	use 'williamboman/nvim-lsp-installer'  -- nice lsp server installer
+	use 'williamboman/mason.nvim'
+	use 'williamboman/mason-lspconfig.nvim'
 
 	-- Telescoppe
 	use 'nvim-telescope/telescope.nvim'

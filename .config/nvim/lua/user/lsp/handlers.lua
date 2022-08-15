@@ -72,9 +72,9 @@ local function lsp_keymaps(bufnr)
 	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 	map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
 	map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
-	map('n', 'gl', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>')
-	map('n', '<leader>mv', '<cmd>lua vim.lsp.buf.rename()<CR>')
-	map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+	map('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>')
+	map('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>')
+	map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
 	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
