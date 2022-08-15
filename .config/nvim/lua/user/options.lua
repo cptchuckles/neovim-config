@@ -54,11 +54,14 @@ vim.cmd [[
 	let g:netrw_banner=0        " no banner
 	let g:netrw_usetab=1        " use netrw-<C-Tab> mapping
 	let g:netrw_wiw=32          " window width (cols)
+]]
 
-	" Don't let netrw create [No Name] buffers
-	augroup AutoDeleteNetrwHiddenBuffers
+-- Buffer wiping
+vim.cmd [[
+	augroup WipeUnwantedBuffers
 		au!
-		au FileType netrw setlocal bufhidden=wipe
+		au FileType netrw setlocal bufhidden=wipe          " Prevent netrw from making entries in the buffer list
+		" au BufEnter /$metadata$/* setlocal bufhidden=wipe  " Wipe omnisharp metadata buffers after leaving (usually by <C-t>)
 	augroup end
 ]]
 

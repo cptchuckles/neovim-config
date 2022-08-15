@@ -39,4 +39,15 @@ mason_lsp.setup_handlers({
 		local json_opts = vim.tbl_deep_extend("force", require('user.lsp.settings.jsonls'), opts)
 		require('lspconfig')["jsonls"].setup(json_opts)
 	end,
+
+	['omnisharp'] = function ()
+		local omnisharp_opts = {
+			handlers = {
+				["textDocument/definition"] = require('omnisharp_extended').handler,
+			},
+		}
+		require('lspconfig')["omnisharp"].setup(
+			vim.tbl_deep_extend("force", omnisharp_opts, opts)
+		)
+	end,
 })
