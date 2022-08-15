@@ -61,8 +61,8 @@ end
 
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
-	local map = function(m, l, r)
-		vim.api.nvim_buf_set_keymap(bufnr, m, l, r, opts)
+	local map = function(mode, shortcut, action)
+		vim.api.nvim_buf_set_keymap(bufnr, mode, shortcut, action, opts)
 	end
 	map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
