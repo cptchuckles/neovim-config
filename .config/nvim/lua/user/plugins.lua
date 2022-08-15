@@ -38,11 +38,6 @@ packer.init {
 	}
 }
 
-local configs_status_ok, configs = pcall(require, 'user.configs')
-if not configs_status_ok then
-	vim.cmd [[echoerr Unable to load configs]]
-end
-
 -- Install plugins here
 return packer.startup(function(use)
 	use "wbthomason/packer.nvim" -- Let packer manage itself
@@ -102,11 +97,7 @@ return packer.startup(function(use)
 	}
 
 	-- Git Signs
-	use {
-		'lewis6991/gitsigns.nvim',
-		requires = {'nvim-lua/plenary.nvim'},
-		config = configs.gitsigns,
-	}
+	use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'} }
 
 	-- Sickass statusline thing (TODO)
 	-- use {
