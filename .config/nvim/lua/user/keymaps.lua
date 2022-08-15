@@ -9,7 +9,7 @@ vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
 
 
--- Normal --
+-- Normal -----------------------------------------------------------------------------
 -- Better window navigation
 keymap("n", "<M-h>", "<C-w>h", opts)
 keymap("n", "<M-j>", "<C-w>j", opts)
@@ -36,13 +36,13 @@ keymap("n", "<C-n>", ":bnext<CR>", opts)
 keymap("n", "<C-p>", ":bprevious<CR>", opts)
 
 
--- Insert --
+-- Insert -----------------------------------------------------------------------------
 -- Move text up/down while in insert mode
 keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 
--- Visual --
+-- Visual -----------------------------------------------------------------------------
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
@@ -55,7 +55,11 @@ keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 keymap("v", "p", '"_dp', opts)
 
 
--- Terminal --
+-- Terminal ---------------------------------------------------------------------------
+keymap("n", "<leader>`", ":split+terminal<CR>", opts)
+
 -- Window switch from terminal
+keymap("t", "<A-h>", "<C-\\><C-n><C-w>h", opts)
 keymap("t", "<A-j>", "<C-\\><C-n><C-w>j", opts)
 keymap("t", "<A-k>", "<C-\\><C-n><C-w>k", opts)
+keymap("t", "<A-l>", "<C-\\><C-n><C-w>l", opts)
