@@ -41,5 +41,9 @@ gitsigns.setup {
 		map('n', '<leader>gX', gs.toggle_deleted)
 		-- text object
 		map({'o', 'x'}, 'ic', ':<C-U>Gitsigns select_hunk<CR>')
+
+		-- automatically turn on some features
+		gs.toggle_current_line_blame(true)
+		gs.toggle_numhl(true)
 	end,
 }

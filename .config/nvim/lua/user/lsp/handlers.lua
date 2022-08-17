@@ -17,7 +17,11 @@ M.setup = function()
 	end
 
 	local config = {
-		virtual_text = false,
+		virtual_text = {
+			severity = vim.diagnostic.severity.ERROR,
+			spacing = 2,
+			prefix = "",
+		},
 		signs = {
 			active = signs,
 		},
@@ -28,9 +32,9 @@ M.setup = function()
 			focusable = false,
 			style = "minimal",
 			border = "rounded",
-			source = "always",
+			source = "if_many",
 			header = "",
-			prefix = "",
+			prefix = "· ",
 		},
 	}
 
@@ -80,9 +84,9 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
---	if client.name == "tsserver" then
---		client.resolved_capabilities.document_formatting = false
---	end
+	if client.name == "tsserver" then
+		client.resolved_capabilities.document_formatting = false
+	end
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end

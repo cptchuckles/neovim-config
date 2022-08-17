@@ -35,10 +35,12 @@ local options = {
 	scrolloff = 4,             -- top/bottom line margin from cursor
 	sidescrolloff = 8,         -- horizontal margin from cursor (no wrap)
 	shortmess = "a",           -- how to display messages in the msg line
-	guifont = "fira\\ code",    -- font to use in graphical nvim frontends
+	guifont = "BlexMono NF",   -- font to use in graphical nvim frontends
 	list = true,
 	listchars = "tab:→ ,lead:·,trail:¶",
 	formatoptions = "n2ljp",   -- magic!
+	textwidth = 120,           -- sets desired document width
+	colorcolumn = "+1",        -- marks desired rightmost document edge
 }
 vim.opt.iskeyword:append "-"   -- add '-' to iskeyword chars
 
@@ -70,7 +72,7 @@ vim.cmd [[
 	augroup TerminalSettings
 		au!
 		au TermOpen * setl nonumber norelativenumber nocursorline nolist modifiable | startinsert
-		au BufEnter * if &buftype == 'terminal' | startinsert | endif
+		au BufEnter * if &buftype == 'terminal' | startinsert | elseif &buftype == 'help' | setl colorcolumn= | endif
 	augroup end
 ]]
 

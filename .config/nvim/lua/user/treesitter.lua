@@ -35,3 +35,5 @@ treesitterConfig.setup {
 		enable_autocmd = false,
 	},
 }
+
+vim.cmd [[ highlight TSComment cterm=italic gui=italic ]]
