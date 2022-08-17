@@ -64,21 +64,24 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	local map = function(mode, shortcut, action)
-		vim.api.nvim_buf_set_keymap(bufnr, mode, shortcut, action, opts)
+	local map = function(mode, lhs, rhs)
+		local opts = { remap = false, buffer = bufnr }
+		vim.keymap.set(mode, lhs, rhs, opts)
 	end
-	map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-	map('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>')
-	map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-	map('n', '<A-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-	map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
-	map('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
-	map('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>')
-	map('n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>')
-	map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+
+	map('n', 'gD', vim.lsp.buf.declaration)
+	map('n', 'gd', vim.lsp.buf.definition)
+	map('n', 'K',  vim.lsp.buf.hover)
+	map('n', 'gi', vim.lsp.buf.implementation)
+	map('n', 'gr', vim.lsp.buf.references)
+	map({'n', 'i'}, '<A-i>', vim.lsp.buf.signature_help)
+
+	map('n', '[d', function() vim.diagnostic.goto_prev({ border = "rounded" }) end)
+	map('n', ']d', function() vim.diagnostic.goto_next({ border = "rounded" }) end)
+
+	map('n', '<leader>d', function() vim.diagnostic.open_float({ border = "rounded" }) end)
+	map('n', '<leader>r', vim.lsp.buf.rename)
+	map('n', '<leader>a', vim.lsp.buf.code_action)
 
 	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
@@ -86,6 +89,16 @@ end
 M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
+	end
+	if client.server_capabilities.signatureHelpProvider then
+		require('lsp-overloads').setup(client, {
+			keymaps = {
+				previous_signature = '<A-K>',
+				next_signature = '<A-J>',
+				previous_parameter = '<A-L>',
+				next_parameter = '<A-H>',
+			},
+		})
 	end
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)

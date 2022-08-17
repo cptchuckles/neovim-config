@@ -67,6 +67,7 @@ return packer.startup(function(use)
 	use 'williamboman/mason.nvim'
 	use 'williamboman/mason-lspconfig.nvim'
 	use 'Hoffs/omnisharp-extended-lsp.nvim'  -- Omnisharp specific bullshit
+	use 'Issafalcon/lsp-overloads.nvim'      -- signature overload cycler
 
 	-- Telescoppe
 	use 'nvim-telescope/telescope.nvim'
