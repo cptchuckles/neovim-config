@@ -45,6 +45,7 @@ return packer.startup(function(use)
 	use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
 
 	use 'kyazdani42/nvim-web-devicons'  -- more icons and shit
+	use 'LunarVim/colorschemes'         -- a bunch of colorschemes
 	use 'numToStr/Comment.nvim'         -- auto-commenting
 	use 'JoosepAlviste/nvim-ts-context-commentstring'
 
