@@ -82,6 +82,8 @@ return packer.startup(function(use)
 	}
 	use 'p00f/nvim-ts-rainbow'  -- Bracket color matching
 
+	use 'lukas-reineke/indent-blankline.nvim'  -- Indentation fanciness
+
 	-- markdown previewer in web browser
 	use {
 		'iamcco/markdown-preview.nvim',

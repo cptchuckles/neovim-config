@@ -91,6 +91,10 @@ vim.cmd [[
 		\|	highlight WinSeparator ctermbg=NONE guibg=NONE
 		\|	highlight GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
 		\|	highlight DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred
+		\|	highlight IndentBlanklineChar guifg=#2b2f38 gui=nocombine
+		\|	highlight link IndentBlanklineSpaceChar Whitespace
+		\|	highlight link IndentBlanklineIndent1 CursorLine
+		\|	highlight IndentBlanklineIndent2 guibg=NONE gui=nocombine
 	augroup end
 
 	colorscheme onedarker
