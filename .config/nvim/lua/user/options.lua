@@ -60,7 +60,7 @@ vim.g.netrw_wiw = 32          -- window width (cols)
 vim.cmd [[
 	augroup WipeUnwantedBuffers
 		au!
-		au FileType netrw setlocal bufhidden=wipe  " Prevent netrw from making entries in the buffer list
+		au FileType netrw,qf setl bufhidden=wipe colorcolumn=  " Prevent netrw from making entries in the buffer list
 	augroup end
 ]]
 
@@ -69,17 +69,29 @@ vim.cmd [[
 	augroup TerminalSettings
 		au!
 		au TermOpen * setl nonumber norelativenumber nocursorline nolist modifiable | startinsert
-		au BufEnter * if &buftype == 'terminal' | startinsert | elseif &buftype == 'help' | setl colorcolumn= | endif
+		au BufEnter *
+			\	if &buftype == 'terminal'
+			\|		startinsert
+			\|	elseif &buftype == 'help'
+			\|		setl colorcolumn=
+			\|	endif
 	augroup end
 ]]
 
 -- theme settings
 vim.cmd [[
-	colorscheme tomorrow
-	highlight TabLineFill cterm=NONE gui=NONE ctermbg=Darkgray guibg=#333333
-	highlight Todo cterm=bold gui=bold ctermbg=Yellow ctermfg=Black guibg=Yellow guifg=Black
-	highlight Comment cterm=italic gui=italic
-	highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
-	highlight GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
-	highlight DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred
+	augroup ColorSchemeOverride
+		au!
+		au ColorScheme *
+		\ 	highlight TabLineFill cterm=NONE gui=NONE ctermbg=Darkgray guibg=#333333
+		\|	highlight Todo cterm=bold gui=bold ctermbg=Yellow ctermfg=Black guibg=Yellow guifg=Black
+		\|	highlight Comment cterm=italic gui=italic
+		\|	highlight TSComment cterm=italic gui=italic
+		\|	highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
+		\|	highlight WinSeparator ctermbg=NONE guibg=NONE
+		\|	highlight GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
+		\|	highlight DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred
+	augroup end
+
+	colorscheme onedarker
 ]]

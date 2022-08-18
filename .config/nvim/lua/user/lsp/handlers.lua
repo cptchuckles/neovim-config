@@ -69,19 +69,19 @@ local function lsp_keymaps(bufnr)
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
-	map('n', 'gD', vim.lsp.buf.declaration)
-	map('n', 'gd', vim.lsp.buf.definition)
+	map('n', '<C-]>', vim.lsp.buf.definition)
+	map('n', 'g<C-]>', vim.lsp.buf.references)
 	map('n', 'K',  vim.lsp.buf.hover)
-	map('n', 'gi', vim.lsp.buf.implementation)
-	map('n', 'gr', vim.lsp.buf.references)
 	map({'n', 'i'}, '<A-i>', vim.lsp.buf.signature_help)
 
 	map('n', '[d', function() vim.diagnostic.goto_prev({ border = "rounded" }) end)
 	map('n', ']d', function() vim.diagnostic.goto_next({ border = "rounded" }) end)
 
-	map('n', '<leader>d', function() vim.diagnostic.open_float({ border = "rounded" }) end)
-	map('n', '<leader>r', vim.lsp.buf.rename)
-	map('n', '<leader>a', vim.lsp.buf.code_action)
+	map('n', '<leader>dh', function() vim.diagnostic.open_float({ border = "rounded" }) end)
+	map('n', '<leader>dd', vim.lsp.buf.declaration)
+	map('n', '<leader>di', vim.lsp.buf.implementation)
+	map('n', '<leader>dr', vim.lsp.buf.rename)
+	map('n', '<leader>da', vim.lsp.buf.code_action)
 
 	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end

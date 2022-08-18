@@ -95,9 +95,7 @@ return packer.startup(function(use)
 		'andymass/vim-matchup',
 		event = "VimEnter",
 		config = function()
-			vim.cmd [[
-				let g:matchup_matchparen_offscreen = { 'method': 'popup', }
-			]]
+			vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 		end,
 	}
 

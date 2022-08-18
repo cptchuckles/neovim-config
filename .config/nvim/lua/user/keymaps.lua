@@ -1,7 +1,7 @@
-local opts = { noremap = true, silent = true }
+local opts = { remap = false }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Remap leader key
 keymap("", "\\", "<Nop>", opts)
@@ -22,8 +22,9 @@ keymap("n", "ZQ", ":qa!<CR>", opts)
 keymap("n", "<leader>e", ":Lex 20<CR>", opts)
 keymap("n", "<leader>s", ":set hls!<CR>", opts)
 
-keymap("n", "<leader>t", "<cmd>Telescope live_grep<cr>", opts)
-keymap("n", "<leader>f", "<cmd>lua require('telescope.builtin').find_files()<cr>", opts)
+keymap("n", "<leader>t", require('telescope.builtin').live_grep, opts)
+keymap("n", "<leader>f", require('telescope.builtin').find_files, opts)
+keymap("n", "<C-l>",     require('telescope.builtin').buffers, opts)
 
 -- Window resizing with CTRL-Arrowkey
 keymap("n", "<C-Up>", "2<C-w>-", opts)

@@ -10,13 +10,11 @@ comment.setup {
 	ignore = '^$',
 
 	toggler = {
-		line = 'g//',
-		block = 'gb/',
+		line = '<C-_>',
 	},
 
 	opleader = {
-		line = 'g/',
-		block = 'gb',
+		line = 'g<C-_>',
 	},
 
 	extra = {
