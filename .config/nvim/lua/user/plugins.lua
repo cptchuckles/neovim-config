@@ -44,6 +44,8 @@ return packer.startup(function(use)
 	use "nvim-lua/popup.nvim"    -- Nvim implementation of Vim Popup API
 	use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
 
+	use 'lewis6991/impatient.nvim'      -- cache bytecode plugins for fast startup
+
 	use 'kyazdani42/nvim-web-devicons'  -- more icons and shit
 	use 'LunarVim/colorschemes'         -- a bunch of colorschemes
 	use 'numToStr/Comment.nvim'         -- auto-commenting
