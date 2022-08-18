@@ -5,6 +5,15 @@ if not status_ok then
 end
 
 gitsigns.setup {
+	numhl = true,
+	current_line_blame = true,
+	current_line_blame_opts = {
+		delay = 200,
+		ignore_whitespace = true,
+	},
+	current_line_blame_formatter = "  <author>, <author_time> - (<abbrev_sha>) <summary>",
+	preview_config = { style = 'minimal', border = 'rounded' },
+
 	on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
 
@@ -41,9 +50,5 @@ gitsigns.setup {
 		map('n', '<leader>gX', gs.toggle_deleted)
 		-- text object
 		map({'o', 'x'}, 'ic', ':<C-U>Gitsigns select_hunk<CR>')
-
-		-- automatically turn on some features
-		gs.toggle_current_line_blame(true)
-		gs.toggle_numhl(true)
 	end,
 }
