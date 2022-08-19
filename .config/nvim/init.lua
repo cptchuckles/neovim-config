@@ -13,4 +13,5 @@ require 'user.comment'
 require 'user.indent-blankline'
 require 'user.nvim-tree'
 
+-- Default configurations
 require 'impatient'
