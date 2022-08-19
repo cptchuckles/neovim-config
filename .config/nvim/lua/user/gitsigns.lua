@@ -55,12 +55,13 @@ gitsigns.setup {
 		map('n', '<leader>gS', gsfunc(gs.stage_buffer))
 		map('n', '<leader>gu', gsfunc(gs.undo_stage_hunk))
 		map('n', '<leader>gR', gsfunc(gs.reset_buffer))
-		map('n', '<leader>gp', gsfunc(gs.preview_hunk))
-		map('n', '<leader>gb', gsfunc(gs.blame_line, {full=true, ignore_whitespace=true}))
-		map('n', '<leader>gB', gsfunc(gs.toggle_current_line_blame))
-		map('n', '<leader>gd', gsfunc(gs.diffthis))
-		map('n', '<leader>gD', gsfunc(gs.diffthis, '~'))
-		map('n', '<leader>gX', gsfunc(gs.toggle_deleted))
+		-- passive actions
+		map('n', '<leader>gb', function() gs.blame_line {full=true, ignore_whitespace=true} end)
+		map('n', '<leader>gB', gs.toggle_current_line_blame)
+		map('n', '<leader>gp', gs.preview_hunk)
+		map('n', '<leader>gd', gs.diffthis)
+		map('n', '<leader>gD', function() gs.diffthis('~') end)
+		map('n', '<leader>gX', gs.toggle_deleted)
 		-- text object
 		map({'o', 'x'}, 'ic', ':<C-U>Gitsigns select_hunk<CR>')
 	end,
