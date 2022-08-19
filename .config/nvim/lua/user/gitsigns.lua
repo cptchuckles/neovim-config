@@ -44,7 +44,10 @@ gitsigns.setup {
 				elseif type(f) == "string" then
 					vim.cmd(f)
 				end
-				require('nvim-tree.api').tree.reload()
+				local nvt_ok, nvtapi = pcall(require, 'nvim-tree.api')
+				if nvt_ok then
+					nvtapi.tree.reload()
+				end
 			end
 		end
 		map({'n', 'v'}, '<leader>gs', gsfunc('Gitsigns stage_hunk'))
@@ -53,7 +56,7 @@ gitsigns.setup {
 		map('n', '<leader>gu', gsfunc(gs.undo_stage_hunk))
 		map('n', '<leader>gR', gsfunc(gs.reset_buffer))
 		map('n', '<leader>gp', gsfunc(gs.preview_hunk))
-		map('n', '<leader>gb', gsfunc(gs.blame_line, {full=true}))
+		map('n', '<leader>gb', gsfunc(gs.blame_line, {full=true, ignore_whitespace=true}))
 		map('n', '<leader>gB', gsfunc(gs.toggle_current_line_blame))
 		map('n', '<leader>gd', gsfunc(gs.diffthis))
 		map('n', '<leader>gD', gsfunc(gs.diffthis, '~'))
