@@ -24,8 +24,8 @@ tree.setup {
 		icons = {
 			error = "",
 			warning = "",
-			hint = "",
-			info = "",
+			hint = "",
+			info = "",
 		},
 	},
 	view = {
@@ -37,6 +37,7 @@ tree.setup {
 	},
 	renderer = {
 		add_trailing = true,
+		group_empty = true,
 		full_name = true,
 		indent_markers = {
 			enable = true,
