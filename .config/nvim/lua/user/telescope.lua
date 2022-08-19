@@ -1,6 +1,6 @@
 local status_ok, telescope = pcall(require, 'telescope')
 if not status_ok then
-	print("Failed to load telescope for configuration")
+	print("Couldn't load 'telescope'")
 	return
 end
 

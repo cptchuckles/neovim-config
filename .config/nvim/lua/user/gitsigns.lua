@@ -1,6 +1,6 @@
 local status_ok, gitsigns = pcall(require, 'gitsigns')
 if not status_ok then
-	print("Couldn't load Gitsigns")
+	print("Couldn't load 'gitsigns'")
 	return
 end
 

@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, 'lspconfig')
 if not status_ok then
-	print("No LspConfig module found")
+	print("Couldn't load 'lspconfig'")
 	return
 end
 

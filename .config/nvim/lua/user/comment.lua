@@ -1,6 +1,6 @@
 local status_ok, comment = pcall(require, 'Comment')
 if not status_ok then
-	print("Couldn't load Comment.nvim")
+	print("Couldn't load 'Comment'")
 	return
 end
 

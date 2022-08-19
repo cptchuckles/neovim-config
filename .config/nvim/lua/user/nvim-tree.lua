@@ -1,6 +1,6 @@
 local status_ok, tree = pcall(require, 'nvim-tree')
 if not status_ok then
-	print("nvim-tree couldn't be loaded")
+	print("Couldn't load 'nvim-tree'")
 	return
 end
 
