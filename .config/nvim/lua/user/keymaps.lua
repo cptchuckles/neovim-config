@@ -19,7 +19,7 @@ keymap("n", "<M-l>", "<C-w>l", opts)
 keymap("n", "ZZ", ":wqa<CR>", opts)
 keymap("n", "ZQ", ":qa!<CR>", opts)
 
-keymap("n", "<leader>e", ":Lex 20<CR>", opts)
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>s", ":set hls!<CR>", opts)
 
 keymap("n", "<leader>t", require('telescope.builtin').live_grep, opts)

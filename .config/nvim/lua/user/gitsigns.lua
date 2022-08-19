@@ -37,17 +37,27 @@ gitsigns.setup {
 		end, { expr = true })
 
 		-- Actions
-		map({'n', 'v'}, '<leader>gs', ':Gitsigns stage_hunk<CR>')
-		map({'n', 'v'}, '<leader>gr', ':Gitsigns reset_hunk<CR>')
-		map('n', '<leader>gS', gs.stage_buffer)
-		map('n', '<leader>gu', gs.undo_stage_hunk)
-		map('n', '<leader>gR', gs.reset_buffer)
-		map('n', '<leader>gp', gs.preview_hunk)
-		map('n', '<leader>gb', function() gs.blame_line{full=true} end)
-		map('n', '<leader>gB', gs.toggle_current_line_blame)
-		map('n', '<leader>gd', gs.diffthis)
-		map('n', '<leader>gD', function() gs.diffthis('~') end)
-		map('n', '<leader>gX', gs.toggle_deleted)
+		local function gsfunc(f, opts)
+			return function()
+				if type(f) == "function" then
+					f(opts or {})
+				elseif type(f) == "string" then
+					vim.cmd(f)
+				end
+				require('nvim-tree.api').tree.reload()
+			end
+		end
+		map({'n', 'v'}, '<leader>gs', gsfunc('Gitsigns stage_hunk'))
+		map({'n', 'v'}, '<leader>gr', gsfunc('Gitsigns reset_hunk'))
+		map('n', '<leader>gS', gsfunc(gs.stage_buffer))
+		map('n', '<leader>gu', gsfunc(gs.undo_stage_hunk))
+		map('n', '<leader>gR', gsfunc(gs.reset_buffer))
+		map('n', '<leader>gp', gsfunc(gs.preview_hunk))
+		map('n', '<leader>gb', gsfunc(gs.blame_line, {full=true}))
+		map('n', '<leader>gB', gsfunc(gs.toggle_current_line_blame))
+		map('n', '<leader>gd', gsfunc(gs.diffthis))
+		map('n', '<leader>gD', gsfunc(gs.diffthis, '~'))
+		map('n', '<leader>gX', gsfunc(gs.toggle_deleted))
 		-- text object
 		map({'o', 'x'}, 'ic', ':<C-U>Gitsigns select_hunk<CR>')
 	end,

@@ -11,5 +11,6 @@ require 'user.telescope'
 require 'user.treesitter'
 require 'user.comment'
 require 'user.indent-blankline'
+require 'user.nvim-tree'
 
 require 'impatient'

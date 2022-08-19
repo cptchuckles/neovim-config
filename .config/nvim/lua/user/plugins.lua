@@ -50,6 +50,11 @@ return packer.startup(function(use)
 	use 'LunarVim/colorschemes'         -- a bunch of colorschemes
 	use 'numToStr/Comment.nvim'         -- auto-commenting
 
+	-- better tree
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = { 'kyazdani42/nvim-web-devicons', },
+	}
 
 	-- cmp plugins
 	use 'hrsh7th/nvim-cmp'    -- The completion engine plugin
