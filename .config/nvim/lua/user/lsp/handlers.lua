@@ -79,6 +79,7 @@ local function lsp_keymaps(bufnr)
 
 	map('n', '<leader>dh', function() vim.diagnostic.open_float({ border = "rounded" }) end)
 	map('n', '<leader>dd', vim.lsp.buf.declaration)
+	map('n', '<leader>dD', function() vim.diagnostic.setqflist{ open=true, severity={min=vim.diagnostic.severity.WARN} } end)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
 	map('n', '<leader>da', vim.lsp.buf.code_action)
