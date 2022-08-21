@@ -73,6 +73,6 @@ tree.setup {
 vim.cmd [[
 	augroup NvimTreeAutoRefresh
 		au!
-		au FileType NvimTree au BufEnter * lua require("nvim-tree.api").tree.reload()
+		au FileType NvimTree au BufEnter NvimTree* lua require('nvim-tree.api').tree.reload()
 	augroup end
 ]]

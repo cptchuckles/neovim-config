@@ -46,7 +46,7 @@ gitsigns.setup {
 				end
 				local nvt_ok, nvtapi = pcall(require, 'nvim-tree.api')
 				if nvt_ok then
-					nvtapi.tree.reload()
+					vim.schedule(function() nvtapi.tree.reload() end)
 				end
 			end
 		end
