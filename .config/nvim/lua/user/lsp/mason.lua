@@ -1,18 +1,18 @@
 local mason_ok, mason = pcall(require, 'mason')
 if not mason_ok then
-	print("Mason couldn't be loaded")
+	print("Couldn't load 'mason'")
 	return
 end
 
 local mason_lsp_ok, mason_lsp = pcall(require, 'mason-lspconfig')
 if not mason_lsp_ok then
-	print("Mason-LSPConfig couldn't be loaded")
+	print("Couldn't load 'mason-lspconfig'")
 	return
 end
 
 local handlers_ok, lsp_handlers = pcall(require, 'user.lsp.handlers')
 if not handlers_ok then
-	print("User.Lsp.Handlers couldn't be loaded")
+	print("Couldn't load 'user.lsp.handlers'")
 	return
 end
 
@@ -24,7 +24,7 @@ local opts = {
 mason.setup()
 
 mason_lsp.setup()
-mason_lsp.setup_handlers({
+mason_lsp.setup_handlers {
 	-- Automatically invoke lspconfig setup for every installed LSP server
 	function (server_name)
 		require('lspconfig')[server_name].setup(opts)
@@ -50,4 +50,4 @@ mason_lsp.setup_handlers({
 			vim.tbl_deep_extend("force", omnisharp_opts, opts)
 		)
 	end,
-})
+}
