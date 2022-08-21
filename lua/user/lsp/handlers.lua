@@ -63,6 +63,8 @@ local function lsp_highlight_document(client)
 	end
 end
 
+local have_telescope, telescope = pcall(require, 'telescope.builtin')
+
 local function lsp_keymaps(bufnr)
 	local map = function(mode, lhs, rhs)
 		local opts = { remap = false, buffer = bufnr }
@@ -70,7 +72,13 @@ local function lsp_keymaps(bufnr)
 	end
 
 	map('n', '<C-]>', vim.lsp.buf.definition)
-	map('n', 'g<C-]>', vim.lsp.buf.references)
+	map('n', 'g<C-]>', function()
+		if have_telescope then
+			telescope.lsp_references()
+		else
+			vim.lsp.buf.references()
+		end
+	end)
 	map('n', 'K',  vim.lsp.buf.hover)
 	map({'n', 'i'}, '<A-i>', vim.lsp.buf.signature_help)
 
@@ -78,7 +86,13 @@ local function lsp_keymaps(bufnr)
 	map('n', ']d', function() vim.diagnostic.goto_next({ border = "rounded" }) end)
 
 	map('n', '<leader>dd', function() vim.diagnostic.open_float({ border = "rounded" }) end)
-	map('n', '<leader>dD', function() vim.diagnostic.setqflist{ open=true, severity={min=vim.diagnostic.severity.WARN} } end)
+	map('n', '<leader>dD', function()
+		if have_telescope then
+			telescope.diagnostics()  -- Full diagnostics because telescope makes looking at things easy
+		else
+			vim.diagnostic.setqflist { open = true, severity = { min = vim.diagnostic.severity.WARN } }
+		end
+	end)
 	map('n', '<leader>de', vim.lsp.buf.declaration)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
