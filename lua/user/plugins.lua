@@ -41,75 +41,68 @@ packer.init {
 
 -- Install plugins here
 return packer.startup(function(use)
-	use "wbthomason/packer.nvim" -- Let packer manage itself
-	use "nvim-lua/popup.nvim"    -- Nvim implementation of Vim Popup API
-	use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
+	-- Bare necessities
+	use 'wbthomason/packer.nvim'                              -- Let packer manage itself
+	use 'nvim-lua/popup.nvim'                                 -- Nvim implementation of Vim Popup API
+	use 'nvim-lua/plenary.nvim'                               -- Useful lua functions used by lots of plugins
 
-	use 'lewis6991/impatient.nvim'      -- cache bytecode plugins for fast startup
+	use 'lewis6991/impatient.nvim'                            -- cache bytecode plugins for fast startup
 
-	use 'kyazdani42/nvim-web-devicons'  -- more icons and shit
-	use 'LunarVim/colorschemes'         -- a bunch of colorschemes
-	use 'numToStr/Comment.nvim'         -- auto-commenting
-
-	-- better tree
-	use {
-		'kyazdani42/nvim-tree.lua',
-		requires = { 'kyazdani42/nvim-web-devicons', },
-	}
-
-	-- cmp plugins
-	use 'hrsh7th/nvim-cmp'    -- The completion engine plugin
-	use 'hrsh7th/cmp-buffer'  -- buffer completion
-	use 'hrsh7th/cmp-path'    -- path completion
-	use 'hrsh7th/cmp-cmdline' -- command line completion
-	use 'saadparwaiz1/cmp_luasnip'  -- snippet completion
-	use 'hrsh7th/cmp-nvim-lsp' -- LSP support for nvim-cmd
-	use 'hrsh7th/cmp-nvim-lua' -- Lua support for nvim-cmd
-
-	-- snippet engines
-	use 'L3MON4D3/LuaSnip'    -- snippet engine
-	use 'rafamadriz/friendly-snippets'  -- a bunch of snippets
+	-- Completion
+	use 'hrsh7th/nvim-cmp'                                    -- The completion engine plugin
+	use 'hrsh7th/cmp-buffer'                                  -- Buffer completion
+	use 'hrsh7th/cmp-path'                                    -- Path completion
+	use 'hrsh7th/cmp-cmdline'                                 -- Command line completion
+	use 'L3MON4D3/LuaSnip'                                    -- Snippet engine
+	use 'saadparwaiz1/cmp_luasnip'                            -- Snippet completion
+	use 'rafamadriz/friendly-snippets'                        -- A bunch of snippets
+	use 'hrsh7th/cmp-nvim-lua'                                -- Lua support for nvim-cmp
 
 	-- LSP
-	use 'neovim/nvim-lspconfig'  -- enable LSP
-	use 'williamboman/mason.nvim'
+	use 'neovim/nvim-lspconfig'                               -- Official community LSP configs
+	use 'hrsh7th/cmp-nvim-lsp'                                -- LSP support for nvim-cmp
+	use 'Issafalcon/lsp-overloads.nvim'                       -- signature overload cycler
+	use 'williamboman/mason.nvim'                             -- LSP/DAP/Format/Lint manager
 	use 'williamboman/mason-lspconfig.nvim'
-	use 'Hoffs/omnisharp-extended-lsp.nvim'  -- Omnisharp specific bullshit
-	use 'Issafalcon/lsp-overloads.nvim'      -- signature overload cycler
+	use 'Hoffs/omnisharp-extended-lsp.nvim'                   -- Omnisharp specific bullshit
 
-	-- Telescoppe
-	use 'nvim-telescope/telescope.nvim'
-
-	-- Treesitter
+	-- Quality of Life enhancements
+	use 'LunarVim/colorschemes'                               -- a bunch of colorschemes
+	use 'kyazdani42/nvim-web-devicons'                        -- more icons and shit
+	use 'lewis6991/gitsigns.nvim'                             -- Git Signs
+	use 'lukas-reineke/indent-blankline.nvim'                 -- Indentation fanciness
+	use 'numToStr/Comment.nvim'                               -- Auto-commenting
+	use 'nvim-telescope/telescope.nvim'                       -- Telescoppe
 	use {
-		'nvim-treesitter/nvim-treesitter',
+		'kyazdani42/nvim-tree.lua',                           -- NvimTree
+		requires = { 'kyazdani42/nvim-web-devicons' }
+	}
+	use {
+		'nvim-treesitter/nvim-treesitter',                    -- Treesitter for syntax highlighting
 		run = function()
 			require('nvim-treesitter.install').update({ with_sync = true })
 		end,
 	}
-	use 'p00f/nvim-ts-rainbow'  -- Bracket color matching
-
-	use 'lukas-reineke/indent-blankline.nvim'  -- Indentation fanciness
-
-	-- markdown previewer in web browser
 	use {
-		'iamcco/markdown-preview.nvim',
-		run = 'cd app && yarn install',
-		cmd = 'MarkdownPreview',
-		opt = true,
+		'p00f/nvim-ts-rainbow',                               -- Color-code brackets and parens and shit
+		requires = 'nvim-treesitter/nvim-treesitter'
 	}
-
-	-- better % operator (keywords and shit)
 	use {
-		'andymass/vim-matchup',
-		event = "VimEnter",
+		'andymass/vim-matchup',                               -- Better % operator (keywords and shit)
+		event = 'VimEnter',
 		config = function()
 			vim.g.matchup_matchparen_offscreen = { method = 'popup' }
 		end,
 	}
 
-	-- Git Signs
-	use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'} }
+	-- Useful tools
+	use {
+		'iamcco/markdown-preview.nvim',                       -- Markdown previewer in web browser
+		run = 'cd app && yarn install',
+		cmd = 'MarkdownPreview',
+		opt = true,
+	}
+	use 'kdheepak/lazygit.nvim'                               -- LazyGit
 
 	-- Sickass statusline thing (TODO)
 	-- use {
