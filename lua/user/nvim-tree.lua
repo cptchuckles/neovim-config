@@ -9,6 +9,7 @@ tree.setup {
 	hijack_cursor = true,
 	open_on_setup = true,
 	reload_on_bufenter = true,
+	prefer_startup_root = true,
 	hijack_directories = {
 		enable = false,
 		auto_open = true,
@@ -17,6 +18,7 @@ tree.setup {
 	update_focused_file = {
 		enable = true,
 		update_root = true,
+		ignore_list = { 'help' },
 	},
 	diagnostics = {
 		enable = true,

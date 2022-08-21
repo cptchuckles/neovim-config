@@ -36,8 +36,8 @@ local options = {
 	sidescrolloff = 8,         -- horizontal margin from cursor (no wrap)
 	shortmess = "a",           -- how to display messages in the msg line
 	guifont = "BlexMono NF",   -- font to use in graphical nvim frontends
-	list = false,
-	listchars = "tab:→ ,lead:·,trail:¶",
+	list = true,
+	listchars = "tab:ﬀ ,lead:·,trail:¶",
 	formatoptions = "n2ljp",   -- magic!
 	textwidth = 120,           -- sets desired document width
 	colorcolumn = "+1",        -- marks desired rightmost document edge
@@ -62,6 +62,7 @@ vim.cmd [[
 	augroup WipeUnwantedBuffers
 		au!
 		au FileType netrw,qf setl bufhidden=wipe colorcolumn=  " Prevent netrw from making entries in the buffer list
+		au BufLeave "[No Name]" bdelete <abuf>
 	augroup end
 ]]
 
@@ -69,7 +70,9 @@ vim.cmd [[
 vim.cmd [[
 	augroup TerminalSettings
 		au!
-		au TermOpen * setl nonumber norelativenumber nocursorline nolist modifiable | startinsert
+		au TermOpen *
+			\	setl nonumber norelativenumber nocursorline nolist modifiable
+			\|	startinsert
 		au BufEnter *
 			\	if &buftype == 'terminal'
 			\|		startinsert

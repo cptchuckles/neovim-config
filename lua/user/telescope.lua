@@ -10,7 +10,19 @@ telescope.setup {
 	defaults = {
 		prompt_prefix = ' ',
 		selection_caret = ' ',
-		path_display = {"default"},
+		sorting_strategy = 'ascending',
+		path_display = function(opts, path)
+			local U = require('telescope.utils')
+			local tail = U.path_tail(path)
+			local short = U.transform_path({path_display={shorten=2}}, path)
+			return string.format("%s (%s)", tail, short)
+		end,
+
+		layout_config = {
+			horizontal = {
+				width = 0.9,
+			},
+		},
 
 		mappings = {
 			i = {
