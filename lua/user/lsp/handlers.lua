@@ -98,7 +98,7 @@ local function lsp_keymaps(bufnr)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
 	map('n', '<leader>da', vim.lsp.buf.code_action)
 
-	vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+	vim.cmd [[ command! -range=% Format execute 'lua vim.lsp.buf.range_formatting()' ]]
 end
 
 M.on_attach = function(client, bufnr)
