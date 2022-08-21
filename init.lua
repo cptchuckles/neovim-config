@@ -1,7 +1,7 @@
 -- Core modules
+require 'user.plugins'
 require 'user.options'
 require 'user.keymaps'
-require 'user.plugins'
 
 -- Plugin configuration modules
 require 'user.gitsigns'
