@@ -53,7 +53,6 @@ tree.setup {
 
 	remove_keymaps = {
 		'[e', ']e',  -- Default diagnostic prev/next
-		'[c', ']c',  -- Default git prev/next
 	},
 
 	on_attach = function(bufnr)
@@ -64,8 +63,6 @@ tree.setup {
 
 		map('n', '[d', ntapi.node.navigate.diagnostics.prev)
 		map('n', ']d', ntapi.node.navigate.diagnostics.next)
-		map('n', '[c', ntapi.node.navigate.git.prev)
-		map('n', ']c', ntapi.node.navigate.git.next)
 	end,
 }
 
