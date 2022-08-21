@@ -1,4 +1,4 @@
-local opts = { remap = false }
+local opts = { remap = false, silent = true }
 
 -- Shorten function name
 local keymap = vim.keymap.set

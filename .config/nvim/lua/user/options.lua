@@ -31,7 +31,7 @@ local options = {
 	relativenumber = true,     -- show line numbers as offset from cursor
 	numberwidth = 4,           -- width of numberline gutter (default 4)
 	signcolumn = "yes",        -- always show the sign column
-	wrap = true,               -- word-wrap long lines
+	wrap = false,              -- word-wrap long lines
 	scrolloff = 4,             -- top/bottom line margin from cursor
 	sidescrolloff = 8,         -- horizontal margin from cursor (no wrap)
 	shortmess = "a",           -- how to display messages in the msg line
@@ -41,6 +41,7 @@ local options = {
 	formatoptions = "n2ljp",   -- magic!
 	textwidth = 120,           -- sets desired document width
 	colorcolumn = "+1",        -- marks desired rightmost document edge
+	laststatus = 3,            -- global statusline at the bottom of nvim
 }
 vim.opt.iskeyword:append "-"   -- add '-' to iskeyword chars
 
