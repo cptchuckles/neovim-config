@@ -61,7 +61,7 @@ vim.g.netrw_wiw = 32          -- window width (cols)
 vim.cmd [[
 	augroup WipeUnwantedBuffers
 		au!
-		au FileType netrw,qf setl bufhidden=wipe colorcolumn=  " Prevent netrw from making entries in the buffer list
+		au FileType netrw,qf,nofile setl bufhidden=wipe colorcolumn=
 		au BufLeave "[No Name]" bdelete <abuf>
 	augroup end
 ]]

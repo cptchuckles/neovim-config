@@ -74,7 +74,7 @@ local function lsp_keymaps(bufnr)
 	map('n', '<C-]>', vim.lsp.buf.definition)
 	map('n', 'g<C-]>', function()
 		if have_telescope then
-			telescope.lsp_references()
+			telescope.lsp_references({ include_declaration = false })
 		else
 			vim.lsp.buf.references()
 		end
