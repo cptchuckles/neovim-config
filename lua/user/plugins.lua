@@ -73,6 +73,7 @@ return packer.startup(function(use)
 	use 'lukas-reineke/indent-blankline.nvim'                 -- Indentation fanciness
 	use 'numToStr/Comment.nvim'                               -- Auto-commenting
 	use 'nvim-telescope/telescope.nvim'                       -- Telescoppe
+	use 'simrat39/symbols-outline.nvim'                       -- Symbols outliner
 	use {
 		'kyazdani42/nvim-tree.lua',                           -- NvimTree
 		requires = { 'kyazdani42/nvim-web-devicons' }

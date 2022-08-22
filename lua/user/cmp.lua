@@ -16,9 +16,9 @@ local kind_icons = {
 	Method = '',
 	Function = '',
 	Constructor = '',
-	Field = '',
-	Variable = '',
-	Class = '',
+	Field = '',
+	Variable = '',
+	Class = '',
 	Interface = '',
 	Module = '',
 	Property = '',
@@ -36,7 +36,7 @@ local kind_icons = {
 	Struct = '',
 	Event = '',
 	Operator = '',
-	TypeParameter = '',
+	TypeParameter = '𝙏',
 }
 -- find more at https://www.nerdfonts.com/cheat-sheet
 

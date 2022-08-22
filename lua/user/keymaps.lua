@@ -25,6 +25,7 @@ if have_nvtree then
 else
 	map("n", "<leader>e", ":Lex 20<CR>", opts)
 end
+map("n", "<leader>E", ":SymbolsOutline<CR>", opts)
 map("n", "<leader>s", ":set hls!<CR>", opts)
 map("n", "<leader>w", ":set wrap!<CR>", opts)
 
