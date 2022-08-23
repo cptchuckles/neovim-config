@@ -72,7 +72,9 @@ return packer.startup(function(use)
 	use 'lewis6991/gitsigns.nvim'                             -- Git Signs
 	use 'lukas-reineke/indent-blankline.nvim'                 -- Indentation fanciness
 	use 'numToStr/Comment.nvim'                               -- Auto-commenting
-	use 'nvim-telescope/telescope.nvim'                       -- Telescoppe
+	use 'nvim-telescope/telescope.nvim'                       -- Telescope
+	use 'nvim-telescope/telescope-ui-select.nvim'             -- Use telescope for more UI things
+	use 'folke/trouble.nvim'                                  -- Pretty qickfix list
 	use 'simrat39/symbols-outline.nvim'                       -- Symbols outliner
 	use {
 		'kyazdani42/nvim-tree.lua',                           -- NvimTree
@@ -97,13 +99,13 @@ return packer.startup(function(use)
 	}
 
 	-- Useful tools
+	use 'kdheepak/lazygit.nvim'                               -- LazyGit
 	use {
 		'iamcco/markdown-preview.nvim',                       -- Markdown previewer in web browser
 		run = 'cd app && yarn install',
 		cmd = 'MarkdownPreview',
 		opt = true,
 	}
-	use 'kdheepak/lazygit.nvim'                               -- LazyGit
 
 	-- Sickass statusline thing (TODO)
 	-- use {
