@@ -76,6 +76,7 @@ return packer.startup(function(use)
 	use 'nvim-telescope/telescope-ui-select.nvim'             -- Use telescope for more UI things
 	use 'folke/trouble.nvim'                                  -- Pretty qickfix list
 	use 'simrat39/symbols-outline.nvim'                       -- Symbols outliner
+	use 'RRethy/vim-illuminate'                               -- Cursor-word highlighter + text objects
 	use {
 		'kyazdani42/nvim-tree.lua',                           -- NvimTree
 		requires = { 'kyazdani42/nvim-web-devicons' }

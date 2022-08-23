@@ -99,6 +99,9 @@ vim.cmd [[
 		\|	highlight link IndentBlanklineSpaceChar Whitespace
 		\|	highlight link IndentBlanklineIndent1 CursorLine
 		\|	highlight IndentBlanklineIndent2 guibg=NONE gui=nocombine
+		\|	highlight link IlluminatedWordText LspReferenceText
+		\|	highlight link IlluminatedWordRead LspReferenceRead
+		\|	highlight link IlluminatedWordWrite LspReferenceWrite
 	augroup end
 
 	colorscheme onedarker
