@@ -48,7 +48,19 @@ tree.setup {
 		highlight_git = true,
 		icons = {
 			show = {
-				git = false,
+				git = true,
+			},
+			git_placement = "after",
+			glyphs = {
+				git = {
+					unstaged = "±",
+					staged = "",
+					unmerged = "",
+					renamed = "➜",
+					untracked = "ﱐ",
+					deleted = "ﯰ",
+					ignored = "﬒",
+				},
 			},
 		},
 	},
