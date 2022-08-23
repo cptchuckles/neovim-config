@@ -7,7 +7,7 @@ end
 trouble.setup {
 	padding = true,
 	auto_close = true,
-	auto_fold = true,
+	auto_fold = false,
 	action_keys = {
 		jump = '<cr>',
 		preview = '<tab>',

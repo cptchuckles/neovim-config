@@ -76,12 +76,9 @@ local function try_telescope_references()
 		vim.lsp.buf.references()
 	end
 end
-local function try_telescope_diagnostics()
-	local have_telescope, telescope = pcall(require, 'telescope.builtin')
-	if have_telescope then
-		telescope.diagnostics()  -- Full diagnostics because telescope makes looking at things easy
-	elseif not pcall(vim.cmd, [[ Trouble workspace_diagnostics ]]) then
-		vim.diagnostic.setqflist { open = true, severity = { min = vim.diagnostic.severity.WARN } }
+local function try_trouble_diagnostics()
+	if not pcall(vim.cmd, [[ Trouble workspace_diagnostics ]]) then
+		vim.diagnostic.setqflist({ open = true })
 	end
 end
 
@@ -101,7 +98,7 @@ local function lsp_keymaps(bufnr)
 	map('n', ']d', function() vim.diagnostic.goto_next({ border = "rounded" }) end)
 
 	map('n', '<leader>dd', function() vim.diagnostic.open_float({ border = "rounded" }) end)
-	map('n', '<leader>dD', try_telescope_diagnostics)
+	map('n', '<leader>dD', try_trouble_diagnostics)
 	map('n', '<leader>de', vim.lsp.buf.declaration)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
