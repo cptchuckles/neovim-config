@@ -32,10 +32,12 @@ map("n", "<leader>w", ":set wrap!<CR>", opts)
 local have_telescope, telescope = pcall(require, 'telescope.builtin')
 if have_telescope then
 	map("n", "<leader>t", telescope.live_grep, opts)
-	map("n", "<leader>T", function() telescope.live_grep({grep_open_files = true}) end, opts)
+	map("n", "<leader>T", function() telescope.live_grep({ grep_open_files = true }) end, opts)
 	map("n", "<leader>*", telescope.grep_string, opts)
 	map("n", "<leader>f", telescope.find_files, opts)
 	map("n", "<C-l>",     telescope.buffers, opts)
+	map("n", "<leader>qh", telescope.quickfixhistory, opts)
+	map("n", "<leader>rg", telescope.current_buffer_fuzzy_find, opts)
 else
 	map("n", "<C-l>", ":ls<CR>:b", opts)
 end

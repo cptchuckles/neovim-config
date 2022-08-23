@@ -63,7 +63,27 @@ local function lsp_highlight_document(client)
 	end
 end
 
-local have_telescope, telescope = pcall(require, 'telescope.builtin')
+local function try_telescope_references()
+	local have_telescope, telescope = pcall(require, 'telescope.builtin')
+	if have_telescope then
+		telescope.lsp_references(
+			require('telescope.themes').get_dropdown {
+				include_declaration = false,
+				layout_config = { width = 0.7, },  -- TODO: fix this not inheriting from defaults
+			}
+		)
+	elseif not pcall(vim.cmd, [[ Trouble lsp_references ]]) then
+		vim.lsp.buf.references()
+	end
+end
+local function try_telescope_diagnostics()
+	local have_telescope, telescope = pcall(require, 'telescope.builtin')
+	if have_telescope then
+		telescope.diagnostics()  -- Full diagnostics because telescope makes looking at things easy
+	elseif not pcall(vim.cmd, [[ Trouble workspace_diagnostics ]]) then
+		vim.diagnostic.setqflist { open = true, severity = { min = vim.diagnostic.severity.WARN } }
+	end
+end
 
 local function lsp_keymaps(bufnr)
 	local map = function(mode, lhs, rhs)
@@ -71,28 +91,17 @@ local function lsp_keymaps(bufnr)
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
-	map('n', '<C-]>', vim.lsp.buf.definition)
-	map('n', 'g<C-]>', function()
-		if have_telescope then
-			telescope.lsp_references({ include_declaration = false })
-		else
-			vim.lsp.buf.references()
-		end
-	end)
-	map('n', 'K',  vim.lsp.buf.hover)
+	map('n', 'K',      vim.lsp.buf.hover)
+	map('n', '<C-]>',  vim.lsp.buf.definition)
+	map('n', 'g<C-]>', try_telescope_references)
+
 	map({'n', 'i'}, '<A-i>', vim.lsp.buf.signature_help)
 
 	map('n', '[d', function() vim.diagnostic.goto_prev({ border = "rounded" }) end)
 	map('n', ']d', function() vim.diagnostic.goto_next({ border = "rounded" }) end)
 
 	map('n', '<leader>dd', function() vim.diagnostic.open_float({ border = "rounded" }) end)
-	map('n', '<leader>dD', function()
-		if have_telescope then
-			telescope.diagnostics()  -- Full diagnostics because telescope makes looking at things easy
-		else
-			vim.diagnostic.setqflist { open = true, severity = { min = vim.diagnostic.severity.WARN } }
-		end
-	end)
+	map('n', '<leader>dD', try_telescope_diagnostics)
 	map('n', '<leader>de', vim.lsp.buf.declaration)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
