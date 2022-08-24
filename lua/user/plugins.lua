@@ -103,8 +103,10 @@ return packer.startup(function(use)
 	use 'kdheepak/lazygit.nvim'                               -- LazyGit
 	use {
 		'iamcco/markdown-preview.nvim',                       -- Markdown previewer in web browser
-		run = 'cd app && yarn install',
+		run = function() vim.fn['mkdp#util#install']() end,
 		cmd = 'MarkdownPreview',
+		setup = function() vim.g.mkdp_filetypes = {'markdown'} end,
+		ft = 'markdown',
 		opt = true,
 	}
 
