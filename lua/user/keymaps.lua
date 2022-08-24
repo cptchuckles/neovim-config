@@ -19,6 +19,20 @@ map("n", "<A-l>", "<C-w>l", opts)
 map("n", "ZZ", ":wqa<CR>", opts)
 map("n", "ZQ", ":qa!<CR>", opts)
 
+-- Folds
+map("n", "zc", "zc:IndentBlanklineRefresh<CR>", opts)
+map("n", "zC", "zC:IndentBlanklineRefresh<CR>", opts)
+map("n", "zo", "zo:IndentBlanklineRefresh<CR>", opts)
+map("n", "zO", "zO:IndentBlanklineRefresh<CR>", opts)
+map("n", "zr", "zr:IndentBlanklineRefresh<CR>", opts)
+map("n", "zR", "zR:IndentBlanklineRefresh<CR>", opts)
+map("n", "zm", "zm:IndentBlanklineRefresh<CR>", opts)
+map("n", "zM", "zM:IndentBlanklineRefresh<CR>", opts)
+map("n", "zn", "zn:IndentBlanklineRefresh<CR>", opts)
+map("n", "zN", "zN:IndentBlanklineRefresh<CR>", opts)
+map("n", "zd", "zd:IndentBlanklineRefresh<CR>", opts)
+map("n", "zD", "zD:IndentBlanklineRefresh<CR>", opts)
+
 local have_nvtree, nvtree = pcall(require, 'nvim-tree.api')
 if have_nvtree then
 	map("n", "<leader>e", nvtree.tree.toggle, opts)
