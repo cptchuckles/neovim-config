@@ -63,27 +63,28 @@ local function lsp_highlight_document(client)
 	end
 end
 
-local function try_telescope_references()
-	local have_telescope, telescope = pcall(require, 'telescope.builtin')
-	if have_telescope then
-		telescope.lsp_references(
-			require('telescope.themes').get_dropdown {
-				include_declaration = false,
-				layout_config = { width = 0.7, },  -- TODO: fix this not inheriting from defaults
-			}
-		)
-	elseif not pcall(vim.cmd, [[ Trouble lsp_references ]]) then
-		vim.lsp.buf.references()
-	end
-end
-local function try_trouble_diagnostics()
-	if not pcall(vim.cmd, [[ Trouble workspace_diagnostics ]]) then
-		vim.diagnostic.setqflist({ open = true })
-	end
-end
-
 local function lsp_keymaps(bufnr)
-	local map = function(mode, lhs, rhs)
+	local function try_telescope_references()
+		local have_telescope, telescope = pcall(require, 'telescope.builtin')
+		if have_telescope then
+			telescope.lsp_references(
+				require('telescope.themes').get_dropdown {
+					include_declaration = false,
+					layout_config = { width = 0.7, },  -- TODO: fix this not inheriting from defaults
+				}
+			)
+		elseif not pcall(vim.cmd, [[ Trouble lsp_references ]]) then
+			vim.lsp.buf.references()
+		end
+	end
+
+	local function try_trouble_diagnostics()
+		if not pcall(vim.cmd, [[ Trouble workspace_diagnostics ]]) then
+			vim.diagnostic.setqflist({ open = true })
+		end
+	end
+
+	local function map(mode, lhs, rhs)
 		local opts = { remap = false, buffer = bufnr }
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
