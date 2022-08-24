@@ -15,9 +15,8 @@ require 'user.trouble'
 -- Buffer Enhancements
 require 'user.gitsigns'
 require 'user.treesitter'
-require 'user.vim-illuminate'
 require 'user.indent-blankline'
-require 'user.vim-illuminate'
+require 'user.illuminate'
 
 -- Default configurations
 require 'impatient'

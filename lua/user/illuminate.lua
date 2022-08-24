@@ -1,6 +1,6 @@
-local status_ok, illuminate = pcall(require, 'vim-illuminate')
+local status_ok, illuminate = pcall(require, 'illuminate')
 if not status_ok then
-	print("Couldn't load 'vim-illuminate'")
+	print("Couldn't load 'illuminate'")
 	return
 end
 
