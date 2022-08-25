@@ -11,7 +11,7 @@ gitsigns.setup {
 		delay = 200,
 		ignore_whitespace = true,
 	},
-	current_line_blame_formatter = "  <author>, <author_time> - (<abbrev_sha>) <summary>",
+	current_line_blame_formatter = "⋮  <author>, <author_time> - (<abbrev_sha>) <summary>",
 	preview_config = { style = 'minimal', border = 'rounded' },
 
 	signs = {
