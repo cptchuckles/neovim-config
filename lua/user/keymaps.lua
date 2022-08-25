@@ -75,6 +75,9 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 -- Overwrite paste
 map("v", "p", '"_dp', opts)
 
+-- Collimate on =
+map({'v', 'x'}, '<leader>c', [[:'<,'>!column --table -s= -o=<CR>]], opts)
+
 
 -- Terminal ---------------------------------------------------------------------------
 map("n", "<leader>`", ":split+terminal<CR>", opts)
