@@ -24,10 +24,10 @@ tree.setup {
 		enable = true,
 		show_on_dirs = false,
 		icons = {
-			error = "",
+			error = "",
 			warning = "",
 			hint = "",
-			info = "",
+			info = "",
 		},
 	},
 	view = {
@@ -50,7 +50,7 @@ tree.setup {
 			show = {
 				git = true,
 			},
-			git_placement = "after",
+			git_placement = "before",
 			glyphs = {
 				git = {
 					unstaged = "±",
