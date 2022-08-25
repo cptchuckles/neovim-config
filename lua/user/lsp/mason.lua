@@ -41,13 +41,7 @@ mason_lsp.setup_handlers {
 	end,
 
 	omnisharp = function ()
-		local omnisharp_opts = {
-			handlers = {
-				["textDocument/definition"] = require('omnisharp_extended').handler,
-			},
-		}
-		require('lspconfig').omnisharp.setup(
-			vim.tbl_deep_extend("force", omnisharp_opts, opts)
-		)
+		local omnisharp_opts = vim.tbl_deep_extend("force", require('user.lsp.settings.omnisharp'), opts)
+		require('lspconfig').omnisharp.setup(omnisharp_opts)
 	end,
 }
