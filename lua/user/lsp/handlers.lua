@@ -64,7 +64,7 @@ local function lsp_highlight_document(client)
 end
 
 local function lsp_keymaps(bufnr)
-	local function try_telescope_references()
+	local function telescope_references()
 		local have_telescope, telescope = pcall(require, 'telescope.builtin')
 		if have_telescope then
 			telescope.lsp_references(
@@ -78,9 +78,17 @@ local function lsp_keymaps(bufnr)
 		end
 	end
 
-	local function try_trouble_diagnostics()
-		if not pcall(vim.cmd, [[ Trouble workspace_diagnostics ]]) then
-			vim.diagnostic.setqflist({ open = true })
+	local function trouble_diagnostics(opts)
+		opts = opts or {}
+		opts.scope = vim.F.if_nil(opts.scope, "document")
+		local diagnose = {
+			document  = function() vim.api.nvim_command[[Trouble  document_diagnostics]] end,
+			workspace = function() vim.api.nvim_command[[Trouble workspace_diagnostics]] end,
+		}
+		return function()
+			if not pcall(diagnose[opts.scope]) then
+				vim.diagnostic.setqflist({ open = true })
+			end
 		end
 	end
 
@@ -91,19 +99,20 @@ local function lsp_keymaps(bufnr)
 
 	map('n', 'K',      vim.lsp.buf.hover)
 	map('n', '<C-]>',  vim.lsp.buf.definition)
-	map('n', 'g<C-]>', try_telescope_references)
+	map('n', 'g<C-]>', telescope_references)
+	map('n', '<A-a>',  vim.lsp.buf.code_action)
+	map('n', '<A-i>',  function() vim.diagnostic.open_float({ border = "rounded" }) end)
 
-	map({'n', 'i'}, '<A-i>', vim.lsp.buf.signature_help)
+	map({'n', 'i'}, '<A-s>', vim.lsp.buf.signature_help)
 
 	map('n', '[d', function() vim.diagnostic.goto_prev({ border = "rounded" }) end)
 	map('n', ']d', function() vim.diagnostic.goto_next({ border = "rounded" }) end)
 
-	map('n', '<leader>dd', function() vim.diagnostic.open_float({ border = "rounded" }) end)
-	map('n', '<leader>dD', try_trouble_diagnostics)
+	map('n', '<leader>dD', trouble_diagnostics { scope = 'workspace' })
+	map('n', '<leader>dd', trouble_diagnostics { scope = 'document' })
 	map('n', '<leader>de', vim.lsp.buf.declaration)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
-	map('n', '<leader>da', vim.lsp.buf.code_action)
 
 	vim.cmd [[ command! -range=% Format execute 'lua vim.lsp.buf.range_formatting()' ]]
 end
