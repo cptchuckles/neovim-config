@@ -20,18 +20,10 @@ map("n", "ZZ", ":wqa<CR>", opts)
 map("n", "ZQ", ":qa!<CR>", opts)
 
 -- Folds
-map("n", "zc", "zc:IndentBlanklineRefresh<CR>", opts)
-map("n", "zC", "zC:IndentBlanklineRefresh<CR>", opts)
-map("n", "zo", "zo:IndentBlanklineRefresh<CR>", opts)
-map("n", "zO", "zO:IndentBlanklineRefresh<CR>", opts)
-map("n", "zr", "zr:IndentBlanklineRefresh<CR>", opts)
-map("n", "zR", "zR:IndentBlanklineRefresh<CR>", opts)
-map("n", "zm", "zm:IndentBlanklineRefresh<CR>", opts)
-map("n", "zM", "zM:IndentBlanklineRefresh<CR>", opts)
-map("n", "zn", "zn:IndentBlanklineRefresh<CR>", opts)
-map("n", "zN", "zN:IndentBlanklineRefresh<CR>", opts)
-map("n", "zd", "zd:IndentBlanklineRefresh<CR>", opts)
-map("n", "zD", "zD:IndentBlanklineRefresh<CR>", opts)
+local zmaps = { "zc", "zC", "zo", "zO", "zr", "zR", "zm", "zM", "zn", "zN", "zd", "zD", "zE", }
+for _, zm in ipairs(zmaps) do
+	map("n", zm, zm .. ":lua pcall(function() require('indent_blankline').refresh() end)<CR>", opts)
+end
 
 local have_nvtree, nvtree = pcall(require, 'nvim-tree.api')
 if have_nvtree then
@@ -45,13 +37,15 @@ map("n", "<leader>w", ":set wrap!<CR>", opts)
 
 local have_telescope, telescope = pcall(require, 'telescope.builtin')
 if have_telescope then
-	map("n", "<leader>t", telescope.live_grep, opts)
-	map("n", "<leader>T", function() telescope.live_grep({ grep_open_files = true }) end, opts)
-	map("n", "<leader>*", telescope.grep_string, opts)
-	map("n", "<leader>f", telescope.find_files, opts)
-	map("n", "<C-l>",     telescope.buffers, opts)
+	map("n", "<leader>ta", telescope.live_grep, opts)
+	map("n", "<leader>to", function() telescope.live_grep { grep_open_files = true } end, opts)
+	map("n", "<leader>*",  telescope.grep_string, opts)
+	map("n", "<leader>tf", telescope.find_files, opts)
+	map("n", "<leader>ts", telescope.treesitter, opts)
+	map("n", "<C-l>",      telescope.buffers, opts)
 	map("n", "<leader>qh", telescope.quickfixhistory, opts)
 	map("n", "<leader>rg", telescope.current_buffer_fuzzy_find, opts)
+	map("n", "<leader>T",  telescope.resume, opts)
 else
 	map("n", "<C-l>", ":ls<CR>:b", opts)
 end
