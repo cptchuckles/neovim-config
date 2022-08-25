@@ -49,7 +49,6 @@ for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
-
 -- netrw settings
 vim.g.netrw_liststyle = 3     -- tree style listing
 vim.g.netrw_browse_split = 4  -- open file in previous window
@@ -63,6 +62,14 @@ vim.cmd [[
 		au!
 		au FileType netrw,qf,nofile setl bufhidden=wipe colorcolumn=
 		au BufLeave "[No Name]" bdelete <abuf>
+	augroup end
+]]
+
+-- Fold settings
+vim.cmd [[
+	augroup FoldingSettings
+		au!
+		au FileType json,yaml setl foldmethod=indent foldlevel=2
 	augroup end
 ]]
 
@@ -92,7 +99,7 @@ vim.cmd [[
 		\|	highlight Comment cterm=italic gui=italic
 		\|	highlight TSComment cterm=italic gui=italic
 		\|	highlight Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
-		\|	highlight WinSeparator ctermbg=NONE guibg=NONE
+		\|	highlight link WinSeparator LineNr
 		\|	highlight GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
 		\|	highlight DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred
 		\|	highlight IndentBlanklineChar guifg=#2b2f38 gui=nocombine
