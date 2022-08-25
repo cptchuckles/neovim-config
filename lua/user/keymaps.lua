@@ -19,12 +19,6 @@ map("n", "<A-l>", "<C-w>l", opts)
 map("n", "ZZ", ":wqa<CR>", opts)
 map("n", "ZQ", ":qa!<CR>", opts)
 
--- Folds
-local zmaps = { "zc", "zC", "zo", "zO", "zr", "zR", "zm", "zM", "zn", "zN", "zd", "zD", "zE", }
-for _, zm in ipairs(zmaps) do
-	map("n", zm, zm .. ":lua pcall(function() require('indent_blankline').refresh() end)<CR>", opts)
-end
-
 local have_nvtree, nvtree = pcall(require, 'nvim-tree.api')
 if have_nvtree then
 	map("n", "<leader>e", nvtree.tree.toggle, opts)

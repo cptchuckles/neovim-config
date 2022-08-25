@@ -14,3 +14,10 @@ bl.setup {
 	show_cursor_context_start = true,
 	space_char_blankline = " ",
 }
+
+-- Folds
+local zmaps = { "zc", "zC", "zo", "zO", "zr", "zR", "zm", "zM", "zn", "zN", "zd", "zD", "zE", }
+for _, zm in ipairs(zmaps) do
+	vim.keymap.set("n", zm, zm .. ":lua pcall(function() require('indent_blankline').refresh() end)<CR>",
+		{ remap = false, silent = true })
+end
