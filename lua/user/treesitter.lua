@@ -1,10 +1,10 @@
-local status_ok, treesitterConfig = pcall(require, 'nvim-treesitter.configs')
+local status_ok, ts = pcall(require, 'nvim-treesitter.configs')
 if not status_ok then
 	print("Couldn't load 'nvim-treesitter.configs'")
 	return
 end
 
-treesitterConfig.setup {
+ts.setup {
 	ensure_installed = "all", -- "all", or a list of language names
 	sync_installed = false, -- install languages synchronously (applies to above)
 	ignore_installed = { "" }, -- list of parsers to ignore installing
