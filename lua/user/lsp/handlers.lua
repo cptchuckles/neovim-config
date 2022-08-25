@@ -3,38 +3,38 @@ local M = {}
 M.setup = function()
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
-		{ name = "DiagnosticSignWarn", text = "" },
-		{ name = "DiagnosticSignHint", text = "ﯧ" },
-		{ name = "DiagnosticSignInfo", text = "" },
+		{ name = "DiagnosticSignWarn",  text = "" },
+		{ name = "DiagnosticSignHint",  text = "ﯧ" },
+		{ name = "DiagnosticSignInfo",  text = "" },
 	}
 
 	for _, sign in ipairs(signs) do
 		vim.fn.sign_define(sign.name, {
 			texthl = sign.name,
-			text = sign.text,
-			numhl = "",
+			text   = sign.text,
+			numhl  = "",
 		})
 	end
 
 	local config = {
 		virtual_text = {
 			severity = vim.diagnostic.severity.ERROR,
-			spacing = 2,
-			prefix = "",
+			spacing  = 2,
+			prefix   = "",
 		},
 		signs = {
 			active = signs,
 		},
 		update_in_insert = true,
-		underline = true,
-		severity_sort = true,
+		underline        = true,
+		severity_sort    = true,
 		float = {
 			focusable = false,
-			style = "minimal",
-			border = "rounded",
-			source = "if_many",
-			header = "",
-			prefix = "· ",
+			style     = "minimal",
+			border    = "rounded",
+			source    = "if_many",
+			header    = "",
+			prefix    = "· ",
 		},
 	}
 
