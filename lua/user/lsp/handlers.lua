@@ -18,9 +18,11 @@ M.setup = function()
 
 	local config = {
 		virtual_text = {
-			severity = vim.diagnostic.severity.ERROR,
+			severity = {
+				min = vim.diagnostic.severity.WARN,
+			},
 			spacing  = 2,
-			prefix   = "",
+			prefix   = "⋮",
 		},
 		signs = {
 			active = signs,

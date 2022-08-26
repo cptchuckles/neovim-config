@@ -61,6 +61,7 @@ vim.cmd [[
 	augroup WipeUnwantedBuffers
 		au!
 		au FileType netrw,qf,nofile setl bufhidden=wipe colorcolumn=
+		au FileType Trouble setl colorcolumn=
 		au BufLeave "[No Name]" bdelete <abuf>
 	augroup end
 ]]
@@ -102,6 +103,8 @@ vim.cmd [[
 		\|	highlight link WinSeparator LineNr
 		\|	highlight GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
 		\|	highlight DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred
+		\|	highlight DiagnosticVirtualTextWarn cterm=bold,italic gui=bold,italic ctermfg=yellow guifg=#777700
+		\|	highlight DiagnosticVirtualTextInfo cterm=bold,italic gui=bold,italic ctermfg=lightyellow guifg=#666644
 		\|	highlight IndentBlanklineChar guifg=#2b2f38 gui=nocombine
 		\|	highlight link IndentBlanklineSpaceChar Whitespace
 		\|	highlight link IndentBlanklineIndent1 CursorLine
