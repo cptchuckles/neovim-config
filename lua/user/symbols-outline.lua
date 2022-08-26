@@ -64,3 +64,10 @@ outliner.setup {
 		Variable      = {icon = "", hl = "TSConstant"},
 	},
 }
+
+vim.cmd [[
+	augroup SymbolsOutlinerSettings
+		au!
+		au FileType Outline setl signcolumn=no
+	augroup end
+]]
