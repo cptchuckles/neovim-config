@@ -45,24 +45,21 @@ gitsigns.setup {
 		end, { expr = true })
 
 		-- Actions
-		local function gsfunc(f, opts)
+		local function reload_nvim_tree_after(f, opts)
 			return function()
 				if type(f) == "function" then
 					f(opts or {})
 				elseif type(f) == "string" then
-					vim.cmd(f)
+					vim.api.nvim_command(f)
 				end
-				local nvt_ok, nvtapi = pcall(require, 'nvim-tree.api')
-				if nvt_ok then
-					vim.schedule(function() nvtapi.tree.reload() end)
-				end
+				vim.schedule(vim.F.nil_wrap(function() require('nvim-tree.api').tree.reload() end))
 			end
 		end
-		map({'n', 'v'}, '<leader>gs', gsfunc('Gitsigns stage_hunk'))
-		map({'n', 'v'}, '<leader>gr', gsfunc('Gitsigns reset_hunk'))
-		map('n', '<leader>gS', gsfunc(gs.stage_buffer))
-		map('n', '<leader>gu', gsfunc(gs.undo_stage_hunk))
-		map('n', '<leader>gR', gsfunc(gs.reset_buffer))
+		map({'n', 'v'}, '<leader>gs', reload_nvim_tree_after('Gitsigns stage_hunk'))
+		map({'n', 'v'}, '<leader>gr', reload_nvim_tree_after('Gitsigns reset_hunk'))
+		map('n', '<leader>gS', reload_nvim_tree_after(gs.stage_buffer))
+		map('n', '<leader>gu', reload_nvim_tree_after(gs.undo_stage_hunk))
+		map('n', '<leader>gR', reload_nvim_tree_after(gs.reset_buffer))
 		-- passive actions
 		map('n', '<leader>gb', function() gs.blame_line {full=true, ignore_whitespace=true} end)
 		map('n', '<leader>gB', gs.toggle_current_line_blame)
