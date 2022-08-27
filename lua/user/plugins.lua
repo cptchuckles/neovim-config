@@ -79,6 +79,7 @@ return packer.startup(function(use)
 	use 'RRethy/vim-illuminate'                               -- Cursor-word highlighter + text objects
 	use 'akinsho/bufferline.nvim'                             -- Bufferline - Tabs, but buffers!
 	use 'Darazaki/indent-o-matic'                             -- Auto-detect buffer indentation
+	use 'moll/vim-bbye'                                       -- Buffer deletion done right
 	use {
 		'kyazdani42/nvim-tree.lua',                           -- NvimTree
 		requires = { 'kyazdani42/nvim-web-devicons' }

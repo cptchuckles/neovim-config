@@ -16,6 +16,9 @@ map("n", "<A-j>", "<C-w>j", opts)
 map("n", "<A-k>", "<C-w>k", opts)
 map("n", "<A-l>", "<C-w>l", opts)
 
+-- Bbye commands
+map("n", "<C-q>", ":Bdelete<CR>", opts)
+
 map("n", "ZZ", ":wqa<CR>", opts)
 map("n", "ZQ", ":qa!<CR>", opts)
 

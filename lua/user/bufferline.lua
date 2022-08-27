@@ -4,6 +4,9 @@ if not status_ok then
 	return
 end
 
+vim.keymap.set('n', '[b', function() bl.cycle(-1) end, { silent = true, remap = false })
+vim.keymap.set('n', ']b', function() bl.cycle(1) end, { silent = true, remap = false })
+
 bl.setup {
 	options = {
 		always_show_bufferline = true,
