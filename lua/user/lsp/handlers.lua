@@ -116,7 +116,8 @@ local function lsp_keymaps(bufnr)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
 
-	vim.cmd [[ command! -range=% Format execute 'lua vim.lsp.buf.range_formatting()' ]]
+	vim.api.nvim_create_user_command('Format',      vim.lsp.buf.formatting, {})
+	vim.api.nvim_create_user_command('FormatRange', vim.lsp.buf.range_formatting, { range = '%' })
 end
 
 M.on_attach = function(client, bufnr)
