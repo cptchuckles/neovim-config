@@ -77,6 +77,7 @@ return packer.startup(function(use)
 	use 'folke/trouble.nvim'                                  -- Pretty qickfix list
 	use 'simrat39/symbols-outline.nvim'                       -- Symbols outliner
 	use 'RRethy/vim-illuminate'                               -- Cursor-word highlighter + text objects
+	use 'akinsho/bufferline.nvim'                             -- Bufferline - Tabs, but buffers!
 	use 'Darazaki/indent-o-matic'                             -- Auto-detect buffer indentation
 	use {
 		'kyazdani42/nvim-tree.lua',                           -- NvimTree
