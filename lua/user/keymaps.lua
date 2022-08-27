@@ -79,7 +79,7 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 map("v", "p", '"_dp', opts)
 
 -- Collimate on =
-map({'v', 'x'}, '<leader>c', [[:'<,'>!column --table -s= -o=<CR>]], opts)
+map({'v', 'x'}, '<leader>c', [[:!column --table -s= -o=<CR>]], opts)
 
 
 -- Terminal ---------------------------------------------------------------------------
