@@ -20,3 +20,4 @@ require 'user.illuminate'
 
 -- Default configurations
 require 'impatient'
+require 'indent-o-matic'
