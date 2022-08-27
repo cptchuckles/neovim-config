@@ -7,7 +7,7 @@ end
 outliner.setup {
 	highlight_hovered_item = true,
 	show_guides = true,
-	auto_preview = false,
+	auto_preview = false,  -- Doesn't jump buffer to location, opens popup window.
 	position = 'right',
 	relative_width = true,
 	width = 25,
