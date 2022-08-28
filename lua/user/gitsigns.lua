@@ -44,17 +44,21 @@ gitsigns.setup {
 			return '<Ignore>'
 		end, { expr = true })
 
-		-- Actions
-		local function reload_nvim_tree_after(f, opts)
+		--- Get a callback to bind to a keymap that runs the given function or command
+		--- and then schedules a safe call to `nvim-tree.api.tree.reload`
+		---@param cmd string | fun() Function or command to run
+		---@return fun()
+		local function reload_nvim_tree_after(cmd)
 			return function()
-				if type(f) == "function" then
-					f(opts or {})
-				elseif type(f) == "string" then
-					vim.api.nvim_command(f)
+				if type(cmd) == "function" then
+					cmd()
+				elseif type(cmd) == "string" then
+					vim.api.nvim_command(cmd)
 				end
 				vim.schedule(vim.F.nil_wrap(function() require('nvim-tree.api').tree.reload() end))
 			end
 		end
+		-- Actions
 		map({'n', 'v'}, '<leader>gs', reload_nvim_tree_after('Gitsigns stage_hunk'))
 		map({'n', 'v'}, '<leader>gr', reload_nvim_tree_after('Gitsigns reset_hunk'))
 		map('n', '<leader>gS', reload_nvim_tree_after(gs.stage_buffer))
