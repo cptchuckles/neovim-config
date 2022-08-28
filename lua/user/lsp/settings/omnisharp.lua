@@ -1,7 +1,7 @@
 return {
 	organize_imports_on_format = true,
 	enable_import_completion = true,
-	enable_roslyn_analyzers = true,  -- Consider turning this off so it stops talking shit about my code
+	enable_roslyn_analyzers = false,  -- Consider keeping this off so it stops talking shit about my code
 	filetypes = { "cs", "vb", --[[ "cshtml", "razor" ]] },  -- Absolutely futile.
 
 	handlers = {
