@@ -6,11 +6,6 @@ end
 
 local luasnip = require 'user.luasnip'
 
-local check_backspace = function()
-	local col = vim.fn.col '.' - 1
-	return col == 0 or vim.fn.getline('.'):sub(col, col):match "%s"
-end
-
 local kind_icons = {
 	Class         = '',
 	Color         = '',
@@ -67,6 +62,11 @@ cmp.setup({
 
 		-- Supertab
 		['<Tab>'] = cmp.mapping(function(fallback)
+			local check_backspace = function()
+				local col = vim.fn.col '.' - 1
+				return col == 0 or vim.fn.getline('.'):sub(col, col):match "%s"
+			end
+
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expandable() then
@@ -79,6 +79,7 @@ cmp.setup({
 				fallback()
 			end
 		end, {'i', 's'}),
+
 		['<S-Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
@@ -99,9 +100,9 @@ cmp.setup({
 			vim_item.menu = ({
 				nvim_lsp = '[LSP]',
 				nvim_lua = '[NvimLua]',
-				luasnip = '[LuaSnip]',
-				buffer = '[Buffer]',
-				path = '[Path]',
+				luasnip  = '[LuaSnip]',
+				buffer   = '[Buffer]',
+				path     = '[Path]',
 			})[entry.source.name]
 
 			return vim_item
