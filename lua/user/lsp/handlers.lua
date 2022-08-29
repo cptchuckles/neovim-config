@@ -28,8 +28,12 @@ M.setup = function()
 			active = signs,
 		},
 		update_in_insert = true,
-		underline        = true,
 		severity_sort    = true,
+		underline = {
+			severity = {
+				min = vim.diagnostic.severity.INFO,
+			},
+		},
 		float = {
 			focusable = false,
 			style     = "minimal",
