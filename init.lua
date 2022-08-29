@@ -1,7 +1,6 @@
 -- Core modules
 require 'user.plugins'
-require 'user.options'
-require 'user.keymaps'
+require 'user.settings'
 
 -- Editing & Completion
 require 'user.cmp'
