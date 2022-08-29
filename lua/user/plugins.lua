@@ -68,9 +68,9 @@ return packer.startup(function(use)
 	use 'williamboman/mason.nvim'                             -- LSP/DAP/Format/Lint manager
 	use 'williamboman/mason-lspconfig.nvim'
 	use 'Hoffs/omnisharp-extended-lsp.nvim'                   -- Omnisharp specific bullshit
-	use 'jlcrochet/vim-razor'                                 -- Attempt to edit razor with neovim
 
 	-- Quality of Life enhancements
+	use 'jlcrochet/vim-razor'                                 -- Attempt to edit razor with neovim
 	use 'LunarVim/colorschemes'                               -- a bunch of colorschemes
 	use 'kyazdani42/nvim-web-devicons'                        -- more icons and shit
 	use 'lewis6991/gitsigns.nvim'                             -- Git Signs
