@@ -81,9 +81,9 @@ tree.setup {
 }
 
 -- Because reload_on_bufenter doesn't work (when defining on_attach?)
-vim.cmd [[
-	augroup NvimTreeAutoRefresh
-		au!
-		au FileType NvimTree au BufEnter NvimTree* lua require('nvim-tree.api').tree.reload()
-	augroup end
-]]
+vim.api.nvim_create_autocmd('BufEnter', {
+	group = vim.api.nvim_create_augroup('NvimTreeAutoRefresh', { clear = true }),
+	desc = 'Refresh NvimTree on BufEnter',
+	pattern = 'NvimTree*',
+	callback = require('nvim-tree.api').tree.reload,
+})
