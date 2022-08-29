@@ -10,7 +10,7 @@ outliner.setup {
 	auto_preview = false, -- Doesn't jump buffer to location, opens popup window.
 	position = 'right',
 	relative_width = true,
-	width = 25,
+	width = 20,
 	auto_close = false,
 	show_numbers = false,
 	show_relative_numbers = false,
