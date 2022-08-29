@@ -69,12 +69,7 @@ local function lsp_keymaps(bufnr)
 	local function telescope_references()
 		local have_telescope, telescope = pcall(require, 'telescope.builtin')
 		if have_telescope then
-			telescope.lsp_references(
-				require('telescope.themes').get_dropdown {
-					include_declaration = false,
-					layout_config = { width = 0.7, },  -- TODO: fix this not inheriting from defaults
-				}
-			)
+			telescope.lsp_references({ show_line = false })
 		elseif not pcall(vim.cmd, [[ Trouble lsp_references ]]) then
 			vim.lsp.buf.references()
 		end

@@ -25,7 +25,7 @@ telescope.setup {
 		layout_config = {
 			horizontal = {
 				width = 0.9,
-				preview_width = 0.5,
+				preview_width = 0.55,
 			},
 			center = {
 				width = 0.7,          -- TODO: bug report this not working
