@@ -5,7 +5,35 @@ if not status_ok then
 end
 
 ts.setup {
-	ensure_installed = "all", -- "all", or a list of language names
+	ensure_installed = {
+		'lua',
+		'bash',
+		'gdscript',
+		'godot_resource',
+		'c_sharp',
+		'cpp',
+		'c',
+		'make',
+		'cmake',
+		'rust',
+		'toml',
+		'julia',
+		'html',
+		'javascript',
+		'css',
+		'scss',
+		'markdown',
+		'markdown_inline',
+		'json',
+		'yaml',
+		'ruby',
+		'latex',
+		'regex',
+		'vim',
+		'perl',
+		'sql',
+		'scheme',
+	},
 	sync_installed = false, -- install languages synchronously (applies to above)
 	ignore_installed = { "" }, -- list of parsers to ignore installing
 	highlight = {
@@ -29,10 +57,6 @@ ts.setup {
 		enable = true,
 		extended_mode = true,
 		max_file_lines = nil,
-	},
-	context_commentstring = {
-		enable = true,
-		enable_autocmd = false,
 	},
 }
 
