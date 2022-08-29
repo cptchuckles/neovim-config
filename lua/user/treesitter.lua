@@ -36,4 +36,4 @@ ts.setup {
 	},
 }
 
-vim.cmd [[ highlight TSComment cterm=italic gui=italic ]]
+vim.api.nvim_command [[ highlight TSComment cterm=italic gui=italic ]]

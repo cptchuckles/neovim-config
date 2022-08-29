@@ -60,7 +60,7 @@ local function lsp_keymaps(bufnr)
 		local have_telescope, telescope = pcall(require, 'telescope.builtin')
 		if have_telescope then
 			telescope.lsp_references({ show_line = false })
-		elseif not pcall(vim.cmd, [[ Trouble lsp_references ]]) then
+		elseif not pcall(vim.api.nvim_command, [[Trouble lsp_references]]) then
 			vim.lsp.buf.references()
 		end
 	end
