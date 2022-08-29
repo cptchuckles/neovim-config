@@ -44,20 +44,27 @@ tree.setup {
 		indent_markers = {
 			enable = true,
 			inline_arrows = true,
+			icons = {
+				edge   = "│",
+				item   = "├",
+				corner = "└",
+				none   = " ",
+			},
 		},
 		highlight_git = true,
 		icons = {
 			show = {
 				git = true,
+				folder_arrow = false,
 			},
 			git_placement = "before",
 			glyphs = {
 				git = {
-					unstaged  = "±",
+					unstaged  = "ﰣ",
 					staged    = "",
 					unmerged  = "",
 					renamed   = "➜",
-					untracked = "ﱐ",
+					untracked = "",
 					deleted   = "ﯰ",
 					ignored   = "﬒",
 				},
