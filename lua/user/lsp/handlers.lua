@@ -51,20 +51,6 @@ M.setup = function()
 	})
 end
 
-local function lsp_highlight_document(client)
-	-- Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
-		vim.api.nvim_exec([[
-			augroup lsp_document_highlight
-				au! * <buffer>
-				au CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-				au CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-			augroup end
-		]],
-		false)
-	end
-end
-
 local function lsp_keymaps(bufnr)
 	local function telescope_references()
 		local have_telescope, telescope = pcall(require, 'telescope.builtin')
@@ -121,6 +107,7 @@ M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end
+
 	if client.server_capabilities.signatureHelpProvider then
 		require('lsp-overloads').setup(client, {
 			keymaps = {
@@ -131,8 +118,8 @@ M.on_attach = function(client, bufnr)
 			},
 		})
 	end
+
 	lsp_keymaps(bufnr)
-	lsp_highlight_document(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
