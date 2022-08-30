@@ -7,7 +7,9 @@ local function buffer_wiping()
 		desc = 'Wipe buffers and remove colorcolumn for certain kinds of buffers',
 		pattern = { 'Trouble', 'netrw', 'qf', 'nofile' },
 		callback = function(opts)
-			if opts.match ~= 'Trouble' then vim.bo[opts.buf].bufhidden = 'wipe' end
+			if opts.match ~= 'Trouble' then
+				vim.bo[opts.buf].bufhidden = 'wipe'
+			end
 			vim.wo[vim.fn.bufwinid(opts.buf)].colorcolumn = '' -- No colorcolumn on these buffers
 		end,
 	})
