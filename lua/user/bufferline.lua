@@ -56,10 +56,12 @@ bl.setup {
 
 		custom_filter = function(bufnr, bufnrs)
 			local filter_type = {
-				'help',
-				'nofile',
-				'qf',
-				'quickfix',
+				-- Set each item to true so indexing works
+				help     = true,
+				nofile   = true,
+				qf       = true,
+				quickfix = true,
+				terminal = true,
 			}
 			if filter_type[vim.bo[bufnr].filetype] or filter_type[vim.bo[bufnr].buftype] then
 				return false
