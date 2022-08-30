@@ -25,10 +25,10 @@ gitsigns.setup {
 	on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
 
-		local function map(mode, shortcut, action, opts)
+		local function map(mode, lhs, rhs, opts)
 			opts = opts or {}
 			opts.buffer = bufnr
-			vim.keymap.set(mode, shortcut, action, opts)
+			vim.keymap.set(mode, lhs, rhs, opts)
 		end
 
 		-- Navigation
@@ -65,13 +65,13 @@ gitsigns.setup {
 		map('n', '<leader>gu', reload_nvim_tree_after(gs.undo_stage_hunk))
 		map('n', '<leader>gR', reload_nvim_tree_after(gs.reset_buffer))
 		-- passive actions
-		map('n', '<leader>gb', function() gs.blame_line {full=true, ignore_whitespace=true} end)
+		map('n', '<leader>gb', function() gs.blame_line { full = true, ignore_whitespace = true } end)
 		map('n', '<leader>gB', gs.toggle_current_line_blame)
 		map('n', '<leader>gp', gs.preview_hunk)
 		map('n', '<leader>gd', gs.diffthis)
 		map('n', '<leader>gD', function() gs.diffthis('~') end)
 		map('n', '<leader>gX', gs.toggle_deleted)
 		-- text object
-		map({'o', 'x'}, 'ic', ':<C-U>Gitsigns select_hunk<CR>')
+		map({ 'o', 'x' }, 'ic', [[<Cmd>Gitsigns select_hunk<CR>]])
 	end,
 }
