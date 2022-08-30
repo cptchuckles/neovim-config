@@ -102,7 +102,8 @@ return packer.startup(function(use)
 		'andymass/vim-matchup',                               -- Better % operator (keywords and shit)
 		event = 'VimEnter',
 		config = function()
-			vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+			vim.g.matchup_matchparen_deferred = 1
+			vim.g.matchup_matchparen_offscreen = { method = 'status' }
 		end,
 	}
 
