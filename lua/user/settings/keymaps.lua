@@ -26,7 +26,7 @@ local have_nvtree, nvtree = pcall(require, 'nvim-tree.api')
 if have_nvtree then
 	map("n", "<leader>e", nvtree.tree.toggle, opts)
 else
-	map("n", "<leader>e", ":Lex 20<CR>", opts)
+	map("n", "<leader>e", "<Cmd>Lex 20<CR>", opts)
 end
 map("n", "<leader>E", ":SymbolsOutline<CR>", opts)
 map("n", "<leader>s", ":set hls!<CR>", opts)
@@ -56,14 +56,14 @@ map("n", "<C-Left>", "2<C-w><", opts)
 map("n", "<C-Right>", "2<C-w>>", opts)
 
 -- Navigate buffers
-map("n", "<C-n>", ":bnext<CR>", opts)
-map("n", "<C-p>", ":bprevious<CR>", opts)
+map("n", "<C-n>", "<Cmd>bnext<CR>", opts)
+map("n", "<C-p>", "<Cmd>bprev<CR>", opts)
 
 
 -- Insert -----------------------------------------------------------------------------
 -- Move text up/down while in insert mode
-map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
+map("i", "<A-j>", "<Cmd>m .+1<CR><C-o>==", opts)
+map("i", "<A-k>", "<Cmd>m .-2<CR><C-o>==", opts)
 
 
 -- Visual -----------------------------------------------------------------------------
@@ -83,10 +83,10 @@ map({'v', 'x'}, '<leader>c', [[:!column --table -s= -o=<CR>]], opts)
 
 
 -- Terminal ---------------------------------------------------------------------------
-map("n", "<leader>`", ":split+terminal<CR>", opts)
+map("n", "<leader>`", "<Cmd>split+terminal<CR>", opts)
 
 -- Window switch from terminal
-map("t", "<A-h>", "<C-\\><C-n><C-w>h", opts)
-map("t", "<A-j>", "<C-\\><C-n><C-w>j", opts)
-map("t", "<A-k>", "<C-\\><C-n><C-w>k", opts)
-map("t", "<A-l>", "<C-\\><C-n><C-w>l", opts)
+map("t", "<A-h>", "<Cmd>wincmd h<CR>", opts)
+map("t", "<A-j>", "<Cmd>wincmd j<CR>", opts)
+map("t", "<A-k>", "<Cmd>wincmd k<CR>", opts)
+map("t", "<A-l>", "<Cmd>wincmd l<CR>", opts)
