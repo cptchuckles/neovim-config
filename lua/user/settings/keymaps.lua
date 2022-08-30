@@ -1,92 +1,113 @@
-local opts = { remap = false, silent = true }
+-- Utility functions
 
--- Shorten function name
-local map = vim.keymap.set
+local function map(mode, lhs, rhs, opts)
+	opts = opts or { remap = false, silent = true}
+	vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+---https://github.com/tjdevries/lazy.nvim/blob/master/lua/lazy.lua#L64-L72
+local function lazy_require_on_call(mod)
+	return setmetatable({}, {
+		__index = function(_, key)
+			return function(...)
+				return require(mod)[key](...)
+			end
+		end,
+	})
+end
 
 -- Remap leader key
-map("", "\\", "<Nop>", opts)
-vim.g.mapleader = "\\"
-vim.g.maplocalleader = "\\"
+map('', '\\', [[<Nop>]])
+vim.g.mapleader = '\\'
+vim.g.maplocalleader = '\\'
 
 
 -- Normal -----------------------------------------------------------------------------
 -- Better window navigation
-map("n", "<A-h>", "<C-w>h", opts)
-map("n", "<A-j>", "<C-w>j", opts)
-map("n", "<A-k>", "<C-w>k", opts)
-map("n", "<A-l>", "<C-w>l", opts)
+map('n', "<A-h>", [[<C-w>h]])
+map('n', "<A-j>", [[<C-w>j]])
+map('n', "<A-k>", [[<C-w>k]])
+map('n', "<A-l>", [[<C-w>l]])
 
 -- Bbye commands
-map("n", "<C-q>", ":Bdelete<CR>", opts)
+map('n', "<C-q>", [[<Cmd>Bdelete<CR>]])
 
-map("n", "ZZ", ":wqa<CR>", opts)
-map("n", "ZQ", ":qa!<CR>", opts)
+-- Formatting
+map('n', "<leader>F", [[<Cmd>Format<CR>]])
 
-local have_nvtree, nvtree = pcall(require, 'nvim-tree.api')
-if have_nvtree then
-	map("n", "<leader>e", nvtree.tree.toggle, opts)
-else
-	map("n", "<leader>e", "<Cmd>Lex 20<CR>", opts)
-end
-map("n", "<leader>E", ":SymbolsOutline<CR>", opts)
-map("n", "<leader>s", ":set hls!<CR>", opts)
-map("n", "<leader>w", ":set wrap!<CR>", opts)
+map('n', "ZZ", [[:wqa<CR>]])
+map('n', "ZQ", [[:qa!<CR>]])
 
-local have_telescope, telescope = pcall(require, 'telescope.builtin')
-if have_telescope then
-	map("n", "<leader>ta", telescope.live_grep, opts)
-	map("n", "<leader>to", function() telescope.live_grep { grep_open_files = true } end, opts)
-	map("n", "<leader>*",  telescope.grep_string, opts)
-	map("n", "<leader>tf", telescope.find_files, opts)
-	map("n", "<leader>ts", telescope.treesitter, opts)
-	map("n", "<C-l>",      telescope.buffers, opts)
-	map("n", "<leader>qh", telescope.quickfixhistory, opts)
-	map("n", "<leader>rg", telescope.current_buffer_fuzzy_find, opts)
-	map("n", "<leader>T",  telescope.resume, opts)
-else
-	map("n", "<C-l>", ":ls<CR>:b", opts)
-end
+map('n', "<leader>e", function()
+	if not pcall(function() require('nvim-tree.api').tree.toggle() end) then
+		vim.api.nvim_command [[Lex 30]]
+	end
+end)
+map('n', "<leader>E", [[<Cmd>SymbolsOutline<CR>]])
+map('n', "<leader>s", [[<Cmd>set hls!<CR>]])
+map('n', "<leader>w", [[<Cmd>set wrap!<CR>]])
 
-map("n", "<leader>gg", ":LazyGit<CR>", opts)
+local lazyscope = lazy_require_on_call 'telescope.builtin'
+map('n', "<leader>ta", lazyscope.live_grep)
+map('n', "<leader>to", function() lazyscope.live_grep { grep_open_files = true } end)
+map('n', "<leader>*" , lazyscope.grep_string)
+map('n', "<leader>tf", lazyscope.find_files)
+map('n', "<leader>ts", lazyscope.treesitter)
+map('n', "<leader>qh", lazyscope.quickfixhistory)
+map('n', "<leader>rg", lazyscope.current_buffer_fuzzy_find)
+map('n', "<leader>tt", lazyscope.resume)
+map('n', "<C-l>", function()
+	if not pcall(function() lazyscope.buffers() end) then
+		-- This is the kind of stupid shit I have to go through just to emulate keypresses
+		local cmdstr = vim.api.nvim_replace_termcodes(":ls<CR>:b", true, false, true)
+		vim.api.nvim_feedkeys(cmdstr, 'n', false)
+	end
+end)
+
+map('n', "<leader>gg", [[<Cmd>LazyGit<CR>]])
 
 -- Window resizing with CTRL-Arrowkey
-map("n", "<C-Up>", "2<C-w>-", opts)
-map("n", "<C-Down>", "2<C-w>+", opts)
-map("n", "<C-Left>", "2<C-w><", opts)
-map("n", "<C-Right>", "2<C-w>>", opts)
+map('n', "<C-Up>"   , [[2<C-w>-]])
+map('n', "<C-Down>" , [[2<C-w>+]])
+map('n', "<C-Left>" , [[2<C-w><]])
+map('n', "<C-Right>", [[2<C-w>>]])
 
 -- Navigate buffers
-map("n", "<C-n>", "<Cmd>bnext<CR>", opts)
-map("n", "<C-p>", "<Cmd>bprev<CR>", opts)
+map('n', "<C-n>", [[<Cmd>bnext<CR>]])
+map('n', "<C-p>", [[<Cmd>bprev<CR>]])
 
 
 -- Insert -----------------------------------------------------------------------------
 -- Move text up/down while in insert mode
-map("i", "<A-j>", "<Cmd>m .+1<CR><C-o>==", opts)
-map("i", "<A-k>", "<Cmd>m .-2<CR><C-o>==", opts)
+map('i', "<A-j>", [[<Cmd>m .+1<CR><C-o>==]])
+map('i', "<A-k>", [[<Cmd>m .-2<CR><C-o>==]])
 
 
 -- Visual -----------------------------------------------------------------------------
 -- Stay in indent mode
-map("v", "<", "<gv", opts)
-map("v", ">", ">gv", opts)
+map('v', "<", [[<gv]])
+map('v', ">", [[>gv]])
 
 -- Move text up and down
-map("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
-map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+map('v', "<A-j>", [[:m '>+1<CR>gv=gv]])
+map('v', "<A-k>", [[:m '<-2<CR>gv=gv]])
 
 -- Overwrite paste
-map("v", "p", '"_dp', opts)
+map('v', "p", [["_dp]])
+map('v', "P", [["_dP]])
+
+-- Format selection
+map({ 'v', 'x' }, '<leader>f', [[:FormatRange<CR>]])
 
 -- Collimate on =
-map({'v', 'x'}, '<leader>c', [[:!column --table -s= -o=<CR>]], opts)
+map({ 'v', 'x' }, '<leader>c', [[:!column --table -s= -o=<CR>]])
 
 
 -- Terminal ---------------------------------------------------------------------------
-map("n", "<leader>`", "<Cmd>split+terminal<CR>", opts)
+map('n', "<leader>`", [[<Cmd>split+terminal<CR>]])
 
 -- Window switch from terminal
-map("t", "<A-h>", "<Cmd>wincmd h<CR>", opts)
-map("t", "<A-j>", "<Cmd>wincmd j<CR>", opts)
-map("t", "<A-k>", "<Cmd>wincmd k<CR>", opts)
-map("t", "<A-l>", "<Cmd>wincmd l<CR>", opts)
+map('t', "<A-h>", [[<Cmd>wincmd h<CR>]])
+map('t', "<A-j>", [[<Cmd>wincmd j<CR>]])
+map('t', "<A-k>", [[<Cmd>wincmd k<CR>]])
+map('t', "<A-l>", [[<Cmd>wincmd l<CR>]])
