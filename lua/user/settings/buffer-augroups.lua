@@ -43,7 +43,7 @@ local function terminal_settings()
 		desc = 'Set some nice defaults for opening a terminal buffer',
 		pattern = '*',
 		callback = function(opts)
-			local wid                   = vim.fn.bufwinid(opts.buf)
+			local wid = vim.fn.bufwinid(opts.buf)
 			vim.wo[wid].number          = false
 			vim.wo[wid].relativenumber  = false
 			vim.wo[wid].cursorline      = false
