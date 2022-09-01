@@ -57,11 +57,9 @@ end
 
 local function lsp_keymaps(bufnr)
 	local function telescope_references()
-		local have_telescope, telescope = pcall(require, 'telescope.builtin')
-		if have_telescope then
-			telescope.lsp_references({ show_line = false })
-		elseif not pcall(vim.api.nvim_command, [[Trouble lsp_references]]) then
-			vim.lsp.buf.references()
+		if not (pcall(function() require('telescope.builtin').lsp_references { show_line = false } end)
+		    or  pcall(function() vim.api.nvim_command [[Trouble lsp_references]] end))
+			then vim.lsp.buf.references()
 		end
 	end
 
@@ -69,12 +67,12 @@ local function lsp_keymaps(bufnr)
 		opts = opts or {}
 		opts.scope = vim.F.if_nil(opts.scope, "document")
 		local diagnose = {
-			document  = function() vim.api.nvim_command[[Trouble  document_diagnostics]] end,
-			workspace = function() vim.api.nvim_command[[Trouble workspace_diagnostics]] end,
+			document  = function() vim.api.nvim_command [[Trouble  document_diagnostics]] end,
+			workspace = function() vim.api.nvim_command [[Trouble workspace_diagnostics]] end,
 		}
 		return function()
 			if not pcall(diagnose[opts.scope]) then
-				vim.diagnostic.setqflist({ open = true })
+				vim.diagnostic.setqflist { open = true }
 			end
 		end
 	end
@@ -116,9 +114,9 @@ M.on_attach = function(client, bufnr)
 		require('lsp-overloads').setup(client, {
 			keymaps = {
 				previous_signature = '<A-K>',
-				next_signature = '<A-J>',
+				next_signature     = '<A-J>',
 				previous_parameter = '<A-L>',
-				next_parameter = '<A-H>',
+				next_parameter     = '<A-H>',
 			},
 		})
 	end
