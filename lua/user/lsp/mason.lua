@@ -10,15 +10,9 @@ if not mason_lsp_ok then
 	return
 end
 
-local handlers_ok, lsp_handlers = pcall(require, 'user.lsp.handlers')
-if not handlers_ok then
-	print("Couldn't load 'user.lsp.handlers'")
-	return
-end
-
 local opts = {
-	on_attach = lsp_handlers.on_attach,
-	capabilities = lsp_handlers.capabilities,
+	on_attach    = require('user.lsp.handlers').on_attach,
+	capabilities = require('user.lsp.handlers').capabilities,
 }
 
 mason.setup()

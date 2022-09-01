@@ -106,6 +106,11 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
+	if pcall(function() return vim.api.nvim_buf_get_var(bufnr, 'UserLspAttached') == 1 end) then
+		return
+	end
+	vim.api.nvim_buf_set_var(bufnr, 'UserLspAttached', 1)
+
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end
