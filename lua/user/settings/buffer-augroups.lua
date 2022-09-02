@@ -13,12 +13,28 @@ local function buffer_wiping()
 			vim.wo[vim.fn.bufwinid(opts.buf)].colorcolumn = '' -- No colorcolumn on these buffers
 		end,
 	})
-	vim.api.nvim_create_autocmd('BufLeave', {
+	vim.api.nvim_create_autocmd({ 'BufLeave', 'BufHidden' }, {
 		group = aug_wipe_buffers,
-		desc = 'Delete [No Name] buffers upon leaving',
-		pattern = '[No Name]',
+		desc = 'Delete [No Name] and [Scratch] buffers upon leaving',
+		pattern = { '[No Name]', '[Scratch]' },
 		callback = function(opts)
 			vim.api.nvim_buf_delete(opts.buf)
+		end,
+	})
+	vim.api.nvim_create_autocmd('BufHidden', {
+		group = aug_wipe_buffers,
+		desc = 'Wipeout term:// buffers when hidden',
+		pattern = 'term://*',
+		callback = function(opts)
+			vim.schedule(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end)
+		end,
+	})
+	vim.api.nvim_create_autocmd('WinLeave', {
+		group = aug_wipe_buffers,
+		desc = 'Wipeout lazygit buffers when accidentally window-switching away',
+		pattern = 'term://*:lazygit',
+		callback = function(opts)
+			vim.schedule(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end)
 		end,
 	})
 end
