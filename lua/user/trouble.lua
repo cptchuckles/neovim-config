@@ -6,7 +6,7 @@ end
 
 trouble.setup {
 	padding = true,
-	auto_close = true,
+	auto_close = false,
 	auto_fold = false,
 	action_keys = {
 		jump        = '<cr>',
