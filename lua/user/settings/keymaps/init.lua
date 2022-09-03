@@ -1,7 +1,8 @@
 -- Utility functions
-
+--
 local function map(mode, lhs, rhs, opts)
-	opts = opts or { remap = false, silent = true}
+	opts = opts or {}
+	opts = vim.tbl_extend("keep", opts, { remap = false, silent = true })
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
@@ -31,9 +32,6 @@ map('n', "<A-l>", [[<C-w>l]])
 
 -- Bbye commands
 map('n', "<C-q>", [[<Cmd>Bdelete<CR>]])
-
--- Formatting
-map('n', "<leader>F", [[<Cmd>Format<CR>]])
 
 map('n', "ZZ", [[:wqa<CR>]])
 map('n', "ZQ", [[:qa!<CR>]])
@@ -96,9 +94,6 @@ map('v', "<A-k>", [[:m '<-2<CR>gv=gv]])
 map('v', "p", [["_dp]])
 map('v', "P", [["_dP]])
 
--- Format selection
-map({ 'v', 'x' }, '<leader>f', [[:FormatRange<CR>]])
-
 -- Collimate on =
 map({ 'v', 'x' }, '<leader>c', [[:!column --table -s= -o=<CR>]])
 
@@ -111,3 +106,29 @@ map('t', "<A-h>", [[<Cmd>wincmd h<CR>]])
 map('t', "<A-j>", [[<Cmd>wincmd j<CR>]])
 map('t', "<A-k>", [[<Cmd>wincmd k<CR>]])
 map('t', "<A-l>", [[<Cmd>wincmd l<CR>]])
+
+
+-- Plugin keybinds --------------------------------------------------------------------
+local M = {}
+
+M.symbols_outline = {
+	close          = { "<Esc>", "q" },
+	goto_location  = "<CR>",
+	focus_location = "<Tab>",
+	hover_symbol   = "<Space>",
+	toggle_preview = "K",
+	rename_symbol  = "r",
+	code_actions   = "a",
+	fold           = "h",
+	unfold         = "l",
+	fold_all       = "W",
+	unfold_all     = "E",
+	fold_reset     = "R",
+}
+
+M.nvim_tree = function(bufnr)
+	map('n', '[d', function() require('nvim-tree.api').node.navigate.diagnostics.prev() end, { buffer = bufnr })
+	map('n', ']d', function() require('nvim-tree.api').node.navigate.diagnostics.next() end, { buffer = bufnr })
+end
+
+return M

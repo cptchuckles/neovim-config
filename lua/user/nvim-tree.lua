@@ -76,15 +76,7 @@ tree.setup {
 		'[e', ']e',  -- Default diagnostic prev/next
 	},
 
-	on_attach = function(bufnr)
-		local ntapi = require('nvim-tree.api')
-		local map = function(m, lhs, rhs)
-			vim.keymap.set(m, lhs, rhs, { buffer = bufnr, remap = false })
-		end
-
-		map('n', '[d', ntapi.node.navigate.diagnostics.prev)
-		map('n', ']d', ntapi.node.navigate.diagnostics.next)
-	end,
+	on_attach = require('user.settings.keymaps').nvim_tree,
 }
 
 -- Because reload_on_bufenter doesn't work (when defining on_attach?)
