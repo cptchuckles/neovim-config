@@ -65,7 +65,7 @@ bl.setup {
 			}
 			if filter_type[vim.bo[bufnr].filetype] or filter_type[vim.bo[bufnr].buftype] then
 				return false
-			elseif vim.fn.match(vim.fn.system({ 'file', '-i', vim.fn.bufname(bufnr) }), 'inode/directory') > 0 then
+			elseif vim.fn.match(vim.fn.system({ 'file', '-ib', vim.fn.bufname(bufnr) }), 'inode/directory') == 0 then
 				return false
 			else
 				return vim.fn.bufname(bufnr) ~= ''
