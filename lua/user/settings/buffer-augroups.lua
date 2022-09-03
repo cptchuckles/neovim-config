@@ -18,7 +18,7 @@ local function buffer_wiping()
 		desc = 'Delete [No Name] and [Scratch] buffers upon leaving',
 		pattern = { '[No Name]', '[Scratch]' },
 		callback = function(opts)
-			vim.api.nvim_buf_delete(opts.buf)
+			vim.schedule(vim.F.nil_wrap(function() vim.api.nvim_buf_delete(opts.buf) end))
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufHidden', {
@@ -26,7 +26,7 @@ local function buffer_wiping()
 		desc = 'Wipeout term:// buffers when hidden',
 		pattern = 'term://*',
 		callback = function(opts)
-			vim.schedule(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end)
+			vim.schedule(vim.F.nil_wrap(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end))
 		end,
 	})
 	vim.api.nvim_create_autocmd('WinLeave', {
@@ -34,7 +34,7 @@ local function buffer_wiping()
 		desc = 'Wipeout lazygit buffers when accidentally window-switching away',
 		pattern = 'term://*:lazygit',
 		callback = function(opts)
-			vim.schedule(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end)
+			vim.schedule(vim.F.nil_wrap(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end))
 		end,
 	})
 end
