@@ -1,20 +1,8 @@
 -- Utility functions
---
 local function map(mode, lhs, rhs, opts)
 	opts = opts or {}
 	opts = vim.tbl_extend("keep", opts, { remap = false, silent = true })
 	vim.keymap.set(mode, lhs, rhs, opts)
-end
-
----https://github.com/tjdevries/lazy.nvim/blob/master/lua/lazy.lua#L64-L72
-local function lazy_require_on_call(mod)
-	return setmetatable({}, {
-		__index = function(_, key)
-			return function(...)
-				return require(mod)[key](...)
-			end
-		end,
-	})
 end
 
 -- Remap leader key
@@ -45,7 +33,7 @@ map('n', "<leader>E", [[<Cmd>SymbolsOutline<CR>]])
 map('n', "<leader>s", [[<Cmd>set hls!<CR>]])
 map('n', "<leader>w", [[<Cmd>set wrap!<CR>]])
 
-local lazyscope = lazy_require_on_call 'telescope.builtin'
+local lazyscope = require('lazy').require_on_exported_call 'telescope.builtin'
 map('n', "<leader>ta", lazyscope.live_grep)
 map('n', "<leader>to", function() lazyscope.live_grep { grep_open_files = true } end)
 map('n', "<leader>*" , lazyscope.grep_string)
@@ -63,6 +51,17 @@ map('n', "<C-l>", function()
 end)
 
 map('n', "<leader>gg", [[<Cmd>LazyGit<CR>]])
+
+-- DAP
+local lazydap = require('lazy').require_on_exported_call 'dap'
+map('n', '<F5>', lazydap.continue)
+map('n', '<F10>', lazydap.step_over)
+map('n', '<F11>', lazydap.step_into)
+map('n', '<F12>', lazydap.step_out)
+map('n', '<leader>b', lazydap.toggle_breakpoint)
+map('n', '<leader>B', function() lazydap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+map('n', '<leader>L', function() lazydap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+map('n', '<leader>dR', function() require('dap').repl.open() end)
 
 -- Window resizing with CTRL-Arrowkey
 map('n', "<C-Up>"   , [[2<C-w>-]])

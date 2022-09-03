@@ -50,6 +50,7 @@ return packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'                               -- Useful lua functions used by lots of plugins
 
 	use 'lewis6991/impatient.nvim'                            -- cache bytecode plugins for fast startup
+	use 'tjdevries/lazy.nvim'                                 -- Plugin lazy load/require
 
 	-- Completion
 	use 'hrsh7th/nvim-cmp'                                    -- The completion engine plugin
@@ -70,6 +71,12 @@ return packer.startup(function(use)
 	use 'Hoffs/omnisharp-extended-lsp.nvim'                   -- Omnisharp specific bullshit
 	use 'jose-elias-alvarez/null-ls.nvim'                     -- Null LS
 	-- use 'ThePrimeagen/refactoring.nvim'                       -- Refactoring
+
+	-- DAP
+	use 'mfussenegger/nvim-dap'                               -- DAP
+	use 'rcarriga/nvim-dap-ui'                                -- DAP UI
+	use 'theHamsta/nvim-dap-virtual-text'                     -- DAP Virtual Text
+	-- use 'nvim-telescope/telescope-dap.nvim'
 
 	-- Quality of Life enhancements
 	use 'jlcrochet/vim-razor'                                 -- Attempt to edit razor with neovim
