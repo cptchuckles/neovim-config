@@ -2,9 +2,13 @@ local M = {}
 
 function M.on_attach(bufnr)
 	local function telescope_references()
-		if not (pcall(function() require('telescope.builtin').lsp_references { show_line = false } end)
-		    or  pcall(function() vim.api.nvim_command [[Trouble lsp_references]] end))
-			then vim.lsp.buf.references()
+		if not (
+			pcall(function() require('telescope.builtin').lsp_references { show_line = false } end)
+			or
+			pcall(function() vim.api.nvim_command [[Trouble lsp_references]] end)
+			)
+		then
+			vim.lsp.buf.references()
 		end
 	end
 
