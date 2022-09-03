@@ -27,7 +27,7 @@ function M.on_attach(bufnr)
 	end
 
 	local function map(mode, lhs, rhs)
-		local opts = { remap = false, buffer = bufnr }
+		local opts = { remap = false, silent = true, buffer = bufnr }
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
