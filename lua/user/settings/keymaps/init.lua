@@ -18,6 +18,10 @@ map('n', "<A-j>", [[<C-w>j]])
 map('n', "<A-k>", [[<C-w>k]])
 map('n', "<A-l>", [[<C-w>l]])
 
+-- Move lines
+map('n', '<C-j>', [[<Cmd>move .+1<CR>==]])
+map('n', '<C-k>', [[<Cmd>move .-2<CR>==]])
+
 -- Bbye commands
 map('n', "<C-q>", [[<Cmd>Bdelete<CR>]])
 
@@ -76,8 +80,8 @@ map('n', "<C-p>", [[<Cmd>bprev<CR>]])
 
 -- Insert -----------------------------------------------------------------------------
 -- Move text up/down while in insert mode
-map('i', "<A-j>", [[<Cmd>m .+1<CR><C-o>==]])
-map('i', "<A-k>", [[<Cmd>m .-2<CR><C-o>==]])
+map('i', "<A-j>", [[<Cmd>move .+1<CR><C-o>==]])
+map('i', "<A-k>", [[<Cmd>move .-2<CR><C-o>==]])
 
 
 -- Visual -----------------------------------------------------------------------------
@@ -86,12 +90,12 @@ map('v', "<", [[<gv]])
 map('v', ">", [[>gv]])
 
 -- Move text up and down
-map('v', "<A-j>", [[:m '>+1<CR>gv=gv]])
-map('v', "<A-k>", [[:m '<-2<CR>gv=gv]])
+map('v', "<A-j>", [[:move '>+1<CR>gv=gv]])
+map('v', "<A-k>", [[:move '<-2<CR>gv=gv]])
 
 -- Overwrite paste
-map('v', "p", [["_dp]])
-map('v', "P", [["_dP]])
+map('v', "p", [["vdp]])
+map('v', "P", [["vdP]])
 
 -- Collimate on =
 map({ 'v', 'x' }, '<leader>c', [[:!column --table -s= -o=<CR>]])
