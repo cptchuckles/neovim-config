@@ -27,6 +27,7 @@ require('treesitter-context').setup({
 	patterns = {
 		lua = {
 			'variable_declaration',
+			'table_constructor',
 		},
 	},
 })
