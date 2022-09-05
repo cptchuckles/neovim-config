@@ -12,8 +12,8 @@ bl.setup {
 		always_show_bufferline = true,
 		tab_size = 18,
 		max_name_length = 18,
-		separator_style = 'thin',
-		sort_by = 'insert_after_current',
+		separator_style = 'padded_slant',
+		sort_by = 'insert_at_end',
 
 		color_icons = true,
 		show_buffer_icons = true,
@@ -25,8 +25,7 @@ bl.setup {
 		left_trunc_marker = 'ﬞﲑ',
 		right_trunc_marker = 'ﲒ',
 		indicator = {
-			style = 'icon',
-			icon = '▌',
+			style = 'underline',
 		},
 
 		numbers = function(opts)
@@ -36,7 +35,13 @@ bl.setup {
 			return buf.name
 		end,
 		diagnostic_indicator = function(count, level)
-			return level:match("error") and "x" or "!"
+			local symbols = {
+				error   = "",
+				warning = "",
+				hint    = "",
+				info    = "",
+			}
+			return symbols[level] or ""
 		end,
 
 		offsets = {
