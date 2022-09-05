@@ -17,17 +17,8 @@ require 'user.gitsigns'
 require 'user.treesitter'
 require 'user.indent-blankline'
 require 'user.illuminate'
+require 'user.treesitter-context'
 
 -- Default configurations
 require 'impatient'
 require 'indent-o-matic'
-require('treesitter-context').setup({
-	mode = 'cursor',
-	-- separator = '─',
-	patterns = {
-		lua = {
-			'variable_declaration',
-			'table_constructor',
-		},
-	},
-})
