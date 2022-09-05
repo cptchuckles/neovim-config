@@ -21,3 +21,12 @@ require 'user.illuminate'
 -- Default configurations
 require 'impatient'
 require 'indent-o-matic'
+require('treesitter-context').setup({
+	mode = 'cursor',
+	-- separator = '─',
+	patterns = {
+		lua = {
+			'variable_declaration',
+		},
+	},
+})

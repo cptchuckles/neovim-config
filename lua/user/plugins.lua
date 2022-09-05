@@ -103,6 +103,8 @@ return packer.startup(function(use)
 				require('nvim-treesitter.install').update({ with_sync = true })
 			end,
 		},
+		'nvim-treesitter/playground',                         -- TSPlayground to see the AST of a file
+		'nvim-treesitter/nvim-treesitter-context',            -- Sticky code context
 		'p00f/nvim-ts-rainbow',                               -- Color-code brackets and parens and shit
 	}
 
