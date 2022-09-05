@@ -1,9 +1,7 @@
-local fn = vim.fn
-
 -- Automatically install packer.nvim
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system {
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	PACKER_BOOTSTRAP = vim.fn.system {
 		"git",
 		"clone",
 		"--depth",
@@ -97,22 +95,23 @@ return packer.startup(function(use)
 		'kyazdani42/nvim-tree.lua',                           -- NvimTree
 		requires = { 'kyazdani42/nvim-web-devicons' }
 	}
-	use {
-		'nvim-treesitter/nvim-treesitter',                    -- Treesitter for syntax highlighting
-		run = function()
-			require('nvim-treesitter.install').update({ with_sync = true })
-		end,
-	}
-	use {
+
+	use {                                                     -- TREESITTER
+		{
+			'nvim-treesitter/nvim-treesitter',
+			run = function()
+				require('nvim-treesitter.install').update({ with_sync = true })
+			end,
+		},
 		'p00f/nvim-ts-rainbow',                               -- Color-code brackets and parens and shit
-		requires = 'nvim-treesitter/nvim-treesitter'
 	}
+
 	use {
 		'andymass/vim-matchup',                               -- Better % operator (keywords and shit)
 		event = 'VimEnter',
 		config = function()
 			vim.g.matchup_matchparen_deferred = 1
-			vim.g.matchup_matchparen_offscreen = { method = 'status' }
+			vim.g.matchup_matchparen_offscreen = {}
 		end,
 	}
 
