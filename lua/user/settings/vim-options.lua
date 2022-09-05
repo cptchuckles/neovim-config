@@ -42,6 +42,7 @@ local options = {
 	textwidth      = 120,                             -- sets desired document width
 	colorcolumn    = "+1",                            -- marks desired rightmost document edge
 	laststatus     = 3,                               -- global statusline at the bottom of nvim
+	joinspaces     = true,                            -- Use two spaces when joining sentences
 }
 vim.opt.iskeyword:append "-"   -- add '-' to iskeyword chars
 
@@ -55,4 +56,4 @@ vim.g.netrw_browse_split = 4  -- open file in previous window
 vim.g.netrw_banner = 0        -- no banner
 vim.g.netrw_usetab = 1        -- use netrw-<C-Tab> mapping
 vim.g.netrw_wiw = 32          -- window width (cols)
-
+vim.g.shada = "'0f0"          -- what to save in the ShaDa file

@@ -18,6 +18,12 @@ map('n', "<A-j>", [[<C-w>j]])
 map('n', "<A-k>", [[<C-w>k]])
 map('n', "<A-l>", [[<C-w>l]])
 
+-- Center view after page up/down
+map('n', '<C-d>', [[<C-d>zz]])
+map('n', '<C-u>', [[<C-u>zz]])
+map('n', '<C-f>', [[<C-f>zz]])
+map('n', '<C-b>', [[<C-b>zz]])
+
 -- Move lines
 map('n', '<C-j>', [[<Cmd>move .+1<CR>==]])
 map('n', '<C-k>', [[<Cmd>move .-2<CR>==]])
