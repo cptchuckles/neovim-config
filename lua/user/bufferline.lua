@@ -70,7 +70,7 @@ bl.setup {
 			}
 			if filter_type[vim.bo[bufnr].filetype] or filter_type[vim.bo[bufnr].buftype] then
 				return false
-			elseif vim.fn.isdirectory(vim.fn.bufname(bufnr)) then
+			elseif vim.fn.isdirectory(vim.fn.bufname(bufnr)) == 1 then
 				return false
 			else
 				return vim.fn.bufname(bufnr) ~= ''
