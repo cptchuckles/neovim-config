@@ -53,14 +53,15 @@ gitsigns.setup {
 				if type(cmd) == "function" then
 					cmd()
 				elseif type(cmd) == "string" then
-					vim.api.nvim_command(cmd)
+					local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
+					vim.api.nvim_feedkeys(keys, 'n', false)
 				end
 				vim.schedule(vim.F.nil_wrap(function() require('nvim-tree.api').tree.reload() end))
 			end
 		end
 		-- Actions
-		map({'n', 'v'}, '<leader>gs', reload_nvim_tree_after('Gitsigns stage_hunk'))
-		map({'n', 'v'}, '<leader>gr', reload_nvim_tree_after('Gitsigns reset_hunk'))
+		map({ 'n', 'v' }, '<leader>gs', reload_nvim_tree_after [[:Gitsigns stage_hunk<CR>]])
+		map({ 'n', 'v' }, '<leader>gr', reload_nvim_tree_after [[:Gitsigns reset_hunk<CR>]])
 		map('n', '<leader>gS', reload_nvim_tree_after(gs.stage_buffer))
 		map('n', '<leader>gu', reload_nvim_tree_after(gs.undo_stage_hunk))
 		map('n', '<leader>gR', reload_nvim_tree_after(gs.reset_buffer))
