@@ -37,6 +37,16 @@ local function buffer_wiping()
 			vim.schedule(vim.F.nil_wrap(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end))
 		end,
 	})
+	vim.api.nvim_create_autocmd('VimEnter', {
+		group = aug_wipe_buffers,
+		desc = 'Wipe directory buffers on startup',
+		pattern = '*',
+		callback = function(opts)
+			if vim.fn.isdirectory(vim.fn.bufname(opts.buf)) == 1 then
+				vim.schedule(vim.F.nil_wrap(function() vim.api.nvim_command("bwipeout! " .. opts.buf) end))
+			end
+		end,
+	})
 end
 
 local function fold_settings()
