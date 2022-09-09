@@ -49,6 +49,19 @@ local function buffer_wiping()
 	})
 end
 
+local function help_qf_close_map()
+	vim.api.nvim_create_autocmd('FileType', {
+		group = vim.api.nvim_create_augroup('HelpWindowKeybinds', { clear = true }),
+		desc = 'Keybind to easily close help and qflist buffer windows',
+		pattern = { 'help', 'qf' },
+		callback = function(opts)
+			vim.keymap.set('n', 'q', function()
+				vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
+			end, { silent = true, remap = false, buffer = opts.buf })
+		end,
+	})
+end
+
 local function fold_settings()
 	vim.api.nvim_create_autocmd('FileType', {
 		group = vim.api.nvim_create_augroup('JsonYamlFoldingSettings', { clear = true }),
@@ -90,6 +103,7 @@ end
 
 M.setup = function()
 	buffer_wiping()
+	help_qf_close_map()
 	fold_settings()
 	terminal_settings()
 end
