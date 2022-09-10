@@ -60,7 +60,7 @@ bl.setup {
 				help     = true,
 				nofile   = true,
 				qf       = true,
-				quickfix = true,
+				acwrite  = true,
 				terminal = true,
 			}
 			if filter_type[vim.bo[bufnr].filetype] or filter_type[vim.bo[bufnr].buftype] then
