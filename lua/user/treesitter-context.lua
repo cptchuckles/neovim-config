@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 tscontext.setup({
-	mode = 'topline',
+	mode = 'cursor',
 	-- separator = '─',
 	patterns = {
 		lua = {
