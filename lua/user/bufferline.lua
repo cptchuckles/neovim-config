@@ -46,17 +46,12 @@ bl.setup {
 
 		offsets = {
 			{ filetype = 'NvimTree',
-				text = 'Nvim Tree',
+				text = function()
+					return vim.fn.getcwd():gsub(vim.fn.getenv("HOME"), '~')
+				end,
 				highlight = 'Visual',
+				padding = 1,
 				separator = false },
-			{ filetype = 'Outline',
-				text = 'Outline',
-				highlight = 'Visual',
-				separator = true },
-			{ filetype = 'Trouble',
-				text = 'Trouble',
-				highlight = 'Visual',
-				separator = true },
 		},
 
 		custom_filter = function(bufnr, bufnrs)
