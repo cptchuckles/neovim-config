@@ -35,7 +35,7 @@ local kind_icons = {
 }
 -- find more at https://www.nerdfonts.com/cheat-sheet
 
-cmp.setup({
+cmp.setup {
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -126,7 +126,7 @@ cmp.setup({
 		ghost_text = true,
 		native_menu = false,
 	},
-})
+}
 
 cmp.setup.cmdline('/', {
 	mapping = cmp.mapping.preset.cmdline(),
