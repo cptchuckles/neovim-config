@@ -17,7 +17,7 @@ end
 vim.api.nvim_create_autocmd('BufWritePost', {
 	group = vim.api.nvim_create_augroup('packer_user_config', { clear = true }),
 	desc = 'Update the plugin list every time you save plugins.lua',
-	pattern = 'plugins.lua',
+	pattern = vim.fn.stdpath('config') .. '/lua/user/plugins.lua',
 	callback = function(opts)
 		vim.api.nvim_command('source ' .. opts.file)
 		require('packer').sync()
