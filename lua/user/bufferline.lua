@@ -38,20 +38,24 @@ bl.setup {
 			local symbols = {
 				error   = "",
 				warning = "",
-				hint    = "",
+				hint    = nil,
 				info    = "",
 			}
-			return symbols[level] or ""
+			if count > 0 and symbols[level] then
+				return symbols[level] .. count
+			end
+			return ""
 		end,
 
 		offsets = {
 			{ filetype = 'NvimTree',
+				highlight = 'Visual',
+				separator = false,
+				padding = 1,
 				text = function()
 					return vim.fn.getcwd():gsub(vim.fn.getenv("HOME"), '~')
 				end,
-				highlight = 'Visual',
-				padding = 1,
-				separator = false },
+			},
 		},
 
 		custom_filter = function(bufnr, bufnrs)
