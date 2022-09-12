@@ -84,5 +84,5 @@ vim.api.nvim_create_autocmd('BufEnter', {
 	group = vim.api.nvim_create_augroup('NvimTreeAutoRefresh', { clear = true }),
 	desc = 'Refresh NvimTree on BufEnter',
 	pattern = 'NvimTree*',
-	callback = require('nvim-tree.api').tree.reload,
+	callback = function() require('nvim-tree.api').tree.reload() end,
 })
