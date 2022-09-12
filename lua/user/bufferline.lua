@@ -10,7 +10,7 @@ vim.keymap.set('n', ']b', function() bl.cycle(1) end, { silent = true, remap = f
 local function get_separator_style()
 	local term = vim.fn.getenv('TERM')
 	if term == vim.NIL then term = 'xterm-256color' end
-	if vim.fn.match(term, 'alacritty') >= 0 then
+	if vim.fn.match(term, 'alacritty') == 0 then
 		return 'padded_slant'
 	end
 	return 'slant'
