@@ -63,15 +63,26 @@ local function help_qf_close_map()
 end
 
 local function fold_settings()
-	vim.api.nvim_create_autocmd('FileType', {
-		group = vim.api.nvim_create_augroup('JsonYamlFoldingSettings', { clear = true }),
+	local json_yaml_folding = vim.api.nvim_create_augroup('JsonYamlFoldingSettings', { clear = true })
+	vim.api.nvim_create_autocmd('BufAdd', {
+		group = json_yaml_folding,
 		desc = 'Set indent-based folding at level 2 for json and yaml files',
-		pattern = { 'json', 'yaml' },
+		pattern = { '*.json', '*.yaml', '*.yml' },
 		callback = function(opts)
 			vim.schedule(function()
 				local wid = vim.fn.bufwinid(opts.buf)
 				vim.wo[wid].foldmethod = 'indent'
 				vim.wo[wid].foldlevel = 2
+			end)
+		end,
+	})
+	vim.api.nvim_create_autocmd('BufHidden', {
+		group = json_yaml_folding,
+		desc = 'Reset folding method to manual when json/yaml buffers are hidden',
+		pattern = { '*.json', '*.yaml', '*.yml' },
+		callback = function(opts)
+			vim.schedule(function()
+				vim.wo[vim.fn.bufwinid('%')].foldmethod = 'manual'
 			end)
 		end,
 	})
