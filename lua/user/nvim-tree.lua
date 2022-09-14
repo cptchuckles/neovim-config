@@ -76,7 +76,11 @@ tree.setup {
 		'[e', ']e',  -- Default diagnostic prev/next
 	},
 
-	on_attach = require('user.settings.keymaps').nvim_tree,
+	on_attach = function(bufnr)
+		for lhs, rhs in pairs(require('user.settings.keymaps').nvim_tree) do
+			vim.keymap.set('n', lhs, rhs, { silent = true, remap = false, buffer = bufnr })
+		end
+	end,
 }
 
 -- Because reload_on_bufenter doesn't work (when defining on_attach?)

@@ -43,7 +43,7 @@ map('n', '<leader>E', [[<Cmd>SymbolsOutline<CR>]])
 map('n', '<leader>s', [[<Cmd>set hls!<CR>]])
 map('n', '<leader>w', [[<Cmd>set wrap!<CR>]])
 
-local lazyscope = require('lazy').require_on_exported_call 'telescope.builtin'
+local lazyscope = require('lazy').require_on_exported_call('telescope.builtin')
 map('n', '<leader>ta', lazyscope.live_grep)
 map('n', '<leader>to', function() lazyscope.live_grep { grep_open_files = true } end)
 map('n', '<leader>*' , lazyscope.grep_string)
@@ -68,9 +68,9 @@ map('n', '<F5>', lazydap.continue)
 map('n', '<F10>', lazydap.step_over)
 map('n', '<F11>', lazydap.step_into)
 map('n', '<F12>', lazydap.step_out)
-map('n', '<leader>b', lazydap.toggle_breakpoint)
-map('n', '<leader>B', function() lazydap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
-map('n', '<leader>L', function() lazydap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+map('n', '<leader>db', lazydap.toggle_breakpoint)
+map('n', '<leader>dB', function() lazydap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+map('n', '<leader>dL', function() lazydap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
 map('n', '<leader>dR', function() require('dap').repl.open() end)
 
 -- Window resizing with CTRL-Arrowkey
@@ -135,9 +135,27 @@ M.symbols_outline = {
 	fold_reset     = 'R',
 }
 
-M.nvim_tree = function(bufnr)
-	map('n', '[d', function() require('nvim-tree.api').node.navigate.diagnostics.prev() end, { buffer = bufnr })
-	map('n', ']d', function() require('nvim-tree.api').node.navigate.diagnostics.next() end, { buffer = bufnr })
-end
+M.nvim_tree = {
+	['[d'] = function() require('nvim-tree.api').node.navigate.diagnostics.prev() end,
+	[']d'] = function() require('nvim-tree.api').node.navigate.diagnostics.next() end,
+}
+
+local bl = require('lazy').require_on_exported_call('bufferline')
+M.bufferline = {
+	['[b'] = function() bl.cycle(-1) end,
+	[']b'] = function() bl.cycle( 1) end,
+	['<leader>bq'] = bl.close_with_pick,
+	['<leader>bb'] = bl.pick_buffer,
+	['<A-1>'] = function() bl.go_to(1, false) end,
+	['<A-2>'] = function() bl.go_to(2, false) end,
+	['<A-3>'] = function() bl.go_to(3, false) end,
+	['<A-4>'] = function() bl.go_to(4, false) end,
+	['<A-5>'] = function() bl.go_to(5, false) end,
+	['<A-6>'] = function() bl.go_to(6, false) end,
+	['<A-7>'] = function() bl.go_to(7, false) end,
+	['<A-8>'] = function() bl.go_to(8, false) end,
+	['<A-9>'] = function() bl.go_to(-1, true) end,
+	['<A-0>'] = function() bl.go_to( 1, true) end,
+}
 
 return M

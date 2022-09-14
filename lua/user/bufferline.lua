@@ -4,8 +4,10 @@ if not status_ok then
 	return
 end
 
-vim.keymap.set('n', '[b', function() bl.cycle(-1) end, { silent = true, remap = false })
-vim.keymap.set('n', ']b', function() bl.cycle(1) end, { silent = true, remap = false })
+local keymaps = require('user.settings.keymaps').bufferline
+for lhs, rhs in pairs(keymaps) do
+	vim.keymap.set('n', lhs, rhs, { silent = true, remap = false })
+end
 
 local function get_separator_style()
 	local term = vim.fn.getenv('TERM')
@@ -19,10 +21,10 @@ end
 bl.setup {
 	options = {
 		always_show_bufferline = true,
-		tab_size               = 18,
-		max_name_length        = 18,
-		separator_style        = get_separator_style(),
-		sort_by                = 'insert_at_end',
+		tab_size        = 18,
+		max_name_length = 18,
+		separator_style = get_separator_style(),
+		sort_by = 'insert_at_end',
 
 		color_icons              = true,
 		show_buffer_icons        = true,
