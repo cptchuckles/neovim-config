@@ -1,4 +1,4 @@
-local status_ok, bl = pcall(require, 'bufferline')
+local status_ok, bufferline = pcall(require, 'bufferline')
 if not status_ok then
 	print("Couldn't load 'bufferline'")
 	return
@@ -18,7 +18,7 @@ local function get_separator_style()
 	return 'slant'
 end
 
-bl.setup {
+bufferline.setup {
 	options = {
 		always_show_bufferline = true,
 		tab_size        = 18,

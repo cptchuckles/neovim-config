@@ -1,10 +1,10 @@
-local status_ok, bl = pcall(require, 'indent_blankline')
+local status_ok, blankline = pcall(require, 'indent_blankline')
 if not status_ok then
 	print("Couldn't load 'indent_blankline'")
 	return
 end
 
-bl.setup {
+blankline.setup {
 	char = "",
 	space_char_highlight_list = {
 		"IndentBlanklineIndent1",
