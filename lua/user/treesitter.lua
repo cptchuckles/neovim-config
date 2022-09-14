@@ -61,3 +61,26 @@ ts.setup {
 }
 
 vim.api.nvim_command [[ highlight TSComment cterm=italic gui=italic ]]
+
+local context_ok, tscontext = pcall(require, 'treesitter-context')
+if not context_ok then
+	print("Couldn't load 'treesitter-context'")
+	return
+end
+
+tscontext.setup({
+	mode = 'cursor',
+	-- separator = '─',
+	patterns = {
+		lua = {
+			'variable_declaration',
+			'table_constructor',
+		},
+	},
+	exclude_patterns = {  -- This shit isn't fucking working!!!!
+		cs = {
+			'attribute_list',
+			'attribute',
+		},
+	},
+})

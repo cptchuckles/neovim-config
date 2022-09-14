@@ -16,7 +16,6 @@ require 'user.bufferline'
 
 -- Buffer Enhancements
 require 'user.treesitter'
-require 'user.treesitter-context'
 require 'user.gitsigns'
 require 'user.illuminate'
 require 'user.indent-blankline'
