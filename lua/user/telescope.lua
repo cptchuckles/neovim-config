@@ -4,6 +4,9 @@ if not status_ok then
 	return
 end
 
+local keys = require 'user.settings.keymaps.telescope'
+local actions = require 'telescope.actions'
+
 telescope.setup {
 	defaults = {
 		winblend = 10,
@@ -35,8 +38,8 @@ telescope.setup {
 		},
 
 		mappings = {
-			i = require('user.settings.keymaps.telescope').insert(require 'telescope.actions'),
-			n = require('user.settings.keymaps.telescope').normal(require 'telescope.actions'),
+			n = keys.normal(actions),
+			i = keys.insert(actions),
 		},
 	},
 

@@ -1,6 +1,6 @@
 local M = {}
 
-local lazytrouble = require('lazy').require_on_exported_call 'trouble.providers.telescope'
+local lazytrouble = require('lazy').require_on_exported_call('trouble.providers.telescope')
 
 function M.insert(actions)
 	return {
@@ -23,7 +23,7 @@ function M.insert(actions)
 		['<C-u>'] = actions.results_scrolling_up,
 		['<C-d>'] = actions.results_scrolling_down,
 
-		['<PageUp>'] = actions.preview_scrolling_up,
+		['<PageUp>']   = actions.preview_scrolling_up,
 		['<PageDown>'] = actions.preview_scrolling_down,
 
 		['<Tab>'] = actions.toggle_selection + actions.move_selection_worse,
@@ -57,7 +57,7 @@ function M.normal(actions)
 		['z'] = actions.move_to_middle,
 		['G'] = actions.move_to_bottom,
 
-		['<PageUp>'] = actions.preview_scrolling_up,
+		['<PageUp>']   = actions.preview_scrolling_up,
 		['<PageDown>'] = actions.preview_scrolling_down,
 
 		['?'] = actions.which_key,
