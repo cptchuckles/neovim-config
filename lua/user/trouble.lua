@@ -6,7 +6,10 @@ end
 
 trouble.setup {
 	padding = true,
-	auto_close = true,
+
+	-- Stop fucking setting this to true because it yeets any list that isn't diagnostics (like references)
+	auto_close = false,
+
 	auto_fold = false,
 	action_keys = {
 		jump        = '<cr>',
