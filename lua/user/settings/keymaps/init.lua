@@ -106,6 +106,29 @@ map('v', 'P', [["vdP]])
 -- Collimate on =
 map({ 'v', 'x' }, '<leader>c', [[:!column --table -s= -o=<CR>]])
 
+-- Replace text command
+map('v', '<C-r>', function()
+	local getselection = function()
+		return vim.fn.strcharpart(
+			vim.fn.getline(vim.fn.line('.')),
+			vim.fn.min({
+				vim.fn.charcol('.'),
+				vim.fn.charcol('v'),
+			}) - 1,
+			vim.fn.abs(vim.fn.charcol('.') - vim.fn.charcol('v')) + 1
+		)
+	end
+
+	local query = getselection()
+
+	vim.fn.inputsave()
+	local answer = vim.fn.input("Replace text: ", query)
+	vim.api.nvim_command(
+		'%s/\\V' .. query:gsub('/','\\/') .. '/' .. answer:gsub('/','\\/') .. '/'
+	)
+	vim.fn.inputrestore()
+	vim.api.nvim_feedkeys('v', 'n', false)
+end)
 
 -- Terminal ---------------------------------------------------------------------------
 map('n', '<leader>`', [[<Cmd>split+terminal<CR>]])
