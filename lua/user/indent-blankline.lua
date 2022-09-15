@@ -16,8 +16,11 @@ blankline.setup {
 }
 
 -- Folds
-local zmaps = { "zc", "zC", "zo", "zO", "zr", "zR", "zm", "zM", "zn", "zN", "zd", "zD", "zE", }
-for _, zm in ipairs(zmaps) do
-	vim.keymap.set("n", zm, zm .. ":lua pcall(function() require('indent_blankline').refresh() end)<CR>",
-		{ remap = false, silent = true })
+local zmaps = {
+	'zA', 'zC', 'zD', 'zE', 'zM', 'zN', 'zO', 'zR',
+	'za', 'zc', 'zd', 'zi', 'zm', 'zn', 'zo', 'zr', 'zv', 'zx',
+}
+for _, lhs in ipairs(zmaps) do
+	local rhs = lhs .. [[<Cmd>lua pcall(function() require('indent_blankline').refresh() end)<CR>]]
+	vim.keymap.set('n', lhs, rhs, { remap = false, silent = true })
 end
