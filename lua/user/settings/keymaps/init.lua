@@ -124,7 +124,7 @@ map('v', '<C-r>', function()
 	vim.fn.inputsave()
 	local answer = vim.fn.input("Replace text: ", query)
 	vim.api.nvim_command(
-		'%s/\\V' .. query:gsub('/','\\/') .. '/' .. answer:gsub('/','\\/') .. '/'
+		'bufdo :%s/\\V' .. query:gsub('/','\\/') .. '/' .. answer:gsub('/','\\/') .. '/ge'
 	)
 	vim.fn.inputrestore()
 	vim.api.nvim_feedkeys('v', 'n', false)
