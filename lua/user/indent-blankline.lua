@@ -5,14 +5,14 @@ if not status_ok then
 end
 
 blankline.setup {
-	char = "",
+	char = '│',
 	space_char_highlight_list = {
-		"IndentBlanklineIndent1",
-		"IndentBlanklineIndent2",
+		'IndentBlanklineIndent1',
+		'IndentBlanklineIndent2',
 	},
 	show_trailing_blankline_indent = false,
 	show_cursor_context_start = true,
-	space_char_blankline = " ",
+	space_char_blankline = ' ',
 }
 
 -- Folds
