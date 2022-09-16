@@ -68,7 +68,7 @@ if not context_ok then
 	return
 end
 
-tscontext.setup({
+tscontext.setup {
 	mode = 'cursor',
 	-- separator = '─',
 	patterns = {
@@ -83,4 +83,4 @@ tscontext.setup({
 			'attribute',
 		},
 	},
-})
+}
