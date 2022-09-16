@@ -45,17 +45,9 @@ bufferline.setup {
 		name_formatter = function(buf)
 			return buf.name
 		end,
-		diagnostic_indicator = function(count, level)
-			local symbols = {
-				error   = "",
-				warning = "",
-				hint    = nil,
-				info    = "",
-			}
-			if count > 0 and symbols[level] then
-				return symbols[level] .. count
-			end
-			return ""
+		diagnostics_indicator = function(count, level)
+			local icon = level:match("error") and ":" or ":"
+			return icon .. count
 		end,
 
 		offsets = {
