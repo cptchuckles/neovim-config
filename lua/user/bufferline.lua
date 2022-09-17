@@ -66,7 +66,7 @@ bufferline.setup {
 			elseif vim.fn.isdirectory(vim.fn.bufname(bufnr)) == 1 then
 				return false
 			else
-				return vim.fn.bufname(bufnr) ~= ''
+				return #vim.fn.bufname(bufnr) > 0
 			end
 		end,
 	},
