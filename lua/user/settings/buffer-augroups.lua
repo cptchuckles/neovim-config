@@ -55,9 +55,11 @@ local function help_qf_close_map()
 		desc = 'Keybind to easily close help and qflist buffer windows',
 		pattern = { 'help', 'qf' },
 		callback = function(opts)
-			vim.keymap.set('n', 'q', function()
+			local close_func = function()
 				vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
-			end, { silent = true, remap = false, buffer = opts.buf })
+			end
+			vim.keymap.set('n', 'q',     close_func, { silent = true, remap = false, buffer = opts.buf })
+			vim.keymap.set('n', '<C-q>', close_func, { silent = true, remap = false, buffer = opts.buf })
 		end,
 	})
 end
