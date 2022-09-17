@@ -9,21 +9,12 @@ for lhs, rhs in pairs(keymaps) do
 	vim.keymap.set('n', lhs, rhs, { silent = true, remap = false })
 end
 
-local function get_separator_style()
-	local term = vim.fn.getenv('TERM')
-	if term == vim.NIL then term = 'xterm-256color' end
-	if vim.fn.match(term, 'alacritty') == 0 then
-		return 'padded_slant'
-	end
-	return 'slant'
-end
-
 bufferline.setup {
 	options = {
 		always_show_bufferline = true,
 		tab_size        = 18,
 		max_name_length = 18,
-		separator_style = get_separator_style(),
+		separator_style = 'thin',
 		sort_by = 'insert_at_end',
 
 		color_icons              = true,
@@ -36,7 +27,7 @@ bufferline.setup {
 		left_trunc_marker        = 'ﬞﲑ',
 		right_trunc_marker       = 'ﲒ',
 		indicator = {
-			style = 'underline',
+			style = 'none',
 		},
 
 		numbers = function(opts)
