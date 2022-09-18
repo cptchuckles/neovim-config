@@ -49,6 +49,7 @@ return function(bufnr)
 	map('n', '<leader>gd', gs.diffthis)
 	map('n', '<leader>gD', function() gs.diffthis('~') end)
 	map('n', '<leader>gX', gs.toggle_deleted)
+	map('n', '<leader>gc', gs.setqflist)
 	-- text object
 	map({ 'o', 'x' }, 'ic', [[<Cmd>Gitsigns select_hunk<CR>]])
 end
