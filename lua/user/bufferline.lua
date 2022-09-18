@@ -24,10 +24,11 @@ bufferline.setup {
 		buffer_close_icon        = '',
 		close_icon               = '',
 		modified_icon            = 'ﰣ',
-		left_trunc_marker        = 'ﬞﲑ',
+		left_trunc_marker        = 'ﲑ',
 		right_trunc_marker       = 'ﲒ',
 		indicator = {
-			style = 'none',
+			style = 'icon',
+			icon = '▌',
 		},
 
 		numbers = function(opts)
