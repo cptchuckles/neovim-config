@@ -4,7 +4,7 @@ if not cmp_status_ok then
 	return
 end
 
-local luasnip = require 'user.luasnip'
+local luasnip = require('lazy').require_on_exported_call('user.luasnip')
 
 local kind_icons = {
 	Class         = '',
@@ -42,10 +42,10 @@ cmp.setup {
 		end,
 	},
 
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
+	-- window = {
+	-- 	completion = cmp.config.window.bordered(),
+	-- 	documentation = cmp.config.window.bordered(),
+	-- },
 
 	mapping = cmp.mapping.preset.insert({
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
