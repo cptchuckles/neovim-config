@@ -131,7 +131,7 @@ return packer.startup(function(use)
 
 	-- Sickass statusline thing
 	use {
-	'glepnir/galaxyline.nvim',
+		'glepnir/galaxyline.nvim',
 		branch = 'main',
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
 	}
