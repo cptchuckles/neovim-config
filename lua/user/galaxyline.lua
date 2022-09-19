@@ -157,7 +157,7 @@ gls.right[5] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = condition.hide_in_width,
-    icon = '  ',
+    icon = '  ',
     highlight = {colors.green,colors.bg},
   }
 }
@@ -173,7 +173,7 @@ gls.right[7] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = condition.hide_in_width,
-    icon = '  ',
+    icon = '  ',
     highlight = {colors.red,colors.bg},
   }
 }
