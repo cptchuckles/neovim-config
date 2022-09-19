@@ -137,7 +137,7 @@ gls.right[2] = {
 
 gls.right[3] = {
   GitIcon = {
-    provider = function() return '  ' end,
+    provider = function() return '  ' end,
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
@@ -165,7 +165,7 @@ gls.right[6] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.hide_in_width,
-    icon = ' 柳',
+    icon = ' ﰣ ',
     highlight = {colors.orange,colors.bg},
   }
 }
