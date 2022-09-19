@@ -79,6 +79,7 @@ return packer.startup(function(use)
 	-- Quality of Life enhancements
 	use 'jlcrochet/vim-razor'                                 -- Attempt to edit razor with neovim
 	use 'LunarVim/colorschemes'                               -- a bunch of colorschemes
+	use 'folke/tokyonight.nvim'                               -- TokyoNight theme
 	use 'kyazdani42/nvim-web-devicons'                        -- more icons and shit
 	use 'lewis6991/gitsigns.nvim'                             -- Git Signs
 	use 'lukas-reineke/indent-blankline.nvim'                 -- Indentation fanciness
