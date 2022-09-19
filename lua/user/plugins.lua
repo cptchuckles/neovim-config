@@ -128,12 +128,12 @@ return packer.startup(function(use)
 		opt = true,
 	}
 
-	-- Sickass statusline thing (TODO)
-	-- use {
-	-- 'glepnir/galaxyline.nvim',
-	-- 	branch = 'main',
-	-- 	requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-	-- }
+	-- Sickass statusline thing
+	use {
+	'glepnir/galaxyline.nvim',
+		branch = 'main',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+	}
 
 	-- Automatically set configuration after cloning packer.nvim
 	-- Keep this at the end
