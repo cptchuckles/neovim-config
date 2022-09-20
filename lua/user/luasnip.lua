@@ -4,12 +4,7 @@ if not status_ok then
 	return
 end
 
-local vscode_ok, vscode_loader = pcall(require, 'luasnip/loaders/from_vscode')
-if not vscode_ok then
-	print("Couldn't load 'luasnip/loaders/from_vscode'")
-else
-	vscode_loader.lazy_load()
-end
+require('luasnip.loaders.from_vscode').lazy_load()
 
 luasnip.filetype_extend("ruby", {
 	"jekyll",
