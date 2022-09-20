@@ -8,7 +8,7 @@ local function make_theme_augroup()
       \   highlight! TabLineFill cterm=NONE gui=NONE ctermbg=Darkgray guibg=#333333
       \|  highlight! Todo cterm=bold gui=bold ctermbg=Yellow ctermfg=Black guibg=Yellow guifg=Black
       \|  highlight! Comment cterm=italic gui=italic
-      \|  highlight! TSComment cterm=italic gui=italic
+      \|  highlight! TSComment cterm=italic gui=italic guifg=#505060
       \|  highlight! Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
       \|  highlight! link WinSeparator LineNr
       \|  highlight! GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
