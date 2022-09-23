@@ -170,7 +170,7 @@ section('mid', {
 	FileName = {
 		condition = buffer_not_empty,
 		provider = function()
-			return vim.fn.expand('%:t') .. (vim.bo.modified and ' ' or '')
+			return vim.fn.expand('%:t') .. ' '
 		end,
 		highlight = { colors.fg, colors.grayblue, 'italic' },
 	}
