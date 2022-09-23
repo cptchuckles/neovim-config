@@ -22,5 +22,5 @@ gitsigns.setup {
 		changedelete = {hl = 'GitSignsChange', text = '┋', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn' },
 	},
 
-	on_attach = require('user.settings.keymaps.gitsigns')
+	on_attach = require('user.settings.keymaps').gitsigns
 }

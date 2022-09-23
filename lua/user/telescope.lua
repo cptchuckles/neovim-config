@@ -4,8 +4,8 @@ if not status_ok then
 	return
 end
 
-local keys = require 'user.settings.keymaps.telescope'
-local actions = require 'telescope.actions'
+local keys = require('user.settings.keymaps').telescope
+local actions = require('telescope.actions')
 
 telescope.setup {
 	defaults = {

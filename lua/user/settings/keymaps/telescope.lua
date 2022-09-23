@@ -9,6 +9,7 @@ function M.insert(actions)
 
 		['<A-j>'] = actions.move_selection_next,
 		['<A-k>'] = actions.move_selection_previous,
+		['<A-d>'] = actions.delete_buffer,
 
 		['<C-e>'] = actions.close,
 
@@ -56,6 +57,7 @@ function M.normal(actions)
 		['g'] = actions.move_to_top,
 		['z'] = actions.move_to_middle,
 		['G'] = actions.move_to_bottom,
+		['dd'] = actions.delete_buffer,
 
 		['<PageUp>']   = actions.preview_scrolling_up,
 		['<PageDown>'] = actions.preview_scrolling_down,

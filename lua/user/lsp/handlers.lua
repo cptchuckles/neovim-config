@@ -76,7 +76,7 @@ M.on_attach = function(client, bufnr)
 		})
 	end
 
-	require('user.settings.keymaps.lsp').on_attach(bufnr)
+	require('user.settings.keymaps').lsp_setup(bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

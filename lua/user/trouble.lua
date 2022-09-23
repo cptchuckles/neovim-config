@@ -5,12 +5,17 @@ if not status_ok then
 end
 
 trouble.setup {
-	padding = true,
+	padding = false,
 
 	-- Stop fucking setting this to true because it yeets any list that isn't diagnostics (like references)
 	auto_close = false,
 
 	auto_fold = false,
+	auto_jump = {
+		"lsp_definitions",
+		"lsp_references",
+	},
+
 	action_keys = {
 		jump        = '<cr>',
 		preview     = '<tab>',

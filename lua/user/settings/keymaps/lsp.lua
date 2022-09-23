@@ -1,7 +1,5 @@
-local M = {}
-
-function M.on_attach(bufnr)
-	local function telescope_references()
+return function(bufnr)
+	local function nice_references()
 		if not (
 			pcall(function() require('telescope.builtin').lsp_references { show_line = false } end)
 			or
@@ -12,7 +10,18 @@ function M.on_attach(bufnr)
 		end
 	end
 
-	local function trouble_diagnostics(opts)
+	local function nice_definitions()
+		if not (
+			pcall(function() require('telescope.builtin').lsp_definitions { show_line = false } end)
+			or
+			pcall(function() vim.api.nvim_command [[Trouble lsp_definitions]] end)
+			)
+		then
+			vim.lsp.buf.definition()
+		end
+	end
+
+	local function nice_diagnostics(opts)
 		opts = opts or {}
 		opts.scope = vim.F.if_nil(opts.scope, 'document')
 		local diagnose = {
@@ -32,8 +41,8 @@ function M.on_attach(bufnr)
 	end
 
 	map('n', 'K',      vim.lsp.buf.hover)
-	map('n', '<C-]>',  vim.lsp.buf.definition)
-	map('n', 'g<C-]>', telescope_references)
+	map('n', '<C-]>',  nice_definitions)
+	map('n', 'g<C-]>', nice_references)
 	map('n', '<A-a>',  vim.lsp.buf.code_action)
 	map('n', '<A-i>',  function() vim.diagnostic.open_float { border = 'rounded' } end)
 
@@ -42,8 +51,8 @@ function M.on_attach(bufnr)
 	map('n', '[d', function() vim.diagnostic.goto_prev { border = 'rounded' } end)
 	map('n', ']d', function() vim.diagnostic.goto_next { border = 'rounded' } end)
 
-	map('n', '<leader>dD', trouble_diagnostics { scope = 'workspace' })
-	map('n', '<leader>dd', trouble_diagnostics { scope = 'document' })
+	map('n', '<leader>dD', nice_diagnostics { scope = 'workspace' })
+	map('n', '<leader>dd', nice_diagnostics { scope = 'document' })
 	map('n', '<leader>de', vim.lsp.buf.declaration)
 	map('n', '<leader>di', vim.lsp.buf.implementation)
 	map('n', '<leader>dr', vim.lsp.buf.rename)
@@ -57,5 +66,3 @@ function M.on_attach(bufnr)
 	map('n', '<leader>F', [[<Cmd>Format<CR>]])
 	map({ 'v', 'x' }, '<leader>f', [[:FormatRange<CR>]])
 end
-
-return M
