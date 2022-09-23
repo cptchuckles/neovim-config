@@ -220,10 +220,76 @@ LspMidSection()
 section('mid', {
 	FileInformationPost = {
 		condition = buffer_not_empty,
-		provider = function() return '' end,
+		provider = function() return ' ' end,
 		highlight = { colors.grayblue, colors.none },
 	}
 })
+
+local function Diagnostics()
+	local diagnostics = {}
+	section('mid', {
+		DiagnosticErrors = {
+			condition = function() return window_wider_than(60) and buffer_not_empty() end,
+			provider = function()
+				diagnostics = vim.diagnostic.get(0)
+				local errors = vim.tbl_filter(function(d)
+					return d.severity == vim.diagnostic.severity.ERROR
+				end, diagnostics)
+				if #errors > 0 then
+					return ' ' .. #errors .. ' '
+				end
+				return ''
+			end,
+			highlight = { colors.red, colors.none, },
+		}
+	})
+	section('mid', {
+		DiagnosticWarnings = {
+			condition = function() return window_wider_than(60) and buffer_not_empty() end,
+			provider = function()
+				local warnings = vim.tbl_filter(function(d)
+					return d.severity == vim.diagnostic.severity.WARN
+				end, diagnostics)
+				if #warnings > 0 then
+					return ' ' .. #warnings .. ' '
+				end
+				return ''
+			end,
+			highlight = { colors.orange, colors.none, },
+		}
+	})
+	section('mid', {
+		DiagnosticInfo = {
+			condition = function() return window_wider_than(60) and buffer_not_empty() end,
+			provider = function()
+				local info = vim.tbl_filter(function(d)
+					return d.severity == vim.diagnostic.severity.INFO
+				end, diagnostics)
+				if #info > 0 then
+					return ' ' .. #info .. ' '
+				end
+				return ''
+			end,
+			highlight = { colors.violet, colors.none, },
+		}
+	})
+	section('mid', {
+		DiagnosticHints = {
+			condition = function() return window_wider_than(60) and buffer_not_empty() end,
+			provider = function()
+				local hints = vim.tbl_filter(function(d)
+					return d.severity == vim.diagnostic.severity.HINT
+				end, diagnostics)
+				if #hints > 0 then
+					return 'ﯧ ' .. #hints .. ' '
+				end
+				return ''
+			end,
+			highlight = { colors.gray, colors.none, },
+		}
+	})
+end
+Diagnostics()
 
 section('right', {
 	FileTypeName = {
