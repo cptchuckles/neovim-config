@@ -46,7 +46,7 @@ bufferline.setup {
 			{ filetype = 'NvimTree',
 				highlight = 'Visual',
 				separator = false,
-				padding = 0,
+				padding = 1,
 				text = function()
 					return vim.fn.getcwd():gsub(vim.fn.getenv("HOME"), '~')
 				end,
