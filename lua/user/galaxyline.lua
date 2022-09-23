@@ -113,10 +113,44 @@ section('left', {
 		end,
 		icon = '  ',
 		highlight = { colors.orange, colors.bg },
-		separator = '',
+		separator = ' ',
 		separator_highlight = { colors.bg, colors.none },
 	}
 })
+local function GitChanges()
+	local vcs = require('galaxyline.provider_vcs')
+	section('left', {
+		GitDiffs = {
+			condition = can_show_git_at(90),
+			provider = function()
+				local diffs = vcs.diff_modified()
+				return (diffs and '~'..diffs or '')
+			end,
+			highlight = { colors.blue, colors.none },
+		}
+	})
+	section('left', {
+		GitAdds = {
+			condition = can_show_git_at(90),
+			provider = function()
+				local adds = vcs.diff_add()
+				return (adds and '+'..adds or '')
+			end,
+			highlight = { colors.green, colors.none },
+		}
+	})
+	section('left', {
+		GitRems = {
+			condition = can_show_git_at(90),
+			provider = function()
+				local rems = vcs.diff_remove()
+				return (rems and '-'..rems or '')
+			end,
+			highlight = { colors.red, colors.none },
+		}
+	})
+end
+GitChanges()
 
 section('mid', {
 	FileInformationPre = {
@@ -155,21 +189,6 @@ section('mid', {
 		separator = ' ',
 		highlight = { colors.red, colors.grayblue },
 		separator_highlight = { colors.red, colors.grayblue },
-	}
-})
-section('mid', {
-	FileGitChanges = {
-		condition = can_show_git_at(90),
-		provider = function()
-			local vcs = require('galaxyline.provider_vcs')
-			local diff = vcs.diff_modified()
-			local adds = vcs.diff_add()
-			local rems = vcs.diff_remove()
-			return (diff and '~'..diff or '') .. (adds and '+'..adds or '') .. (rems and '-'..rems or '')
-		end,
-		highlight = { colors.gray, colors.grayblue },
-		separator = ' ',
-		separator_highlight = { colors.gray, colors.grayblue },
 	}
 })
 
