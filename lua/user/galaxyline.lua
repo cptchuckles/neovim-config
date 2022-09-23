@@ -292,14 +292,39 @@ end
 Diagnostics()
 
 section('right', {
+	Indentation = {
+		condition = function()
+			return buffer_not_empty() and vim.bo.buftype ~= 'terminal'
+		end,
+		provider = function()
+			return (vim.bo.expandtab and ('·'..vim.bo.shiftwidth) or 'ﬀ') .. ' '
+		end,
+		highlight = { colors.gray, colors.none, },
+	}
+})
+section('right', {
+	FileFormat = {
+		condition = buffer_not_empty,
+		provider = function()
+			return ({
+				unix = ' ',
+				dos = ' ',
+			})[vim.bo.fileformat]
+		end,
+		highlight = { colors.fg, colors.bg, },
+		separator = "",
+		separator_highlight = { colors.bg, colors.none },
+	}
+})
+section('right', {
 	FileTypeName = {
 		condition = function()
 			return buffer_not_empty() and vim.bo.buftype ~= 'terminal'
 		end,
 		provider = function() return vim.bo.filetype end,
 		highlight = { colors.fg, colors.bg, 'italic' },
-		separator = "",
-		separator_highlight = { colors.bg, colors.none },
+		separator = " ",
+		separator_highlight = { colors.none, colors.bg, 'bold' },
 	}
 })
 section('right', {
