@@ -12,9 +12,9 @@ local function make_theme_augroup()
       \|  highlight! Whitespace cterm=NONE ctermfg=8 guifg=#3a3a3a
       \|  highlight! link WinSeparator LineNr
       \|  highlight! GitSignsCurrentLineBlame cterm=italic,bold ctermfg=Lightgray gui=italic,bold guifg=#4A4A4A
-      \|  highlight! DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred
-      \|  highlight! DiagnosticVirtualTextWarn cterm=bold,italic gui=bold,italic ctermfg=yellow guifg=#777700
-      \|  highlight! DiagnosticVirtualTextInfo cterm=bold,italic gui=bold,italic ctermfg=lightyellow guifg=#666644
+      \|  highlight! DiagnosticVirtualTextError cterm=bold,italic gui=bold,italic ctermfg=darkred guifg=darkred guibg=NONE
+      \|  highlight! DiagnosticVirtualTextWarn cterm=bold,italic gui=bold,italic ctermfg=yellow guifg=#777700 guibg=NONE
+      \|  highlight! DiagnosticVirtualTextInfo cterm=bold,italic gui=bold,italic ctermfg=lightyellow guifg=#666644 guibg=NONE
       \|  highlight! IndentBlanklineChar guifg=#2b2f38 gui=nocombine
       \|  highlight! link IndentBlanklineSpaceChar Whitespace
       \|  highlight! link IndentBlanklineIndent1 CursorLine
