@@ -13,6 +13,7 @@ colors.green    = "#118822"
 colors.blue     = "#4466aa"
 colors.red      = "#aa4422"
 colors.grayblue = "#283034"
+colors.gray     = "#767676"
 colors.none = function()
 	local sl = vim.api.nvim_get_hl_by_name('StatusLine', true)
 	local color = sl.reverse and sl.foreground or sl.background
@@ -162,8 +163,9 @@ section('mid', {
 				return ''
 			end
 		end,
-		icon = ' ',
-		highlight = { colors.violet, colors.grayblue },
+		highlight = { colors.gray, colors.grayblue },
+		separator = ' ',
+		separator_highlight = { colors.gray, colors.grayblue },
 	}
 })
 section('mid', {
