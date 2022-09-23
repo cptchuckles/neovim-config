@@ -294,7 +294,7 @@ Diagnostics()
 section('right', {
 	FileTypeName = {
 		condition = function()
-			return buffer_not_empty() and vim.bo.filetype ~= 'terminal'
+			return buffer_not_empty() and vim.bo.buftype ~= 'terminal'
 		end,
 		provider = function() return vim.bo.filetype end,
 		highlight = { colors.fg, colors.bg, 'italic' },
@@ -305,7 +305,7 @@ section('right', {
 section('right', {
 	FileSize = {
 		condition = function()
-			return buffer_not_empty() and vim.bo.filetype ~= 'terminal' and window_wider_than(60)
+			return buffer_not_empty() and vim.bo.buftype ~= 'terminal' and window_wider_than(60)
 		end,
 		provider = 'FileSize',
 		highlight = { colors.fg, colors.bg, },
