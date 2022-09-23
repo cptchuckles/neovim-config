@@ -24,8 +24,16 @@ local function buffer_not_empty()
 	return #vim.fn.expand('%:t') > 0
 end
 
-local function buffer_wide()
-	return vim.fn.winwidth(0) >= 40
+---@param width integer
+local function window_wider_than(width)
+	return vim.fn.winwidth(0) >= width
+end
+
+---@param width integer
+local function can_show_git_at(width)
+	return function()
+		return buffer_not_empty() and window_wider_than(width) and condition.check_git_workspace()
+	end
 end
 
 local sections = { left = 0, mid = 0, right = 0, short_line_left = 0, short_line_right = 0, }
@@ -96,7 +104,7 @@ section('left', {
 
 section('left', {
 	GitBranch = {
-		condition = function() return buffer_not_empty() and buffer_wide() and condition.check_git_workspace() end,
+		condition = can_show_git_at(60),
 		provider = function()
 			return require('galaxyline.provider_vcs').get_git_branch()
 		end,
@@ -145,29 +153,46 @@ section('mid', {
 	}
 })
 section('mid', {
-	FileSize = {
-		condition = buffer_not_empty,
-		provider = 'FileSize',
-		separator = ' ',
-		highlight = { colors.fg, colors.grayblue },
-		separator_highlight = { colors.fg, colors.grayblue },
-	}
-})
-section('mid', {
-	LspServerName = {
-		condition = function() return buffer_wide() and buffer_not_empty() end,
+	FileGitChanges = {
+		condition = can_show_git_at(90),
 		provider = function()
-			if next(vim.lsp.buf_get_clients()) ~= nil then
-				return require('galaxyline.provider_lsp').get_lsp_client()
-			else
-				return ''
-			end
+			local vcs = require('galaxyline.provider_vcs')
+			local diff = vcs.diff_modified()
+			local adds = vcs.diff_add()
+			local rems = vcs.diff_remove()
+			return (diff and '~'..diff or '') .. (adds and '+'..adds or '') .. (rems and '-'..rems or '')
 		end,
 		highlight = { colors.gray, colors.grayblue },
 		separator = ' ',
 		separator_highlight = { colors.gray, colors.grayblue },
 	}
 })
+
+local function LspMidSection()
+	local lsp_active = false
+	section('mid', {
+		LspServerSeparator = {
+			condition = function() return window_wider_than(75) and buffer_not_empty() end,
+			provider = function()
+				lsp_active = next(vim.lsp.buf_get_clients()) ~= nil
+				return lsp_active and ' ' or ''
+			end,
+			highlight = { colors.none, colors.grayblue, 'bold' },
+		}
+	})
+	section('mid', {
+		LspServerName = {
+			condition = function() return window_wider_than(75) and buffer_not_empty() end,
+			provider = function()
+				return lsp_active and require('galaxyline.provider_lsp').get_lsp_client() or ''
+			end,
+			icon = ' ',
+			highlight = { colors.violet, colors.grayblue },
+		}
+	})
+end
+LspMidSection()
+
 section('mid', {
 	FileInformationPost = {
 		condition = buffer_not_empty,
@@ -183,6 +208,17 @@ section('right', {
 		highlight = { colors.fg, colors.bg, 'italic' },
 		separator = "",
 		separator_highlight = { colors.bg, colors.none },
+	}
+})
+section('right', {
+	FileSize = {
+		condition = function()
+			return buffer_not_empty() and vim.bo.filetype ~= 'terminal' and window_wider_than(60)
+		end,
+		provider = 'FileSize',
+		highlight = { colors.fg, colors.bg, },
+		separator = "  ",
+		separator_highlight = { colors.none, colors.bg, 'bold' },
 	}
 })
 section('right', {
