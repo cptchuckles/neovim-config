@@ -66,41 +66,44 @@ end
 ---@field fg string
 ---@field bg string
 
----@type VimMode
-local vimode = modes.n
+local function ViModeLeftSection()
+	---@type VimMode
+	local vimode = modes.n
 
-section('left', {
-	Vim = {
-		provider = function() return ' ' end,
-		highlight = { colors.green, colors.bg },
-	}
-})
-section('left', {
-	VimSeparator = {
-		provider = function()
-			vimode = modes[vim.fn.mode()] or modes.default
-			vim.api.nvim_command('hi GalaxyVimSeparator guifg=' .. colors.bg .. ' guibg=' .. vimode.bg)
-			return ' '
-		end,
-	}
-})
-section('left', {
-	ViMode = {
-		provider = function()
-			vim.api.nvim_command('hi GalaxyViMode gui=BOLD guifg=' .. vimode.fg .. ' guibg=' .. vimode.bg)
-			return vimode.text or vim.fn.mode(1)
-		end,
-	}
-})
-section('left', {
-	ViModeSeparator = {
-		provider = function()
-			local bgcolor = condition.check_git_workspace() and colors.bg or colors.none()
-			vim.api.nvim_command('hi GalaxyViModeSeparator guifg=' .. vimode.bg .. ' guibg=' .. bgcolor)
-			return ' '
-		end,
-	}
-})
+	section('left', {
+		Vim = {
+			provider = function() return ' ' end,
+			highlight = { colors.green, colors.bg },
+		}
+	})
+	section('left', {
+		VimSeparator = {
+			provider = function()
+				vimode = modes[vim.fn.mode()] or modes.default
+				vim.api.nvim_command('hi GalaxyVimSeparator guifg=' .. colors.bg .. ' guibg=' .. vimode.bg)
+				return ' '
+			end,
+		}
+	})
+	section('left', {
+		ViMode = {
+			provider = function()
+				vim.api.nvim_command('hi GalaxyViMode gui=BOLD guifg=' .. vimode.fg .. ' guibg=' .. vimode.bg)
+				return vimode.text or vim.fn.mode(1)
+			end,
+		}
+	})
+	section('left', {
+		ViModeSeparator = {
+			provider = function()
+				local bgcolor = condition.check_git_workspace() and colors.bg or colors.none()
+				vim.api.nvim_command('hi GalaxyViModeSeparator guifg=' .. vimode.bg .. ' guibg=' .. bgcolor)
+				return ' '
+			end,
+		}
+	})
+end
+ViModeLeftSection()
 
 section('left', {
 	GitBranch = {
@@ -132,14 +135,16 @@ section('mid', {
 section('mid', {
 	FileName = {
 		condition = buffer_not_empty,
-		provider = function() return vim.fn.expand('%:t') end,
-		highlight = { "#6688ee", colors.grayblue },
+		provider = function()
+			return vim.fn.expand('%:t') .. (vim.bo.modified and ' ' or '')
+		end,
+		highlight = { colors.fg, colors.grayblue, 'italic' },
 	}
 })
 section('mid', {
 	FileModified = {
 		condition = buffer_not_empty,
-		provider = function() return vim.bo.modified and 'פֿ' or '' end,
+		provider = function() return vim.bo.modified and 'פֿ ' or '' end,
 		highlight = { colors.yellow, colors.grayblue },
 	}
 })
@@ -203,7 +208,9 @@ section('mid', {
 
 section('right', {
 	FileTypeName = {
-		condition = buffer_not_empty,
+		condition = function()
+			return buffer_not_empty() and vim.bo.filetype ~= 'terminal'
+		end,
 		provider = function() return vim.bo.filetype end,
 		highlight = { colors.fg, colors.bg, 'italic' },
 		separator = "",
@@ -227,7 +234,7 @@ section('right', {
 			return " " .. vim.fn.line('.') .. ":" .. vim.fn.col('.')
 		end,
 		highlight = { colors.fg, colors.bg, 'bold' },
-		separator = "  ",
+		separator = " ",
 		separator_highlight = { colors.fg, colors.bg },
 	}
 })
