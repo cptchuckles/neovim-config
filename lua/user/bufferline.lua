@@ -11,7 +11,7 @@ end
 
 bufferline.setup {
 	options = {
-		always_show_bufferline = true,
+		always_show_bufferline = false,
 		tab_size        = 18,
 		max_name_length = 18,
 		separator_style = 'thin',
