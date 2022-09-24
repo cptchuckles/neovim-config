@@ -76,6 +76,10 @@ tscontext.setup {
 			'variable_declaration',
 			'table_constructor',
 		},
+		gdscript = {
+			'variable_statement',
+			'enum_definition',
+		},
 	},
 	exclude_patterns = {  -- This shit isn't fucking working!!!!
 		cs = {
