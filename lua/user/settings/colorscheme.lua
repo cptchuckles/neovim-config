@@ -33,7 +33,7 @@ end
 ---@param opts colorschemeOptions
 M.setup = function(opts)
   opts = opts or {}
-  opts.scheme = vim.F.if_nil(opts.scheme, 'default')
+  opts.scheme = opts.scheme or 'default'
   make_theme_augroup()
   vim.api.nvim_command('colorscheme ' .. opts.scheme)
 end

@@ -23,7 +23,7 @@ return function(bufnr)
 
 	local function nice_diagnostics(opts)
 		opts = opts or {}
-		opts.scope = vim.F.if_nil(opts.scope, 'document')
+		opts.scope = opts.scope or 'document'
 		local diagnose = {
 			document  = function() vim.api.nvim_command [[Trouble  document_diagnostics]] end,
 			workspace = function() vim.api.nvim_command [[Trouble workspace_diagnostics]] end,
