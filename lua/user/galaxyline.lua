@@ -172,7 +172,7 @@ section('mid', {
 		provider = function()
 			return vim.fn.expand('%:t') .. ' '
 		end,
-		highlight = { colors.fg, colors.grayblue, 'italic' },
+		highlight = { colors.fg, colors.grayblue, },
 	}
 })
 section('mid', {
