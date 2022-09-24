@@ -16,7 +16,14 @@ illuminate.configure {
 	-- filetype_overrides: filetype specific overrides.
 	-- The keys are strings to represent the filetype while the values are tables that
 	-- supports the same keys passed to .configure except for filetypes_denylist and filetypes_allowlist
-	filetype_overrides = {},
+	filetype_overrides = {
+		gdscript = {  -- lsp unsupported, and treesitter doesn't work (vim-illuminate#133)
+			providers = { 'regex' },
+		},
+		sh = {  -- lsp and treesitter are ass (don't match function refs to defs, can't find next)
+			providers = { 'regex' },
+		},
+	},
 	-- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
 	filetypes_denylist = {
 		'dirvish',
