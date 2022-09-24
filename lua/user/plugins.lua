@@ -69,6 +69,7 @@ return packer.startup(function(use)
 	use 'Hoffs/omnisharp-extended-lsp.nvim'                   -- Omnisharp specific bullshit
 	use 'jose-elias-alvarez/null-ls.nvim'                     -- Null LS
 	-- use 'ThePrimeagen/refactoring.nvim'                       -- Refactoring
+	use 'j-hui/fidget.nvim'                                   -- LSP Progress fidget spinner
 
 	-- DAP
 	use 'mfussenegger/nvim-dap'                               -- DAP
