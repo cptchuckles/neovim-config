@@ -14,10 +14,9 @@ telescope.setup {
 		selection_caret = ' ',
 		sorting_strategy = 'ascending',
 		path_display = function(opts, path)
-			local U = require('telescope.utils')
-			local tail = U.path_tail(path)
-			local short = U.transform_path({ path_display = { shorten = 2 } }, path)
-			return string.format("%s (%s)", tail, short)
+			local basename = vim.fn.fnamemodify(path, ":t")
+			local dirname = vim.fn.fnamemodify(path, ":.:h")
+			return string.format("%s (%s)", basename, dirname)
 		end,
 
 		layout_strategy = 'flex',

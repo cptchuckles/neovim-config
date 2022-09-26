@@ -170,7 +170,7 @@ section('mid', {
 	FileName = {
 		condition = buffer_not_empty,
 		provider = function()
-			return vim.fn.expand('%:t') .. ' '
+			return vim.fn.expand('%:.') .. ' '
 		end,
 		highlight = { colors.fg, colors.grayblue, },
 	}
