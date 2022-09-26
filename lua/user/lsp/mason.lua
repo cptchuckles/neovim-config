@@ -10,7 +10,7 @@ if not mason_lsp_ok then
 	return
 end
 
-local opts = {
+local base_opts = {
 	on_attach    = require('user.lsp.handlers').on_attach,
 	capabilities = require('user.lsp.handlers').capabilities,
 }
@@ -21,21 +21,11 @@ mason_lsp.setup()
 mason_lsp.setup_handlers {
 	-- Automatically invoke lspconfig setup for every installed LSP server
 	function (server_name)
+		local opts = base_opts
+		local has_settings, settings = pcall(require, 'user.lsp.settings.'..server_name)
+		if has_settings then
+			opts = vim.tbl_deep_extend("force", opts, settings)
+		end
 		require('lspconfig')[server_name].setup(opts)
-	end,
-
-	sumneko_lua = function ()
-		local lua_opts = vim.tbl_deep_extend("force", require('user.lsp.settings.sumneko_lua'), opts)
-		require('lspconfig').sumneko_lua.setup(lua_opts)
-	end,
-
-	jsonls = function ()
-		local json_opts = vim.tbl_deep_extend("force", require('user.lsp.settings.jsonls'), opts)
-		require('lspconfig').jsonls.setup(json_opts)
-	end,
-
-	omnisharp = function ()
-		local omnisharp_opts = vim.tbl_deep_extend("force", require('user.lsp.settings.omnisharp'), opts)
-		require('lspconfig').omnisharp.setup(omnisharp_opts)
 	end,
 }
