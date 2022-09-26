@@ -11,7 +11,9 @@ function M.insert(actions)
 		['<A-k>'] = actions.move_selection_previous,
 		['<A-d>'] = actions.delete_buffer,
 
-		['<C-e>'] = actions.close,
+		['<C-e>'] = actions.close,  -- deprecated
+		['<esc>'] = actions.close,
+		['<A-esc>'] = function() vim.api.nvim_command [[stopinsert]] end,
 
 		['<Down>'] = actions.move_selection_next,
 		['<Up>']   = actions.move_selection_previous,
@@ -40,6 +42,7 @@ end
 function M.normal(actions)
 	return {
 		['<esc>'] = actions.close,
+		['<C-e>'] = actions.close,  -- redundant, don't use.  Only here because I'm retarded
 		['<C-x>'] = actions.select_horizontal,
 		['<C-v>'] = actions.select_vertical,
 		['<C-t>'] = actions.select_tab,
