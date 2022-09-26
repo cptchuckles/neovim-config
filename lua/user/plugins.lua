@@ -13,7 +13,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
 	vim.api.nvim_command [[packadd packer.nvim]]
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- Autocommand that resyncs packer whenever you save the plugins.lua file
 vim.api.nvim_create_autocmd('BufWritePost', {
 	group = vim.api.nvim_create_augroup('packer_user_config', { clear = true }),
 	desc = 'Update the plugin list every time you save plugins.lua',
