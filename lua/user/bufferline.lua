@@ -51,8 +51,7 @@ bufferline.setup {
 		},
 
 		custom_filter = function(bufnr, bufnrs)
-			local filter_type = {
-				-- Set each item to true so indexing works
+			local filter_type = {  -- Set each item to true so indexing works
 				help     = true,
 				nofile   = true,
 				qf       = true,
