@@ -116,7 +116,7 @@ vim.api.nvim_create_user_command("Collimate", function()
 		d = d:gsub([[\]], [[\\]])
 		d = d:gsub([[']], [[\']])
 		d = d:gsub([["]], [[\"]])
-		local cmd = 'gv:!column -t -s'..d..' -o'..d..cr
+		local cmd = 'gv:!column -t -s' .. d .. ' -o' .. d .. cr
 		vim.api.nvim_feedkeys(cmd, 'n', false)
 	end)
 end, { range = '%' })
