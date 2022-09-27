@@ -103,8 +103,24 @@ map('v', '<A-k>', [[:move '<-2<CR>gv=gv]])
 map('v', 'p', [["vdp]])
 map('v', 'P', [["vdP]])
 
--- Collimate on =
-map({ 'v', 'x' }, '<leader>c', [[:!column --table -s= -o=<CR>]])
+-- Collimate
+vim.api.nvim_create_user_command("Collimate", function()
+	vim.fn.inputsave()
+	local delimiter = vim.fn.input("Collimate on: ", '=')
+	vim.fn.inputrestore()
+	if #delimiter < 1 then
+		return
+	end
+	local cr = vim.api.nvim_replace_termcodes('<cr>', true, false, true)
+	delimiter:gsub('.', function(d)
+		d = d:gsub([[\]], [[\\]])
+		d = d:gsub([[']], [[\']])
+		d = d:gsub([["]], [[\"]])
+		local cmd = 'gv:!column -t -s'..d..' -o'..d..cr
+		vim.api.nvim_feedkeys(cmd, 'n', false)
+	end)
+end, { range = '%' })
+map({ 'v', 'x' }, '<leader>c', [[:Collimate<CR>]])
 
 -- Replace text command
 map('v', '<C-r>', function()
