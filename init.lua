@@ -25,3 +25,4 @@ require 'user.galaxyline'
 require 'impatient'
 require 'indent-o-matic'
 require('fidget').setup()
+require('colorizer').setup()
