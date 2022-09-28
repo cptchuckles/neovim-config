@@ -24,6 +24,10 @@ map('n', '<A-l>', [[<C-w>l]])
 -- map('n', '<C-f>', [[<C-f>zz]])
 -- map('n', '<C-b>', [[<C-b>zz]])
 
+-- Fast scrolling
+map('n', '<C-e>', [[3<C-e>]])
+map('n', '<C-y>', [[3<C-y>]])
+
 -- Move lines
 map('n', '<C-j>', [[<Cmd>move .+1<CR>==]])
 map('n', '<C-k>', [[<Cmd>move .-2<CR>==]])
