@@ -17,6 +17,8 @@ local zmaps = {
 	'za', 'zc', 'zd', 'zi', 'zm', 'zn', 'zo', 'zr', 'zv', 'zx',
 }
 for _, lhs in ipairs(zmaps) do
-	local rhs = lhs .. [[<Cmd>lua pcall(function() require('indent_blankline').refresh() end)<CR>]]
-	vim.keymap.set('n', lhs, rhs, { remap = false, silent = true })
+	vim.keymap.set('n', lhs, function()
+		vim.api.nvim_feedkeys(lhs, 'n', false)
+		vim.schedule(vim.F.nil_wrap(function() require('indent_blankline').refresh() end))
+	end, { remap = false, silent = true })
 end
