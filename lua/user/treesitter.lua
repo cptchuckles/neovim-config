@@ -14,7 +14,6 @@ ts.setup {
 	ignore_installed = { "" }, -- list of parsers to ignore installing
 	highlight = {
 		enable = true, -- false will disable the whole extension
-		disable = { "" },
 		additional_vim_regex_highlighting = false,
 	},
 	incremental_selection = {

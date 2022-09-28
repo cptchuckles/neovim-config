@@ -13,18 +13,13 @@ telescope.setup {
 		prompt_prefix = ' ',
 		selection_caret = ' ',
 		sorting_strategy = 'ascending',
-		path_display = function(opts, path)
-			local basename = vim.fn.fnamemodify(path, ":t")
-			local dirname = vim.fn.fnamemodify(path, ":.:h")
-			return string.format("%s (%s)", basename, dirname)
-		end,
 
 		layout_strategy = 'flex',
 
 		layout_config = {
 			horizontal = {
 				width = 0.9,
-				preview_width = 0.55,
+				preview_width = 0.5,
 			},
 			center = {
 				width = 0.7,          -- TODO: bug report this not working
