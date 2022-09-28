@@ -122,19 +122,15 @@ end, { range = '%' })
 map('x', '<leader>c', [[:Collimate<CR>]])
 
 -- Replace text command
-map('v', '<C-r>', function()
-	local getselection = function()
-		return vim.fn.strcharpart(
-			vim.fn.getline(vim.fn.line('.')),
-			vim.fn.min({
-				vim.fn.charcol('.'),
-				vim.fn.charcol('v'),
-			}) - 1,
-			vim.fn.abs(vim.fn.charcol('.') - vim.fn.charcol('v')) + 1
-		)
-	end
-
-	local query = getselection()
+map('x', '<C-r>', function()
+	local query = vim.fn.strcharpart(
+		vim.fn.getline(vim.fn.line('.')),
+		vim.fn.min({
+			vim.fn.charcol('.'),
+			vim.fn.charcol('v'),
+		}) - 1,
+		vim.fn.abs(vim.fn.charcol('.') - vim.fn.charcol('v')) + 1
+	)
 
 	vim.fn.inputsave()
 	local answer = vim.fn.input("Replace text: ", query)
