@@ -18,10 +18,10 @@ ts.setup {
 		additional_vim_regex_highlighting = false,
 	},
 	incremental_selection = {
-		enabled = true,
+		enable = true,
 	},
 	textobjects = {
-		enabled = true,
+		enable = true,
 	},
 	indent = {
 		enable = true,
