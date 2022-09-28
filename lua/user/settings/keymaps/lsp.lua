@@ -1,60 +1,62 @@
-return function(bufnr)
-	local function nice_references()
-		if not (
-			pcall(function() require('telescope.builtin').lsp_references { show_line = false } end)
-			or
-			pcall(function() vim.api.nvim_command [[Trouble lsp_references]] end)
-			)
-		then
-			vim.lsp.buf.references()
-		end
-	end
-
-	local function nice_definitions()
-		if not (
-			pcall(function() require('telescope.builtin').lsp_definitions { show_line = false } end)
-			or
-			pcall(function() vim.api.nvim_command [[Trouble lsp_definitions]] end)
-			)
-		then
-			vim.lsp.buf.definition()
-		end
-	end
-
-	local function nice_diagnostics(opts)
-		opts = opts or {}
-		opts.scope = opts.scope or 'document'
-		local diagnose = {
-			document  = function() vim.api.nvim_command [[Trouble  document_diagnostics]] end,
-			workspace = function() vim.api.nvim_command [[Trouble workspace_diagnostics]] end,
-		}
+local function try_fancy(action)
+	local function try(f)
 		return function()
-			if not pcall(diagnose[opts.scope]) then
-				vim.diagnostic.setqflist { open = true }
-			end
+			return pcall(function() f() end)
 		end
 	end
 
+	local try_telescope = try(function()
+		require('telescope.builtin')[action]({ show_line = false })
+	end)
+
+	local try_trouble = try(function()
+		vim.api.nvim_command('Trouble '..action)
+	end)
+
+	return function()
+		if not (try_telescope() or try_trouble()) then
+			({
+				lsp_declarations     = vim.lsp.buf.declaration,
+				lsp_definitions      = vim.lsp.buf.definition,
+				lsp_type_definitions = vim.lsp.buf.type_definition,
+				lsp_references       = vim.lsp.buf.references,
+				lsp_implementations  = vim.lsp.buf.implementation,
+			})[action]()
+		end
+	end
+end
+
+local function nice_diagnostics(opts)
+	opts = opts or {}
+	opts.scope = opts.scope or 'document'
+	return function()
+		if not pcall(function() vim.api.nvim_command('Trouble ' .. opts.scope .. '_diagnostics') end) then
+			vim.diagnostic.setqflist { open = true }
+		end
+	end
+end
+
+return function(bufnr)
 	local function map(mode, lhs, rhs)
 		local opts = { remap = false, silent = true, buffer = bufnr }
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
 	map('n', 'K',      vim.lsp.buf.hover)
-	map('n', '<C-]>',  nice_definitions)
-	map('n', 'g<C-]>', nice_references)
+	map('n', '<C-]>',  try_fancy("lsp_definitions"))
+	map('n', 'g<C-]>', try_fancy("lsp_references"))
 	map('n', '<A-a>',  vim.lsp.buf.code_action)
-	map('n', '<A-i>',  function() vim.diagnostic.open_float { border = 'rounded' } end)
+	map('n', '<A-i>',  vim.diagnostic.open_float)
 
 	map({'n', 'i'}, '<A-s>', vim.lsp.buf.signature_help)
 
-	map('n', '[d', function() vim.diagnostic.goto_prev { border = 'rounded' } end)
-	map('n', ']d', function() vim.diagnostic.goto_next { border = 'rounded' } end)
+	map('n', '[d', vim.diagnostic.goto_prev)
+	map('n', ']d', vim.diagnostic.goto_next)
 
 	map('n', '<leader>dD', nice_diagnostics { scope = 'workspace' })
 	map('n', '<leader>dd', nice_diagnostics { scope = 'document' })
-	map('n', '<leader>de', vim.lsp.buf.declaration)
-	map('n', '<leader>di', vim.lsp.buf.implementation)
+	map('n', '<leader>de', try_fancy("lsp_declarations"))
+	map('n', '<leader>di', try_fancy("lsp_implementations"))
 	map('n', '<leader>dr', vim.lsp.buf.rename)
 
 	-- Formatting commands
