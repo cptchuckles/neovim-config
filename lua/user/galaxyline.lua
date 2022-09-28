@@ -42,29 +42,29 @@ local function section(pos, tbl)
 	gl.section[pos][sections[pos]] = tbl
 end
 
-local modes = {
-	n       = { text = "NORMAL", fg = colors.bg, bg = colors.yellow, },
-	i       = { text = "INSERT", bg = colors.green, },
-	v       = { text = "VISUAL", bg = colors.blue, },
-	V       = { text = "VISUAL-LINE", bg = colors.blue, },
-	['']  = { text = "VISUAL-BLOCK", bg = colors.blue, },
-	S       = { text = "SELECT-LINE", bg = colors.red, },
-	['']  = { text = "SELECT-BLOCK", bg = colors.red, },
-	c       = { text = "COMMAND", fg = colors.bg, bg = colors.blue, },
-	R       = { text = "REPLACE", bg = colors.red, },
-	r       = { text = "PRESS ENTER", fg = colors.bg, bg = colors.green, },
-	t       = { text = "TERMINAL", fg = colors.bg, bg = colors.red, },
-	default = { text = nil, fg = colors.bg, bg = colors.red, },
-}
-for m, _ in pairs(modes) do
-	modes[m] = vim.tbl_extend("keep", modes[m], { fg = colors.fg, bg = colors.bg })
-end
-
 --- Defines the highlight colors for a section of GalaxyLine
 ---@class VimMode
 ---@field text string?
 ---@field fg string
 ---@field bg string
+
+local modes = {
+	n       = { text = "NORMAL", fg = colors.bg, bg = colors.yellow, },      ---@type VimMode
+	i       = { text = "INSERT", bg = colors.green, },                       ---@type VimMode
+	v       = { text = "VISUAL", bg = colors.blue, },                        ---@type VimMode
+	V       = { text = "VISUAL-LINE", bg = colors.blue, },                   ---@type VimMode
+	['']  = { text = "VISUAL-BLOCK", bg = colors.blue, },                  ---@type VimMode
+	S       = { text = "SELECT-LINE", bg = colors.red, },                    ---@type VimMode
+	['']  = { text = "SELECT-BLOCK", bg = colors.red, },                   ---@type VimMode
+	c       = { text = "COMMAND", fg = colors.bg, bg = colors.blue, },       ---@type VimMode
+	R       = { text = "REPLACE", bg = colors.red, },                        ---@type VimMode
+	r       = { text = "PRESS ENTER", fg = colors.bg, bg = colors.green, },  ---@type VimMode
+	t       = { text = "TERMINAL", fg = colors.bg, bg = colors.red, },       ---@type VimMode
+	default = { text = nil, fg = colors.bg, bg = colors.red, },              ---@type VimMode
+}
+for m, _ in pairs(modes) do
+	modes[m] = vim.tbl_extend("keep", modes[m], { fg = colors.fg, bg = colors.bg })
+end
 
 local function ViModeLeftSection()
 	---@type VimMode
