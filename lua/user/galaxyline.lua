@@ -348,3 +348,25 @@ section('right', {
 		separator_highlight = { colors.fg, colors.bg },
 	}
 })
+
+local function shortlines()
+	section("short_line_left", {
+		ShortFiletype = {
+			condition = function() return vim.bo.buftype == 'nofile' end,
+			provider = function() return vim.bo.filetype end,
+			highlight = { colors.none, colors.gray },
+			separator = ' ',
+			separator_highlight = { colors.gray, colors.bg },
+		}
+	})
+	section("short_line_left", {
+		ShortFileName = {
+			condition = function() return vim.bo.buftype ~= 'nofile' end,
+			provider = function() return vim.fn.expand("%:.:p") end,
+			highlight = { colors.none, colors.gray },
+			separator = ' ',
+			separator_highlight = { colors.gray, colors.bg },
+		}
+	})
+end
+shortlines()
