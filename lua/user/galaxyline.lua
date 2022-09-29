@@ -96,7 +96,7 @@ local function ViModeLeftSection()
 	section('left', {
 		ViModeSeparator = {
 			provider = function()
-				local bgcolor = condition.check_git_workspace() and colors.bg or colors.none()
+				local bgcolor = (buffer_not_empty() and condition.check_git_workspace()) and colors.bg or colors.none()
 				vim.api.nvim_command('hi GalaxyViModeSeparator guifg=' .. vimode.bg .. ' guibg=' .. bgcolor)
 				return ' '
 			end,
