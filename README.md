@@ -12,7 +12,7 @@ This started out as a config for personal use, but is garnering some interest fr
 - [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - Language parsing, highlighting, and editing features
 
 **LSP and Diagnostics**
-- [Mason](https://github.com/williambomen/mason.nvim) - Plugin management for LSP, DAP, Formatters and Linters
+- [Mason](https://github.com/williamboman/mason.nvim) - Plugin management for LSP, DAP, Formatters and Linters
 - [null-ls](https://github.com/jose-elias-alvarez/null-ls.nvim) - Plugs external linters into LSP Diagnostics and Code Actions
 
 **Intellisense and Completion**
