@@ -20,6 +20,13 @@ colors.none = function()
 	return color and string.format("#%x", color) or "NONE"
 end
 
+local separators = {
+	right      = ' ',
+	left       = '',
+	right_thin = ' ',
+	left_thin  = ' ',
+}
+
 local function buffer_not_empty()
 	return #vim.fn.expand('%:t') > 0
 end
@@ -81,7 +88,7 @@ local function ViModeLeftSection()
 			provider = function()
 				vimode = modes[vim.fn.mode()] or modes.default
 				vim.api.nvim_command('hi GalaxyVimSeparator guifg=' .. colors.bg .. ' guibg=' .. vimode.bg)
-				return ' '
+				return separators.right
 			end,
 		}
 	})
@@ -98,7 +105,7 @@ local function ViModeLeftSection()
 			provider = function()
 				local bgcolor = (buffer_not_empty() and condition.check_git_workspace()) and colors.bg or colors.none()
 				vim.api.nvim_command('hi GalaxyViModeSeparator guifg=' .. vimode.bg .. ' guibg=' .. bgcolor)
-				return ' '
+				return separators.right
 			end,
 		}
 	})
@@ -111,9 +118,9 @@ section('left', {
 		provider = function()
 			return require('galaxyline.provider_vcs').get_git_branch()
 		end,
-		icon = '  ',
+		icon = '  ',
 		highlight = { colors.orange, colors.bg },
-		separator = ' ',
+		separator = separators.right,
 		separator_highlight = { colors.bg, colors.none },
 	}
 })
@@ -155,7 +162,7 @@ GitChanges()
 section('mid', {
 	FileInformationPre = {
 		condition = buffer_not_empty,
-		provider = function() return '' end,
+		provider = function() return separators.left end,
 		highlight = { colors.grayblue, colors.none },
 	}
 })
@@ -199,7 +206,7 @@ local function LspMidSection()
 			condition = function() return window_wider_than(75) and buffer_not_empty() end,
 			provider = function()
 				lsp_active = next(vim.lsp.buf_get_clients()) ~= nil
-				return lsp_active and ' ' or ''
+				return lsp_active and separators.right_thin or ''
 			end,
 			highlight = { colors.none, colors.grayblue, 'bold' },
 		}
@@ -220,7 +227,7 @@ LspMidSection()
 section('mid', {
 	FileInformationPost = {
 		condition = buffer_not_empty,
-		provider = function() return ' ' end,
+		provider = function() return separators.right end,
 		highlight = { colors.grayblue, colors.none },
 	}
 })
@@ -312,7 +319,7 @@ section('right', {
 			})[vim.bo.fileformat]
 		end,
 		highlight = { colors.fg, colors.bg, },
-		separator = "",
+		separator = separators.left,
 		separator_highlight = { colors.bg, colors.none },
 	}
 })
@@ -323,7 +330,7 @@ section('right', {
 		end,
 		provider = function() return vim.bo.filetype end,
 		highlight = { colors.fg, colors.bg, 'italic' },
-		separator = " ",
+		separator = separators.left_thin,
 		separator_highlight = { colors.none, colors.bg, 'bold' },
 	}
 })
@@ -334,7 +341,7 @@ section('right', {
 		end,
 		provider = 'FileSize',
 		highlight = { colors.fg, colors.bg, },
-		separator = "  ",
+		separator = ' ' .. separators.left_thin,
 		separator_highlight = { colors.none, colors.bg, 'bold' },
 	}
 })
@@ -344,27 +351,19 @@ section('right', {
 			return " " .. vim.fn.line('.') .. ":" .. vim.fn.col('.')
 		end,
 		highlight = { colors.fg, colors.bg, 'bold' },
-		separator = " ",
+		separator = separators.left_thin,
 		separator_highlight = { colors.fg, colors.bg },
 	}
 })
 
 local function shortlines()
 	section("short_line_left", {
-		ShortFiletype = {
-			condition = function() return vim.bo.buftype == 'nofile' end,
-			provider = function() return vim.bo.filetype end,
+		ShortBuffer = {
+			provider = function()
+				return vim.bo.buftype == 'nofile' and vim.bo.filetype or vim.fn.expand("%:.:p")
+			end,
 			highlight = { colors.none, colors.gray },
-			separator = ' ',
-			separator_highlight = { colors.gray, colors.bg },
-		}
-	})
-	section("short_line_left", {
-		ShortFileName = {
-			condition = function() return vim.bo.buftype ~= 'nofile' end,
-			provider = function() return vim.fn.expand("%:.:p") end,
-			highlight = { colors.none, colors.gray },
-			separator = ' ',
+			separator = separators.right,
 			separator_highlight = { colors.gray, colors.bg },
 		}
 	})
