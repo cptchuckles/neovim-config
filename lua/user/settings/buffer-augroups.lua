@@ -114,11 +114,25 @@ local function terminal_settings()
 	})
 end
 
+local function file_settings()
+	local aug_file_settings = vim.api.nvim_create_augroup('UserFileSettings', { clear = true })
+	vim.api.nvim_create_autocmd('FileType', {
+		group = aug_file_settings,
+		desc = 'Enable text wrapping for the specified filetypes',
+		pattern = { 'markdown', },
+		callback = function(opts)
+			vim.opt_local.textwidth = 100
+			vim.opt_local.formatoptions:remove('l')
+		end,
+	})
+end
+
 M.setup = function()
 	buffer_wiping()
 	help_qf_close_map()
 	fold_settings()
 	terminal_settings()
+	file_settings()
 end
 
 return M
