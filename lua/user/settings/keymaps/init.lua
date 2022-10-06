@@ -118,7 +118,7 @@ vim.api.nvim_create_user_command("Collimate", function()
 	local cr = vim.api.nvim_replace_termcodes('<cr>', true, false, true)
 	delimiter:gsub('[^%d%s]%d*', function(d)
 		local l = #d > 1 and (' -l' .. d:sub(2)) or ''
-		local ch = d:sub(1,1):gsub('[\'\\"<>&|]', function(s) return '\\' .. s end)
+		local ch = d:sub(1,1):gsub('[\'\\"<>&|();#]', function(s) return '\\' .. s end)
 		local cmd = 'gv:!column -t ' .. l .. ' -s' .. ch .. ' -o' .. ch .. cr
 		vim.api.nvim_feedkeys(cmd, 'n', false)
 	end)
