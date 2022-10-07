@@ -17,9 +17,7 @@ M.section = function(pos, tbl)
 end
 
 M.update_colors = function(statusline)
-	vim.schedule(function()
-		vim.api.nvim_command('hi StatusLine guibg=' .. statusline .. ' gui=nocombine')
-	end)
+	vim.api.nvim_command('hi StatusLine guibg=' .. statusline .. ' gui=nocombine')
 	for pos, _ in pairs(sections) do
 		for i = 1, #gl.section[pos] do
 			for k, v in pairs(gl.section[pos][i]) do
