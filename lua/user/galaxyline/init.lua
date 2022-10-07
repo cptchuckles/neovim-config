@@ -53,7 +53,8 @@ U.section('left', {
 	GitBranch = {
 		condition = condition.check_git_workspace,
 		provider = function()
-			return require('galaxyline.provider_vcs').get_git_branch():gsub('detached at ', '')
+			local branch = require('galaxyline.provider_vcs').get_git_branch()
+			return branch and branch:gsub('detached at ', '') or ''
 		end,
 		icon = icons.git,
 		highlight = {
