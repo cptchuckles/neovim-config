@@ -49,9 +49,10 @@ local function buffer_wiping()
 	})
 end
 
-local function help_qf_close_map()
+local function easy_close_window()
+	local aug_easy_close = vim.api.nvim_create_augroup('EasyCloseWindowKeybind', { clear = true })
 	vim.api.nvim_create_autocmd('FileType', {
-		group = vim.api.nvim_create_augroup('HelpWindowKeybinds', { clear = true }),
+		group = aug_easy_close,
 		desc = 'Keybind to easily close help and qflist buffer windows',
 		pattern = { 'help', 'qf' },
 		callback = function(opts)
@@ -60,6 +61,16 @@ local function help_qf_close_map()
 			end
 			vim.keymap.set('n', 'q',     close_func, { silent = true, remap = false, buffer = opts.buf })
 			vim.keymap.set('n', '<C-q>', close_func, { silent = true, remap = false, buffer = opts.buf })
+		end,
+	})
+	vim.api.nvim_create_autocmd('BufAdd', {
+		group = aug_easy_close,
+		desc = 'Keybind to easily close git diff windows',
+		pattern = { 'gitsigns://*' },
+		callback = function(opts)
+			vim.keymap.set('n', '<C-q>', function()
+				vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
+			end, { silent = true, remap = false, buffer = opts.buf })
 		end,
 	})
 end
@@ -129,7 +140,7 @@ end
 
 M.setup = function()
 	buffer_wiping()
-	help_qf_close_map()
+	easy_close_window()
 	fold_settings()
 	terminal_settings()
 	file_settings()
