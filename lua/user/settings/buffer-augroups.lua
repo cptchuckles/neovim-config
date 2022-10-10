@@ -51,16 +51,18 @@ end
 
 local function easy_close_window()
 	local aug_easy_close = vim.api.nvim_create_augroup('EasyCloseWindowKeybind', { clear = true })
+	local function close_bufwinid(bufnr)
+		return function()
+			vim.api.nvim_win_close(vim.fn.bufwinid(bufnr), { force = true })
+		end
+	end
 	vim.api.nvim_create_autocmd('FileType', {
 		group = aug_easy_close,
 		desc = 'Keybind to easily close help and qflist buffer windows',
 		pattern = { 'help', 'qf' },
 		callback = function(opts)
-			local close_func = function()
-				vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
-			end
-			vim.keymap.set('n', 'q',     close_func, { silent = true, remap = false, buffer = opts.buf })
-			vim.keymap.set('n', '<C-q>', close_func, { silent = true, remap = false, buffer = opts.buf })
+			vim.keymap.set('n', 'q',     close_bufwinid(opts.buf), { silent = true, remap = false, buffer = opts.buf })
+			vim.keymap.set('n', '<C-q>', close_bufwinid(opts.buf), { silent = true, remap = false, buffer = opts.buf })
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufAdd', {
@@ -68,9 +70,7 @@ local function easy_close_window()
 		desc = 'Keybind to easily close git diff windows',
 		pattern = { 'gitsigns://*' },
 		callback = function(opts)
-			vim.keymap.set('n', '<C-q>', function()
-				vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
-			end, { silent = true, remap = false, buffer = opts.buf })
+			vim.keymap.set('n', '<C-q>', close_bufwinid(opts.buf), { silent = true, remap = false, buffer = opts.buf })
 		end,
 	})
 end
