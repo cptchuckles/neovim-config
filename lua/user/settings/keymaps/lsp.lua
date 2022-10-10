@@ -37,27 +37,27 @@ local function nice_diagnostics(opts)
 end
 
 return function(bufnr)
-	local function map(mode, lhs, rhs)
-		local opts = { remap = false, silent = true, buffer = bufnr }
+	local function map(mode, lhs, rhs, opts)
+		opts = vim.tbl_extend("force", opts or {}, { remap = false, silent = true, buffer = bufnr })
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
-	map('n', 'K',      vim.lsp.buf.hover)
-	map('n', '<C-]>',  try_fancy("lsp_definitions"))
-	map('n', 'g<C-]>', try_fancy("lsp_references"))
-	map('n', '<A-a>',  vim.lsp.buf.code_action)
-	map('n', '<A-i>',  vim.diagnostic.open_float)
+	map('n', 'K',      vim.lsp.buf.hover,            { desc = "LSP show information about symbol under cursor" })
+	map('n', '<C-]>',  try_fancy("lsp_definitions"), { desc = "LSP go to definition" })
+	map('n', 'g<C-]>', try_fancy("lsp_references"),  { desc = "LSP list references" })
+	map('n', '<A-a>',  vim.lsp.buf.code_action,      { desc = "LSP code actions" })
+	map('n', '<A-i>',  vim.diagnostic.open_float,    { desc = "Show line diagnostics" })
 
-	map({'n', 'i'}, '<A-s>', vim.lsp.buf.signature_help)
+	map({'n', 'i'}, '<A-s>', vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 
-	map('n', '[d', vim.diagnostic.goto_prev)
-	map('n', ']d', vim.diagnostic.goto_next)
+	map('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+	map('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
-	map('n', '<leader>dD', nice_diagnostics { scope = 'workspace' })
-	map('n', '<leader>dd', nice_diagnostics { scope = 'document' })
-	map('n', '<leader>de', try_fancy("lsp_declarations"))
-	map('n', '<leader>di', try_fancy("lsp_implementations"))
-	map('n', '<leader>dr', vim.lsp.buf.rename)
+	map('n', '<leader>dD', nice_diagnostics { scope = 'workspace' }, { desc = "Show workspace diagnostics" })
+	map('n', '<leader>dd', nice_diagnostics { scope = 'document' }, { desc = "Show document diagnostics" })
+	map('n', '<leader>de', try_fancy("lsp_declarations"), { desc = "LSP go to declaration of symbol" })
+	map('n', '<leader>di', try_fancy("lsp_implementations"), { desc = "LSP list implementations" })
+	map('n', '<leader>dr', vim.lsp.buf.rename, { desc = "LSP rename symbol" })
 
 	-- Formatting commands
 	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()

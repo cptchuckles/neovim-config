@@ -42,40 +42,44 @@ map('n', '<leader>e', function()
 	if not pcall(function() require('nvim-tree.api').tree.toggle() end) then
 		vim.api.nvim_command [[Lex 30]]
 	end
-end)
+end, { desc = "Open nvim-tree or :Lexplore if it isn't found" })
 map('n', '<leader>E', [[<Cmd>SymbolsOutline<CR>]])
 map('n', '<leader>s', [[<Cmd>set hls!<CR>]])
 map('n', '<leader>w', [[<Cmd>set wrap!<CR>]])
 
 local lazyscope = require('lazy').require_on_exported_call('telescope.builtin')
-map('n', '<leader>ta', lazyscope.live_grep)
-map('n', '<leader>to', function() lazyscope.live_grep { grep_open_files = true } end)
-map('n', '<leader>*' , lazyscope.grep_string)
-map('n', '<leader>tf', lazyscope.find_files)
-map('n', '<leader>ts', lazyscope.treesitter)
-map('n', '<leader>qh', lazyscope.quickfixhistory)
-map('n', '<leader>rg', lazyscope.current_buffer_fuzzy_find)
-map('n', '<leader>tt', lazyscope.resume)
+map('n', '<leader>ta', lazyscope.live_grep, { desc = "Telescope live-grep all files" })
+map('n', '<leader>to', function() lazyscope.live_grep { grep_open_files = true } end, {
+	desc = "Telescope live-grep only open buffers",
+})
+map('n', '<leader>*' , lazyscope.grep_string,               { desc = "Telescope grep symbol under cursor" })
+map('n', '<leader>tf', lazyscope.find_files,                { desc = "Telescope fuzzy-search for files" })
+map('n', '<leader>ts', lazyscope.treesitter,                { desc = "Telescope list treesitter symbols in buffer" })
+map('n', '<leader>qh', lazyscope.quickfixhistory,           { desc = "Telescope list quickfix history" })
+map('n', '<leader>rg', lazyscope.current_buffer_fuzzy_find, { desc = "Telescope grep inside current buffer" })
+map('n', '<leader>tt', lazyscope.resume,                    { desc = "Telescope resume last session" })
 map('n', '<C-l>', function()
 	if not pcall(function() lazyscope.buffers() end) then
 		-- This is the kind of stupid shit I have to go through just to emulate keypresses
 		local cmdstr = vim.api.nvim_replace_termcodes(':ls<CR>:b', true, false, true)
 		vim.api.nvim_feedkeys(cmdstr, 'n', false)
 	end
-end)
+end, { desc = "List open buffers in telescope, or with :ls if telescope can't be loaded" })
 
 map('n', '<leader>gg', [[<Cmd>LazyGit<CR>]])
 
 -- DAP
 local lazydap = require('lazy').require_on_exported_call 'dap'
-map('n', '<F5>', lazydap.continue)
-map('n', '<F10>', lazydap.step_over)
-map('n', '<F11>', lazydap.step_into)
-map('n', '<F12>', lazydap.step_out)
-map('n', '<leader>db', lazydap.toggle_breakpoint)
-map('n', '<leader>dB', function() lazydap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
-map('n', '<leader>dL', function() lazydap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-map('n', '<leader>dR', function() require('dap').repl.open() end)
+map('n', '<F5>', lazydap.continue,                { desc = "DAP continue" })
+map('n', '<F10>', lazydap.step_over,              { desc = "DAP step over" })
+map('n', '<F11>', lazydap.step_into,              { desc = "DAP step into" })
+map('n', '<F12>', lazydap.step_out,               { desc = "DAP step out" })
+map('n', '<leader>db', lazydap.toggle_breakpoint, { desc = "DAP toggle breakpoint" })
+map('n', '<leader>dB', function() lazydap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+	{ desc = "DAP set a breakpoint condition" })
+map('n', '<leader>dL', function() lazydap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
+	{ desc = "DAP set log point message" })
+map('n', '<leader>dR', function() require('dap').repl.open() end, { desc = "DAP open repl" })
 
 -- Window resizing with CTRL-Arrowkey
 map('n', '<C-Up>'   , [[2<C-w>-]])
@@ -143,7 +147,7 @@ map('x', '<C-r>', function()
 	)
 	vim.fn.inputrestore()
 	vim.api.nvim_feedkeys('v', 'n', false)
-end)
+end, { desc = "Replace all selected text in buffer" })
 
 -- Terminal ---------------------------------------------------------------------------
 map('n', '<leader>`', [[<Cmd>split+terminal<CR>]])
@@ -199,5 +203,18 @@ M.bufferline = {
 M.gitsigns   = require('user.settings.keymaps.gitsigns')
 M.lsp_setup  = require('user.settings.keymaps.lsp')
 M.telescope  = require('user.settings.keymaps.telescope')
+
+M.indent_blankline = function()
+	local zmaps = {
+		'zA', 'zC', 'zD', 'zE', 'zM', 'zN', 'zO', 'zR',
+		'za', 'zc', 'zd', 'zi', 'zm', 'zn', 'zo', 'zr', 'zv', 'zx',
+	}
+	for _, lhs in ipairs(zmaps) do
+		vim.keymap.set('n', lhs, function()
+			vim.api.nvim_feedkeys(lhs, 'n', false)
+			vim.schedule(vim.F.nil_wrap(function() require('indent_blankline').refresh() end))
+		end, { desc = "Refresh IndentBlankline after fold operation", remap = false, silent = true })
+	end
+end
 
 return M

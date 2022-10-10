@@ -11,14 +11,4 @@ blankline.setup {
 	space_char_blankline = ' ',
 }
 
--- Folds
-local zmaps = {
-	'zA', 'zC', 'zD', 'zE', 'zM', 'zN', 'zO', 'zR',
-	'za', 'zc', 'zd', 'zi', 'zm', 'zn', 'zo', 'zr', 'zv', 'zx',
-}
-for _, lhs in ipairs(zmaps) do
-	vim.keymap.set('n', lhs, function()
-		vim.api.nvim_feedkeys(lhs, 'n', false)
-		vim.schedule(vim.F.nil_wrap(function() require('indent_blankline').refresh() end))
-	end, { remap = false, silent = true })
-end
+require('user.settings.keymaps').indent_blankline()
