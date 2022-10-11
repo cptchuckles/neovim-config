@@ -10,7 +10,7 @@ local function try_fancy(action)
 	end)
 
 	local try_trouble = try(function()
-		vim.api.nvim_command('Trouble '..action)
+		vim.api.nvim_command('Trouble ' .. action)
 	end)
 
 	return function()
@@ -48,7 +48,7 @@ return function(bufnr)
 	map('n', '<A-a>',  vim.lsp.buf.code_action,      { desc = "LSP code actions" })
 	map('n', '<A-i>',  vim.diagnostic.open_float,    { desc = "Show line diagnostics" })
 
-	map({'n', 'i'}, '<A-s>', vim.lsp.buf.signature_help, { desc = "LSP signature help" })
+	map({ 'n', 'i' }, '<A-s>', vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 
 	map('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
 	map('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
@@ -61,10 +61,8 @@ return function(bufnr)
 
 	-- Formatting commands
 	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
-		vim.api.nvim_command [[lua vim.lsp.buf.formatting()]]
-	end, {})
-	vim.api.nvim_buf_create_user_command(bufnr, 'FormatRange', vim.lsp.buf.range_formatting, { range = '%' })
+		vim.lsp.buf.format({ timeout_ms = 250 })
+	end, { range = true })
 
-	map('n', '<leader>F', [[<Cmd>Format<CR>]])
-	map({ 'v', 'x' }, '<leader>f', [[:FormatRange<CR>]])
+	map({ 'n', 'v' }, '<leader>F', [[<Cmd>Format<CR>]])
 end
