@@ -113,7 +113,7 @@ local plugins = {
 			{ 'RRethy/vim-illuminate',                        -- Cursor-word highlighter + text objects
 				commit = nil },
 			{ 'andymass/vim-matchup',                         -- Better % operator (keywords and shit)
-				commit = 'e59d5c73f1bf696c7de9fc13090a240d1ceb13f7',
+				commit = nil,
 				event = 'VimEnter',
 				config = function()
 					vim.g.matchup_matchparen_deferred = 1
