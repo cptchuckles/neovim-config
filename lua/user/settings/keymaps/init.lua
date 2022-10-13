@@ -112,7 +112,7 @@ map('v', 'p', [["vdp]])
 map('v', 'P', [["vdP]])
 
 -- Collimate
-vim.api.nvim_create_user_command("Collimate", function()
+local function collimate()
 	vim.fn.inputsave()
 	local delimiter = vim.fn.input("Collimate on: ", '=')
 	vim.fn.inputrestore()
@@ -126,11 +126,12 @@ vim.api.nvim_create_user_command("Collimate", function()
 		local cmd = 'gv:!column -t ' .. l .. ' -s' .. ch .. ' -o' .. ch .. cr
 		vim.api.nvim_feedkeys(cmd, 'n', false)
 	end)
-end, { range = '%' })
+end
+vim.api.nvim_create_user_command("Collimate", collimate, { range = '%' })
 map('x', '<leader>c', [[:Collimate<CR>]])
 
 -- Replace text command
-map('x', '<C-r>', function()
+local function replace_all()
 	local query = vim.fn.strcharpart(
 		vim.fn.getline(vim.fn.line('.')),
 		vim.fn.min({
@@ -147,7 +148,8 @@ map('x', '<C-r>', function()
 	)
 	vim.fn.inputrestore()
 	vim.api.nvim_feedkeys('v', 'n', false)
-end, { desc = "Replace all selected text in buffer" })
+end
+map('x', '<C-r>', replace_all, { desc = "Replace all selected text in buffer" })
 
 -- Terminal ---------------------------------------------------------------------------
 map('n', '<leader>`', [[<Cmd>split+terminal<CR>]])
