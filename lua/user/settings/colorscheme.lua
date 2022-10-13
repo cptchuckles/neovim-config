@@ -22,7 +22,7 @@ local function make_theme_augroup()
       \|  highlight! link IlluminatedWordText LspReferenceText
       \|  highlight! link IlluminatedWordRead LspReferenceRead
       \|  highlight! link IlluminatedWordWrite LspReferenceWrite
-      \|  highlight! link NvimTreeIndentMarker WinSeparator
+      \|  highlight! link NvimTreeIndentMarker TSComment
     augroup end
   ]]
 end
