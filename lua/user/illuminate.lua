@@ -17,6 +17,9 @@ illuminate.configure {
 	-- The keys are strings to represent the filetype while the values are tables that
 	-- supports the same keys passed to .configure except for filetypes_denylist and filetypes_allowlist
 	filetype_overrides = {
+		javascript = {
+			providers = { 'regex' },
+		},
 		gdscript = {  -- lsp unsupported, and treesitter doesn't work (vim-illuminate#133)
 			providers = { 'regex' },
 		},
