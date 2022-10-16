@@ -17,7 +17,7 @@ local function make_theme_augroup()
       \|  highlight! DiagnosticVirtualTextInfo cterm=bold,italic gui=bold,italic ctermfg=lightyellow guifg=#666644 guibg=NONE
       \|  highlight! IndentBlanklineChar guifg=#2b2f38 gui=nocombine
       \|  highlight! link IndentBlanklineSpaceChar Whitespace
-      \|  highlight! link IndentBlanklineIndent1 CursorLine
+      \|  highlight! link IndentBlanklineIndent1 CursorColumn
       \|  highlight! IndentBlanklineIndent2 guibg=NONE gui=nocombine
       \|  highlight! link IlluminatedWordText LspReferenceText
       \|  highlight! link IlluminatedWordRead LspReferenceRead
