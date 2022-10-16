@@ -53,7 +53,12 @@ local function easy_close_window()
 	local aug_easy_close = vim.api.nvim_create_augroup('EasyCloseWindowKeybind', { clear = true })
 	local function close_bufwinid(bufnr)
 		return function()
-			vim.api.nvim_win_close(vim.fn.bufwinid(bufnr), { force = true })
+			vim.api.nvim_command [[lclose]]
+			local winid = vim.fn.bufwinid(bufnr)
+			if winid < 0 then
+				return
+			end
+			vim.api.nvim_win_close(winid, { force = true })
 		end
 	end
 	vim.api.nvim_create_autocmd('FileType', {
