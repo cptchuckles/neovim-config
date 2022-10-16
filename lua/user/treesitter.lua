@@ -6,9 +6,15 @@ end
 
 ts.setup {
 	ensure_installed = {
-		'bash'      , 'c'   , 'c_sharp', 'cmake' , 'cpp' , 'css' , 'gdscript', 'godot_resource' , 'html',
-		'javascript', 'json', 'julia'  , 'latex' , 'lua' , 'make', 'markdown', 'markdown_inline', 'perl',
-		'regex'     , 'ruby', 'rust'   , 'scheme', 'scss', 'sql' , 'toml'    , 'vim'            , 'yaml',
+		'bash'      , 'c'              , 'c_sharp',
+		'cmake'     , 'cpp'            , 'css'    ,
+		'gdscript'  , 'godot_resource' , 'html'   ,
+		'javascript', 'json'           , 'julia'  ,
+		'latex'     , 'lua'            , 'make'   ,
+		'markdown'  , 'markdown_inline', 'perl'   ,
+		'regex'     , 'ruby'           , 'rust'   ,
+		'scheme'    , 'scss'           , 'sql'    ,
+		'toml'      , 'vim'            , 'yaml'   ,
 	},
 	sync_installed = false, -- install languages synchronously (applies to above)
 	ignore_installed = { "" }, -- list of parsers to ignore installing
@@ -32,6 +38,10 @@ ts.setup {
 		enable = true,
 		extended_mode = true,
 		max_file_lines = nil,
+	},
+
+	matchup = {
+		enable = true,
 	},
 }
 
