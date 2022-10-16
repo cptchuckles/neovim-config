@@ -28,7 +28,7 @@ M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if cmp_ok then
-	M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+	M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 else
 	print("Couldn't load 'cmp_nvim_lsp'")
 end
