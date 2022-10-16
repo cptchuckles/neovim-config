@@ -13,10 +13,10 @@ vim.g.maplocalleader = '\\'
 
 -- Normal -----------------------------------------------------------------------------
 -- Better window navigation
-map('n', '<A-h>', [[<C-w>h]])
-map('n', '<A-j>', [[<C-w>j]])
-map('n', '<A-k>', [[<C-w>k]])
-map('n', '<A-l>', [[<C-w>l]])
+map('n', '<C-h>', [[<C-w>h]])
+map('n', '<C-j>', [[<C-w>j]])
+map('n', '<C-k>', [[<C-w>k]])
+map('n', '<C-l>', [[<C-w>l]])
 
 -- Center view after page up/down
 -- map('n', '<C-d>', [[<C-d>zz]])
@@ -29,8 +29,8 @@ map('n', '<C-e>', [[3<C-e>]])
 map('n', '<C-y>', [[3<C-y>]])
 
 -- Move lines
-map('n', '<C-j>', [[<Cmd>move .+1<CR>==]])
-map('n', '<C-k>', [[<Cmd>move .-2<CR>==]])
+map('n', '<A-j>', [[<Cmd>move .+1<CR>==]])
+map('n', '<A-k>', [[<Cmd>move .-2<CR>==]])
 
 -- Bbye commands
 map('n', '<C-q>', [[<Cmd>Bdelete<CR>]])
@@ -58,7 +58,7 @@ map('n', '<leader>ts', lazyscope.treesitter,                { desc = "Telescope 
 map('n', '<leader>qh', lazyscope.quickfixhistory,           { desc = "Telescope list quickfix history" })
 map('n', '<leader>rg', lazyscope.current_buffer_fuzzy_find, { desc = "Telescope grep inside current buffer" })
 map('n', '<leader>tt', lazyscope.resume,                    { desc = "Telescope resume last session" })
-map('n', '<C-l>', function()
+map('n', '<A-l>', function()
 	if not pcall(function() lazyscope.buffers() end) then
 		-- This is the kind of stupid shit I have to go through just to emulate keypresses
 		local cmdstr = vim.api.nvim_replace_termcodes(':ls<CR>:b', true, false, true)
@@ -91,14 +91,9 @@ map('n', '<C-Right>', [[2<C-w>>]])
 map('n', '<C-n>', [[<Cmd>bnext<CR>]])
 map('n', '<C-p>', [[<Cmd>bprev<CR>]])
 
-
--- Insert -----------------------------------------------------------------------------
--- Move text up/down while in insert mode
-map('i', '<A-j>', [[<Cmd>move .+1<CR><C-o>==]])
-map('i', '<A-k>', [[<Cmd>move .-2<CR><C-o>==]])
-
-
 -- Visual -----------------------------------------------------------------------------
+
+
 -- Stay in indent mode
 map('v', '<', [[<gv]])
 map('v', '>', [[>gv]])
@@ -155,11 +150,7 @@ map('x', '<C-r>', replace_all, { desc = "Replace all selected text in buffer" })
 map('n', '<leader>`', [[<Cmd>split+terminal<CR>]])
 
 -- Window switch from terminal
-map('t', '<A-h>', [[<Cmd>wincmd h<CR>]])
-map('t', '<A-j>', [[<Cmd>wincmd j<CR>]])
-map('t', '<A-k>', [[<Cmd>wincmd k<CR>]])
-map('t', '<A-l>', [[<Cmd>wincmd l<CR>]])
-
+map('t', '<A-Esc>', [[<Cmd>stopinsert<CR>]])
 
 -- Plugin keybinds --------------------------------------------------------------------
 local M = {}
