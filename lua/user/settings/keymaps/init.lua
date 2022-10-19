@@ -147,7 +147,7 @@ end
 map('x', '<C-r>', replace_all, { desc = "Replace all selected text in buffer" })
 
 -- Terminal ---------------------------------------------------------------------------
-map('n', '<leader>`', [[<Cmd>split+terminal<CR>]])
+map('n', '<leader>`', [[<Cmd>botright split+terminal<CR>]])
 
 -- Window switch from terminal
 map('t', '<A-Esc>', [[<Cmd>stopinsert<CR>]])
