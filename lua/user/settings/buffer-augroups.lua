@@ -80,10 +80,10 @@ local function easy_close_window()
 	})
 end
 
-local function fold_settings()
-	local json_yaml_folding = vim.api.nvim_create_augroup('JsonYamlFoldingSettings', { clear = true })
+local function json_yaml_settings()
+	local json_yaml_settings = vim.api.nvim_create_augroup('JsonYamlSettings', { clear = true })
 	vim.api.nvim_create_autocmd('BufAdd', {
-		group = json_yaml_folding,
+		group = json_yaml_settings,
 		desc = 'Set indent-based folding at level 2 for json and yaml files',
 		pattern = { '*.json', '*.yaml', '*.yml' },
 		callback = function(opts)
@@ -95,13 +95,50 @@ local function fold_settings()
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufHidden', {
-		group = json_yaml_folding,
+		group = json_yaml_settings,
 		desc = 'Reset folding method to manual when json/yaml buffers are hidden',
 		pattern = { '*.json', '*.yaml', '*.yml' },
 		callback = function(opts)
 			vim.schedule(function()
 				vim.wo[vim.fn.bufwinid('%')].foldmethod = 'manual'
 			end)
+		end,
+	})
+
+	local function convert_json_to_yaml(opts)
+		local flag = opts.reverse and '-j' or '-y'
+		local cursor_percent = vim.fn.line('.') / vim.fn.line('$')
+		vim.api.nvim_command('silent %!yq ' .. flag)
+		vim.bo[opts.bufnr].filetype = opts.reverse and 'json' or 'yaml'
+		vim.fn.cursor(math.floor(vim.fn.line('$') * cursor_percent + 0.5), 0)
+	end
+
+	vim.api.nvim_create_autocmd('FileType', {
+		group = json_yaml_settings,
+		desc = 'Map json-to-yaml keybind',
+		pattern = 'json',
+		callback = function(opts)
+			vim.keymap.set('n', '<leader>j', function()
+				convert_json_to_yaml { bufnr = opts.buf }
+			end, { silent = true, remap = false, buffer = opts.buf })
+		end,
+	})
+	vim.api.nvim_create_autocmd('FileType', {
+		group = json_yaml_settings,
+		desc = 'Map yaml-to-json keybind',
+		pattern = 'yaml',
+		callback = function(opts)
+			vim.keymap.set('n', '<leader>j', function()
+				convert_json_to_yaml { bufnr = opts.buf, reverse = true }
+			end, { silent = true, remap = false, buffer = opts.buf })
+		end,
+	})
+	vim.api.nvim_create_autocmd('BufWritePre', {
+		group = json_yaml_settings,
+		desc = 'Convert *.json files back to json before saving',
+		pattern = '*.json',
+		callback = function(opts)
+			convert_json_to_yaml { bufnr = opts.buf, reverse = true }
 		end,
 	})
 end
@@ -146,7 +183,7 @@ end
 M.setup = function()
 	buffer_wiping()
 	easy_close_window()
-	fold_settings()
+	json_yaml_settings()
 	terminal_settings()
 	file_settings()
 end
