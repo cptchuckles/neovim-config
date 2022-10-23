@@ -60,8 +60,15 @@ return function(bufnr)
 	map('n', '<leader>dr', vim.lsp.buf.rename, { desc = "LSP rename symbol" })
 
 	-- Formatting commands
-	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
-		vim.lsp.buf.format({ timeout_ms = 250 })
+	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(opts)
+		local format_opts = { timeout_ms = 250 }
+		if opts.range > 0 then
+			format_opts.range = {
+				{ opts.line1, 0 },
+				{ opts.line2, 0 },
+			}
+		end
+		vim.lsp.buf.format(format_opts)
 	end, { range = true })
 
 	map({ 'n', 'v' }, '<leader>F', [[<Cmd>Format<CR>]])
