@@ -33,4 +33,6 @@ else
 	print("Couldn't load 'cmp_nvim_lsp'")
 end
 
+M.capabilities = vim.tbl_deep_extend('force', M.capabilities, { offsetEncoding = 'utf-8' })
+
 return M
