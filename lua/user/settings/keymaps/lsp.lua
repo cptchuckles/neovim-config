@@ -36,17 +36,25 @@ local function nice_diagnostics(opts)
 	end
 end
 
-return function(bufnr)
+return function(client, bufnr)
 	local function map(mode, lhs, rhs, opts)
 		opts = vim.tbl_extend("force", opts or {}, { remap = false, silent = true, buffer = bufnr })
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
 	map('n', 'K',      vim.lsp.buf.hover,            { desc = "LSP show information about symbol under cursor" })
-	map('n', '<C-]>',  try_fancy("lsp_definitions"), { desc = "LSP go to definition" })
 	map('n', 'g<C-]>', try_fancy("lsp_references"),  { desc = "LSP list references" })
 	map('n', '<A-a>',  vim.lsp.buf.code_action,      { desc = "LSP code actions" })
 	map('n', '<A-i>',  vim.diagnostic.open_float,    { desc = "Show line diagnostics" })
+	map('n', '<C-]>', (function()
+		if client.name == 'omnisharp' then
+			-- Override general <C-]> mappping for default vim one,
+			-- since omnisharp_extended doesn't work with Telescope or Trouble
+			return vim.lsp.buf.definition
+		else
+			return try_fancy("lsp_definitions")
+		end
+	end)(), { desc = "LSP go to definition" })
 
 	map({ 'n', 'i' }, '<A-s>', vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 

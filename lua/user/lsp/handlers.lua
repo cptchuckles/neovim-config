@@ -21,13 +21,7 @@ M.on_attach = function(client, bufnr)
 	end
 	vim.api.nvim_buf_set_var(bufnr, 'UserLspAttached', 1)
 
-	require('user.settings.keymaps').lsp_setup(bufnr)
-
-	if client.name == 'omnisharp' then
-		-- Override general <C-]> mappping for default vim one,
-		-- since omnisharp_extended doesn't work with Telescope or Trouble
-		vim.keymap.set('n', '<C-]>', vim.lsp.buf.definition, { silent = true, remap = false, buffer = bufnr })
-	end
+	require('user.settings.keymaps').lsp_setup(client, bufnr)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
