@@ -25,15 +25,14 @@ M.on_attach = function(client, bufnr)
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.offsetEncoding = { 'utf-16' }
 
 local cmp_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not cmp_ok then
+if cmp_ok then
+	M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+else
 	print("Couldn't load 'cmp_nvim_lsp' nor update capabilities")
-	return M
 end
 
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 M.capabilities.offsetEncoding = { 'utf-16' }
 
 return M
