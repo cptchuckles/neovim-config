@@ -14,7 +14,7 @@ tree.setup {
 		enable = false,
 		auto_open = true,
 	},
-	open_on_tab = true,
+	open_on_tab = false,
 	update_focused_file = {
 		enable = true,
 		update_root = true,
