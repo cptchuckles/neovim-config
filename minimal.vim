@@ -1,6 +1,7 @@
 set termguicolors number relativenumber cursorline list noexpandtab
 set tabstop=4 softtabstop=4 shiftwidth=4
 set listchars=tab:›\ ,lead:·,trail:¶
+set clipboard+=unnamedplus
 colorscheme habamax
 
 nnoremap \\ <Nop>
