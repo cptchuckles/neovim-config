@@ -15,8 +15,7 @@ local function try_fancy(action)
 
 	return function()
 		if not (try_telescope() or try_trouble()) then
-			({
-				lsp_declarations     = vim.lsp.buf.declaration,
+			({	lsp_declarations     = vim.lsp.buf.declaration,
 				lsp_definitions      = vim.lsp.buf.definition,
 				lsp_type_definitions = vim.lsp.buf.type_definition,
 				lsp_references       = vim.lsp.buf.references,
