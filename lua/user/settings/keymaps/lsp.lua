@@ -47,7 +47,7 @@ return function(client, bufnr)
 	map('n', '<A-i>',  vim.diagnostic.open_float,    { desc = "Show line diagnostics" })
 	map('n', '<C-]>', (function()
 		if client.name == 'omnisharp' then
-			-- Override general <C-]> mappping for default vim one,
+			-- Override general <C-]> mapping for default vim one,
 			-- since omnisharp_extended doesn't work with Telescope or Trouble
 			return vim.lsp.buf.definition
 		else
