@@ -69,7 +69,7 @@ return function(client, bufnr)
 
 	-- Formatting commands
 	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(opts)
-		local format_opts = { timeout_ms = 250 }
+		local format_opts = { async = true }
 		if opts.range > 0 then
 			format_opts.range = {
 				{ opts.line1, 0 },
