@@ -58,6 +58,7 @@ local function easy_close_window()
 			if winid < 0 then
 				return
 			end
+			vim.api.nvim_command [[wincmd p]]
 			vim.api.nvim_win_close(winid, { force = true })
 		end
 	end
@@ -164,6 +165,15 @@ local function terminal_settings()
 			vim.wo[wid].list            = false
 			vim.bo[opts.buf].modifiable = true
 			vim.api.nvim_command [[startinsert]]
+		end,
+	})
+	vim.api.nvim_create_autocmd('TermClose', {
+		group = aug_terminal_settings,
+		desc = 'Return to previous window and close the terminal buffer',
+		pattern = '*',
+		callback = function(opts)
+			vim.api.nvim_command [[wincmd p]]
+			vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufEnter', {
