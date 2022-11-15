@@ -33,7 +33,7 @@ function M.insert(actions)
 		['<S-Tab>'] = actions.toggle_selection + actions.move_selection_better,
 		['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
 		['<A-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
-		['<C-T>'] = lazytrouble.open_with_trouble,
+		['<A-t>'] = lazytrouble.open_with_trouble,
 		['<C-l>'] = actions.complete_tag,
 		['<C-_>'] = actions.which_key,   -- keys from pressing <C-/> (what?)
 	}
@@ -51,7 +51,7 @@ function M.normal(actions)
 		['<S-Tab>'] = actions.toggle_selection + actions.move_selection_better,
 		['<C-q>'] = actions.send_to_qflist + actions.open_qflist,
 		['<A-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
-		['<C-T>'] = lazytrouble.open_with_trouble,
+		['<A-t>'] = lazytrouble.open_with_trouble,
 
 		['<Down>'] = actions.move_selection_next,
 		['<Up>']   = actions.move_selection_previous,
