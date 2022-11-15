@@ -172,8 +172,13 @@ local function terminal_settings()
 		desc = 'Return to previous window and close the terminal buffer',
 		pattern = '*',
 		callback = function(opts)
+			if vim.endswith(opts.match, "lazygit") then
+				-- Let lazygit windows close themselves
+				return
+			end
 			vim.api.nvim_command [[wincmd p]]
 			vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
+			vim.api.nvim_command("bdelete! " .. opts.buf)
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufEnter', {
