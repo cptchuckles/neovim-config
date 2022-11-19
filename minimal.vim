@@ -37,3 +37,9 @@ augroup HelpQfClose
 	au!
 	au FileType help,qf nnoremap <buffer> q <C-w><C-q>
 augroup end
+
+" Add settings for gitcommit message buffers
+augroup GitCommitMessages
+	au!
+	au FileType gitcommit setl textwidth=67 colorcolumn=+1 expandtab
+augroup end
