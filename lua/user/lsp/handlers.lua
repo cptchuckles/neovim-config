@@ -5,16 +5,16 @@ M.on_attach = function(client, bufnr)
 		client.resolved_capabilities.document_formatting = false
 	end
 
-	if client.server_capabilities.signatureHelpProvider then
-		require('lsp-overloads').setup(client, {
-			keymaps = {
-				previous_signature = '<A-K>',
-				next_signature     = '<A-J>',
-				previous_parameter = '<A-L>',
-				next_parameter     = '<A-H>',
-			},
-		})
-	end
+	-- if client.server_capabilities.signatureHelpProvider then
+	-- 	require('lsp-overloads').setup(client, {
+	-- 		keymaps = {
+	-- 			previous_signature = '<A-K>',
+	-- 			next_signature     = '<A-J>',
+	-- 			previous_parameter = '<A-L>',
+	-- 			next_parameter     = '<A-H>',
+	-- 		},
+	-- 	})
+	-- end
 
 	if pcall(function() return vim.api.nvim_buf_get_var(bufnr, 'UserLspAttached') == 1 end) then
 		return
