@@ -150,7 +150,7 @@ local plugins = {
 
 	treesitter = {
 		{ 'nvim-treesitter/nvim-treesitter',
-			commit = '27cba73df9ddca00c066c7ebb514576a99bb8b2c',
+			commit = nil,
 			run = function()
 				require('nvim-treesitter.install').update({ with_sync = true })
 			end,
