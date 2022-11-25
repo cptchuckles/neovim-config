@@ -1,4 +1,4 @@
-set termguicolors number relativenumber cursorline list noexpandtab
+set termguicolors number relativenumber cursorline list noexpandtab smartindent
 set tabstop=4 softtabstop=4 shiftwidth=4
 set listchars=tab:›\ ,lead:·,trail:¶
 set clipboard+=unnamedplus
