@@ -55,14 +55,13 @@ map('n', '<leader>to', function() lazyscope.live_grep { grep_open_files = true }
 map('n', '<leader>*' , lazyscope.grep_string,               { desc = "Telescope grep symbol under cursor" })
 map('n', '<leader>tf', lazyscope.find_files,                { desc = "Telescope fuzzy-search for files" })
 map('n', '<leader>ts', lazyscope.treesitter,                { desc = "Telescope list treesitter symbols in buffer" })
-map('n', '<leader>qh', lazyscope.quickfixhistory,           { desc = "Telescope list quickfix history" })
+map('n', '<leader>tq', lazyscope.quickfixhistory,           { desc = "Telescope list quickfix history" })
 map('n', '<leader>rg', lazyscope.current_buffer_fuzzy_find, { desc = "Telescope grep inside current buffer" })
 map('n', '<leader>tt', lazyscope.resume,                    { desc = "Telescope resume last session" })
 map('n', '<A-l>', function()
 	if not pcall(function() lazyscope.buffers() end) then
-		-- This is the kind of stupid shit I have to go through just to emulate keypresses
-		local cmdstr = vim.api.nvim_replace_termcodes(':ls<CR>:b', true, false, true)
-		vim.api.nvim_feedkeys(cmdstr, 'n', false)
+		vim.api.nvim_command [[ls]]
+		vim.api.nvim_feedkeys(":b", 'n', false)
 	end
 end, { desc = "List open buffers in telescope, or with :ls if telescope can't be loaded" })
 
