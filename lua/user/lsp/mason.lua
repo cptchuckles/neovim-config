@@ -15,7 +15,12 @@ local base_opts = {
 	capabilities = require('user.lsp.handlers').capabilities,
 }
 
-mason.setup()
+mason.setup {
+	ui = {
+		border = "rounded",
+	},
+}
+
 
 mason_lsp.setup()
 mason_lsp.setup_handlers {
