@@ -130,7 +130,7 @@ local function collimate()
 	local cr = vim.api.nvim_replace_termcodes('<cr>', true, false, true)
 	delimiter:gsub('[^%d%s]%d*', function(d)
 		local l = #d > 1 and (' -l' .. d:sub(2)) or ''
-		local ch = d:sub(1,1):gsub('[\'\\"<>&|();#]', function(s) return '\\' .. s end)
+		local ch = d:sub(1, 1):gsub('[\'\\"<>&|();#]', function(s) return '\\' .. s end)
 		local cmd = 'gv:!column -t ' .. l .. ' -s' .. ch .. ' -o' .. ch .. cr
 		vim.api.nvim_feedkeys(cmd, 'n', false)
 	end)
@@ -144,7 +144,7 @@ local function replace_all()
 	vim.fn.inputsave()
 	local answer = vim.fn.input("Replace text: ", query)
 	vim.api.nvim_command(
-		'%s/\\V' .. query:gsub('/','\\/') .. '/' .. answer:gsub('/','\\/') .. '/ge'
+		'%s/\\V' .. query:gsub('/', '\\/') .. '/' .. answer:gsub('/', '\\/') .. '/ge'
 	)
 	vim.fn.inputrestore()
 	vim.api.nvim_feedkeys('v', 'n', false)
@@ -185,7 +185,7 @@ M.bufferline = {
 	['<leader>bq'] = bl.close_with_pick,
 	['<leader>bb'] = bl.pick_buffer,
 	['[b']         = function() bl.cycle(-1) end,
-	[']b']         = function() bl.cycle( 1) end,
+	[']b']         = function() bl.cycle(1) end,
 	['<A-1>']      = function() bl.go_to(1, false) end,
 	['<A-2>']      = function() bl.go_to(2, false) end,
 	['<A-3>']      = function() bl.go_to(3, false) end,
@@ -195,12 +195,12 @@ M.bufferline = {
 	['<A-7>']      = function() bl.go_to(7, false) end,
 	['<A-8>']      = function() bl.go_to(8, false) end,
 	['<A-9>']      = function() bl.go_to(-1, true) end,
-	['<A-0>']      = function() bl.go_to( 1, true) end,
+	['<A-0>']      = function() bl.go_to(1, true) end,
 }
 
-M.gitsigns   = require('user.settings.keymaps.gitsigns')
-M.lsp_setup  = require('user.settings.keymaps.lsp')
-M.telescope  = require('user.settings.keymaps.telescope')
+M.gitsigns  = require('user.settings.keymaps.gitsigns')
+M.lsp_setup = require('user.settings.keymaps.lsp')
+M.telescope = require('user.settings.keymaps.telescope')
 
 M.indent_blankline = function()
 	local zmaps = {
