@@ -5,6 +5,17 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local function get_visual_text()
+	return vim.fn.strcharpart(
+		vim.fn.getline(vim.fn.line('.')),
+		vim.fn.min({
+			vim.fn.charcol('.'),
+			vim.fn.charcol('v'),
+		}) - 1,
+		vim.fn.abs(vim.fn.charcol('.') - vim.fn.charcol('v')) + 1
+	)
+end
+
 -- Remap leader key
 map('', '\\', [[<Nop>]])
 vim.g.mapleader = '\\'
@@ -52,7 +63,10 @@ map('n', '<leader>ta', lazyscope.live_grep, { desc = "Telescope live-grep all fi
 map('n', '<leader>to', function() lazyscope.live_grep { grep_open_files = true } end, {
 	desc = "Telescope live-grep only open buffers",
 })
-map('n', '<leader>*' , lazyscope.grep_string,               { desc = "Telescope grep symbol under cursor" })
+map('n', '<leader>*', lazyscope.grep_string, { desc = "Telescope grep symbol under cursor" })
+map('x', '<leader>*', function()
+	lazyscope.grep_string { search = get_visual_text() }
+end, { desc = "Telescope grep highlighted text" })
 map('n', '<leader>tf', lazyscope.find_files,                { desc = "Telescope fuzzy-search for files" })
 map('n', '<leader>ts', lazyscope.treesitter,                { desc = "Telescope list treesitter symbols in buffer" })
 map('n', '<leader>tq', lazyscope.quickfixhistory,           { desc = "Telescope list quickfix history" })
@@ -126,15 +140,7 @@ map('x', '<leader>c', [[:Collimate<CR>]])
 
 -- Replace text command
 local function replace_all()
-	local query = vim.fn.strcharpart(
-		vim.fn.getline(vim.fn.line('.')),
-		vim.fn.min({
-			vim.fn.charcol('.'),
-			vim.fn.charcol('v'),
-		}) - 1,
-		vim.fn.abs(vim.fn.charcol('.') - vim.fn.charcol('v')) + 1
-	)
-
+	local query = get_visual_text()
 	vim.fn.inputsave()
 	local answer = vim.fn.input("Replace text: ", query)
 	vim.api.nvim_command(
