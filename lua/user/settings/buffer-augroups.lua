@@ -89,9 +89,9 @@ local function easy_close_window()
 end
 
 local function json_yaml_settings()
-	local json_yaml_settings = vim.api.nvim_create_augroup('JsonYamlSettings', { clear = true })
+	local aug_json_yaml = vim.api.nvim_create_augroup('JsonYamlSettings', { clear = true })
 	vim.api.nvim_create_autocmd('BufAdd', {
-		group = json_yaml_settings,
+		group = aug_json_yaml,
 		desc = 'Set indent-based folding at level 2 for json and yaml files',
 		pattern = { '*.json', '*.yaml', '*.yml' },
 		callback = function(opts)
@@ -103,7 +103,7 @@ local function json_yaml_settings()
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufHidden', {
-		group = json_yaml_settings,
+		group = aug_json_yaml,
 		desc = 'Reset folding method to manual when json/yaml buffers are hidden',
 		pattern = { '*.json', '*.yaml', '*.yml' },
 		callback = function(opts)
@@ -122,7 +122,7 @@ local function json_yaml_settings()
 	end
 
 	vim.api.nvim_create_autocmd('FileType', {
-		group = json_yaml_settings,
+		group = aug_json_yaml,
 		desc = 'Map json-to-yaml keybind',
 		pattern = 'json',
 		callback = function(opts)
@@ -132,7 +132,7 @@ local function json_yaml_settings()
 		end,
 	})
 	vim.api.nvim_create_autocmd('FileType', {
-		group = json_yaml_settings,
+		group = aug_json_yaml,
 		desc = 'Map yaml-to-json keybind',
 		pattern = 'yaml',
 		callback = function(opts)
@@ -142,7 +142,7 @@ local function json_yaml_settings()
 		end,
 	})
 	vim.api.nvim_create_autocmd('BufWritePre', {
-		group = json_yaml_settings,
+		group = aug_json_yaml,
 		desc = 'Convert *.json files back to json before saving',
 		pattern = '*.json',
 		callback = function(opts)
