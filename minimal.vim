@@ -23,6 +23,10 @@ nnoremap <A-k> <Cmd>move .-2<CR>==
 vnoremap <A-j> :move '>+1<CR>gv=gv
 vnoremap <A-k> :move '<-2<CR>gv=gv
 
+" Indenting
+vnoremap < <gv
+vnoremap > >gv
+
 " Terminal settings
 nnoremap <leader>` <Cmd>botright split+terminal<CR>
 tnoremap <A-Esc> <Cmd>stopinsert<CR>
