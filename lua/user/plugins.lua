@@ -120,13 +120,12 @@ local plugins = {
 					vim.g.matchup_matchparen_offscreen = {}
 				end,
 			},
-			{ 'iamcco/markdown-preview.nvim',                 -- Markdown previewer in web browser
+			{ 'toppair/peek.nvim',                            -- Markdown previewer in web browser
 				commit = nil,
-				run = function() vim.fn['mkdp#util#install']() end,
-				cmd = 'MarkdownPreview',
-				setup = function() vim.g.mkdp_filetypes = {'markdown'} end,
+				run = 'deno task --quiet build:fast',
 				ft = 'markdown',
 				opt = true,
+				config = function() require 'user.peek' end,
 			},
 		},
 		layout = {
