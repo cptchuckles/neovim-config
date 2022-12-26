@@ -6,34 +6,7 @@ end
 
 local luasnip = require('user.luasnip')
 
-local kind_icons = {
-	Class         = '',
-	Color         = '',
-	Constant      = '',
-	Constructor   = '',
-	Enum          = '',
-	EnumMember    = '',
-	Event         = '',
-	Field         = '',
-	File          = '',
-	Folder        = '',
-	Function      = '',
-	Interface     = '',
-	Keyword       = '',
-	Method        = '',
-	Module        = '',
-	Operator      = '',
-	Property      = '',
-	Reference     = '',
-	Snippet       = '﬍',
-	Struct        = '',
-	Text          = '',
-	TypeParameter = '𝙏',
-	Unit          = '',
-	Value         = '',
-	Variable      = '',
-}
--- find more at https://www.nerdfonts.com/cheat-sheet
+local kind_icons = require('user.settings.icons')
 
 cmp.setup {
 	snippet = {

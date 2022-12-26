@@ -4,6 +4,40 @@ if not status_ok then
 	return
 end
 
+local symbols = {
+	Array         = { hl = "@constant" },
+	Boolean       = { hl = "@boolean" },
+	Class         = { hl = "@type" },
+	Constant      = { hl = "@constant" },
+	Constructor   = { hl = "@constructor" },
+	Enum          = { hl = "@type" },
+	EnumMember    = { hl = "@field" },
+	Event         = { hl = "@type" },
+	Field         = { hl = "@field" },
+	File          = { hl = "@uRI" },
+	Function      = { hl = "@function" },
+	Interface     = { hl = "@type" },
+	Key           = { hl = "@type" },
+	Method        = { hl = "@method" },
+	Module        = { hl = "@namespace" },
+	Namespace     = { hl = "@namespace" },
+	Null          = { hl = "@type" },
+	Number        = { hl = "@number" },
+	Object        = { hl = "@type" },
+	Operator      = { hl = "@operator" },
+	Package       = { hl = "@namespace" },
+	Property      = { hl = "@property" },
+	String        = { hl = "@string" },
+	Struct        = { hl = "@type" },
+	TypeParameter = { hl = "@parameter" },
+	Variable      = { hl = "@constant" },
+}
+
+local user_icons = require('user.settings.icons')
+for key, value in pairs(symbols) do
+	symbols[key] = vim.tbl_extend("force", value, { icon = user_icons[key] })
+end
+
 outliner.setup {
 	highlight_hovered_item = true,
 	show_guides = true,
@@ -22,34 +56,7 @@ outliner.setup {
 	keymaps = require('user.settings.keymaps').symbols_outline,
 	lsp_blacklist = {},
 	symbol_blacklist = {},
-	symbols = {
-		Array         = { icon = "", hl = "@constant"    },
-		Boolean       = { icon = "", hl = "@boolean"     },
-		Class         = { icon = "", hl = "@type"        },
-		Constant      = { icon = "", hl = "@constant"    },
-		Constructor   = { icon = "", hl = "@constructor" },
-		Enum          = { icon = "", hl = "@type"        },
-		EnumMember    = { icon = "", hl = "@field"       },
-		Event         = { icon = "", hl = "@type"        },
-		Field         = { icon = "", hl = "@field"       },
-		File          = { icon = "", hl = "@uRI"         },
-		Function      = { icon = "", hl = "@function"    },
-		Interface     = { icon = "", hl = "@type"        },
-		Key           = { icon = "", hl = "@type"        },
-		Method        = { icon = "", hl = "@method"      },
-		Module        = { icon = "", hl = "@namespace"   },
-		Namespace     = { icon = "", hl = "@namespace"   },
-		Null          = { icon = "ﳠ", hl = "@type"        },
-		Number        = { icon = "", hl = "@number"      },
-		Object        = { icon = "", hl = "@type"        },
-		Operator      = { icon = "", hl = "@operator"    },
-		Package       = { icon = "", hl = "@namespace"   },
-		Property      = { icon = "", hl = "@property"    },
-		String        = { icon = "", hl = "@string"      },
-		Struct        = { icon = "", hl = "@type"        },
-		TypeParameter = { icon = "𝙏", hl = "@parameter"   },
-		Variable      = { icon = "", hl = "@constant"    },
-	},
+	symbols = symbols,
 }
 
 vim.api.nvim_create_autocmd('FileType', {
