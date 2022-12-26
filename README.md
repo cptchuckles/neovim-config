@@ -44,8 +44,8 @@ users.
 **User Experience**
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) - See and manipulate git hunks, commits,
   and diffs in-editor
-- [Treesitter-Context](https://github.com/nvim-treesitter/nvim-treesitter-context) - Sticky code
-  context to always see your current scope at the top of the buffer
+- [nvim-navic](https://github.com/SmiteshP/nvim-navic) - Show document symbol breadcrumbs in
+  winbar
 - [IndentBlankline](https://github.com/lukas-reineke/indent-blankline.nvim) - Clearly visualize
   indentation and scope
 - [Tokyonight](https://github.com/folke/tokyonight.nvim) - Simply the best colorscheme
