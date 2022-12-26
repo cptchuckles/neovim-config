@@ -144,6 +144,10 @@ local plugins = {
 				branch = 'main',
 				requires = { 'kyazdani42/nvim-web-devicons', opt = true },
 			},
+			{ 'SmiteshP/nvim-navic',                          -- Winbar plugin to show context
+				commit = nil,
+				requires = 'neovim/nvim-lspconfig',
+			},
 		},
 	},
 
@@ -155,8 +159,6 @@ local plugins = {
 			end,
 		},
 		{ 'nvim-treesitter/playground',                       -- TSPlayground to see the AST of a file
-			commit = nil },
-		{ 'nvim-treesitter/nvim-treesitter-context',          -- Sticky code context
 			commit = nil },
 		{ 'p00f/nvim-ts-rainbow',                             -- Color-code brackets and parens and shit
 			commit = nil },

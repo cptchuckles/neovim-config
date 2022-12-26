@@ -16,6 +16,8 @@ M.on_attach = function(client, bufnr)
 	-- 	})
 	-- end
 
+	require('user.lsp.navic').try_attach(client, bufnr)
+
 	if pcall(function() return vim.api.nvim_buf_get_var(bufnr, 'UserLspAttached') == 1 end) then
 		return
 	end
