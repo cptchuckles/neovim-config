@@ -26,7 +26,6 @@ end
 
 function M.try_attach(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
-		print("WHAT THE FUCK??? " .. vim.fn.expand("%") .. vim.fn.bufwinid(bufnr))
 		require('nvim-navic').attach(client, bufnr)
 		vim.wo[vim.fn.bufwinid(bufnr)].winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 	end
