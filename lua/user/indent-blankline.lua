@@ -7,8 +7,9 @@ end
 blankline.setup {
 	char = '│',
 	show_trailing_blankline_indent = false,
-	show_cursor_context_start = true,
+	show_current_context = true,
 	space_char_blankline = ' ',
+	use_treesitter = true,
 }
 
 require('user.settings.keymaps').indent_blankline()
