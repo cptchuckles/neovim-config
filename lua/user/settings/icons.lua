@@ -6,7 +6,7 @@ return {
 	Constant      = '',
 	Constructor   = '',
 	Enum          = '',
-	EnumMember    = '',
+	EnumMember    = 'ﱔ',
 	Event         = '',
 	Field         = '',
 	File          = '',
