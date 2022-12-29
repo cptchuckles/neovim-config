@@ -1,6 +1,6 @@
 local M = {}
 
-local lazytrouble = require('lazy').require_on_exported_call('trouble.providers.telescope')
+local lazytrouble = require('lazy-require').require_on_exported_call('trouble.providers.telescope')
 
 function M.insert(actions)
 	return {

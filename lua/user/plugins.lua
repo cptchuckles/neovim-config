@@ -188,7 +188,7 @@ return packer.startup(function(use)
 	use 'nvim-lua/plenary.nvim'     -- Useful lua functions used by lots of plugins
 
 	use 'lewis6991/impatient.nvim'  -- cache bytecode plugins for fast startup
-	use 'tjdevries/lazy.nvim'       -- Plugin lazy load/require
+	use 'tjdevries/lazy-require.nvim'       -- Plugin lazy load/require
 
 	use(plugins.completion)
 	use(plugins.lsp)
