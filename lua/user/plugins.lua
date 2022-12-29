@@ -135,8 +135,6 @@ local plugins = {
 				commit = nil },
 			{ 'simrat39/symbols-outline.nvim',                -- Symbols outliner
 				commit = nil },
-			{ 'akinsho/bufferline.nvim',                      -- Bufferline - Tabs, but buffers!
-				commit = nil },
 			{ 'moll/vim-bbye',                                -- Buffer deletion done right
 				commit = nil },
 			{ 'glepnir/galaxyline.nvim',                      -- Sickass statusline

@@ -180,24 +180,6 @@ M.nvim_tree = {
 	[']d'] = function() require('nvim-tree.api').node.navigate.diagnostics.next() end,
 }
 
-local bl = require('lazy').require_on_exported_call('bufferline')
-M.bufferline = {
-	['<leader>bq'] = bl.close_with_pick,
-	['<leader>bb'] = bl.pick_buffer,
-	['[b']         = function() bl.cycle(-1) end,
-	[']b']         = function() bl.cycle(1) end,
-	['<A-1>']      = function() bl.go_to(1, false) end,
-	['<A-2>']      = function() bl.go_to(2, false) end,
-	['<A-3>']      = function() bl.go_to(3, false) end,
-	['<A-4>']      = function() bl.go_to(4, false) end,
-	['<A-5>']      = function() bl.go_to(5, false) end,
-	['<A-6>']      = function() bl.go_to(6, false) end,
-	['<A-7>']      = function() bl.go_to(7, false) end,
-	['<A-8>']      = function() bl.go_to(8, false) end,
-	['<A-9>']      = function() bl.go_to(-1, true) end,
-	['<A-0>']      = function() bl.go_to(1, true) end,
-}
-
 M.gitsigns  = require('user.settings.keymaps.gitsigns')
 M.lsp_setup = require('user.settings.keymaps.lsp')
 M.telescope = require('user.settings.keymaps.telescope')
