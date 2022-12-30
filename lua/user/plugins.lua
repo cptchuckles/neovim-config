@@ -162,6 +162,8 @@ local plugins = {
 			commit = nil },
 		{ 'p00f/nvim-ts-rainbow',                             -- Color-code brackets and parens and shit
 			commit = nil },
+		{ 'nvim-treesitter/nvim-treesitter-textobjects',      -- Text objects
+			commit = nil },
 	},
 
 	workspace_tools = {
