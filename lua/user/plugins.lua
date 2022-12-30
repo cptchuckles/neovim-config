@@ -127,6 +127,8 @@ local plugins = {
 				opt = true,
 				config = function() require 'user.peek' end,
 			},
+			{ 'windwp/nvim-autopairs',                        -- Automagically match punctuation pairs
+				commit = nil },
 		},
 		layout = {
 			{ 'lukas-reineke/indent-blankline.nvim',          -- Indentation fanciness

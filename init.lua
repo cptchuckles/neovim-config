@@ -4,8 +4,9 @@ require 'user.settings'
 
 -- Editing & Completion
 require 'user.cmp'
-require 'user.lsp'
 require 'user.comment'
+require 'user.autopairs'
+require 'user.lsp'
 
 -- Layout & Tools
 require 'user.nvim-tree'
