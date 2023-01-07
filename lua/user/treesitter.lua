@@ -97,7 +97,9 @@ ts.setup {
 
 	indent = {
 		enable = true,
-		-- disable = { "yaml" },
+		disable = {
+			"html"  -- it fucking SUCKS
+		},
 	},
 
 	-- third-party plugins
