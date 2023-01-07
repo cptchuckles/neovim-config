@@ -195,9 +195,17 @@ local function file_settings()
 		group = aug_file_settings,
 		desc = 'Enable text wrapping for the specified filetypes',
 		pattern = { 'markdown', },
-		callback = function(opts)
+		callback = function()
 			vim.opt_local.textwidth = 100
 			vim.opt_local.formatoptions:remove('l')
+		end,
+	})
+	vim.api.nvim_create_autocmd('BufWritePre', {
+		group = aug_file_settings,
+		desc = 'Format HTML/XML using built-in indentation upon save',
+		pattern = { '*.html', '*.xml' },
+		callback = function()
+			vim.api.nvim_feedkeys("gg=G<C-o>", 'n', true)
 		end,
 	})
 end
