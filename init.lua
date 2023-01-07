@@ -13,6 +13,7 @@ require 'user.nvim-tree'
 require 'user.symbols-outline'
 require 'user.telescope'
 require 'user.trouble'
+require 'user.web-tools'
 
 -- Buffer Enhancements
 require 'user.treesitter'

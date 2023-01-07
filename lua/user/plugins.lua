@@ -124,13 +124,6 @@ local plugins = {
 					vim.g.matchup_matchparen_offscreen = {}
 				end,
 			},
-			{ 'toppair/peek.nvim',                            -- Markdown previewer in web browser
-				commit = nil,
-				run = 'deno task --quiet build:fast',
-				ft = 'markdown',
-				opt = true,
-				config = function() require 'user.peek' end,
-			},
 			{ 'windwp/nvim-autopairs',                        -- Automagically match punctuation pairs
 				commit = nil },
 		},
@@ -183,6 +176,15 @@ local plugins = {
 			commit = nil,
 			requires = { 'kyazdani42/nvim-web-devicons' },
 		},
+		{ 'toppair/peek.nvim',                                -- Markdown previewer in web browser
+			commit = nil,
+			run = 'deno task --quiet build:fast',
+			ft = 'markdown',
+			opt = true,
+			config = function() require 'user.peek' end,
+		},
+		{ 'ray-x/web-tools.nvim',                             -- Live server for web development
+			commit = nil }
 	},
 }
 
