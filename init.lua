@@ -23,6 +23,6 @@ require 'user.galaxyline'
 
 -- Default configurations
 require 'impatient'
-require 'indent-o-matic'
 require('fidget').setup()
 require('colorizer').setup()
+require('guess-indent').setup()

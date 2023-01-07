@@ -102,8 +102,12 @@ local plugins = {
 				commit = nil },
 			{ 'kyazdani42/nvim-web-devicons',                 -- more icons and shit
 				commit = nil },
-			{ 'Darazaki/indent-o-matic',                      -- Auto-detect buffer indentation
-				commit = nil },
+			{ 'NMAC427/guess-indent.nvim',                    -- Auto-detect buffer indentation
+				commit = nil,
+				config = function()
+					require('guess-indent').setup {}
+				end,
+			},
 			{ 'norcalli/nvim-colorizer.lua',                  -- Colorize hex color codes
 				commit = nil },
 		},
