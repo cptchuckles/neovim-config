@@ -73,7 +73,7 @@ map('n', '<leader>tq', lazyscope.quickfixhistory,           { desc = "Telescope 
 map('n', '<leader>rg', lazyscope.current_buffer_fuzzy_find, { desc = "Telescope grep inside current buffer" })
 map('n', '<leader>tt', lazyscope.resume,                    { desc = "Telescope resume last session" })
 map('n', '<A-l>', function()
-	if not pcall(function() lazyscope.buffers() end) then
+	if not pcall(function() lazyscope.buffers { sort_mru = true } end) then
 		vim.api.nvim_command [[ls]]
 		vim.api.nvim_feedkeys(":b", 'n', false)
 	end
