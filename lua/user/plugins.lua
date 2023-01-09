@@ -157,7 +157,7 @@ local plugins = {
 		},
 		{ 'nvim-treesitter/playground',                       -- TSPlayground to see the AST of a file
 			commit = nil },
-		{ 'p00f/nvim-ts-rainbow',                             -- Color-code brackets and parens and shit
+		{ 'mrjones2014/nvim-ts-rainbow',                      -- Color-code brackets and parens and shit
 			commit = nil },
 		{ 'nvim-treesitter/nvim-treesitter-textobjects',      -- Text objects
 			commit = nil },
