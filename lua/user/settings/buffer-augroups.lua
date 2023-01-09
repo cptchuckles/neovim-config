@@ -205,7 +205,8 @@ local function file_settings()
 		desc = 'Format HTML/XML using built-in indentation upon save',
 		pattern = { '*.html', '*.xml' },
 		callback = function()
-			vim.api.nvim_feedkeys("gg=G<C-o>", 'n', true)
+			local macro = vim.api.nvim_replace_termcodes('gg=G<C-o>', true, false, true)
+			vim.api.nvim_feedkeys(macro, 'n', false)
 		end,
 	})
 end
