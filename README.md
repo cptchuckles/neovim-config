@@ -31,7 +31,7 @@ users.
 - [Symbols-Outline](https://github.com/simrat39/symbols-outline.nvim) - LSP-powered symbol outliner
   for code files
 - [Galaxyline](https://github.com/glepnir/galaxyline.nvim) - Customized editor statusline
-- [Bufferline](https://github.com/akinsho/bufferline.nvim) - Tabular display for open buffers
+- [nvim-navic](https://github.com/SmiteshP/nvim-navic) - Show document symbol breadcrumb in winbar
 
 **Workspace Tools**
 - [Telescope](https://github.com/nvim-telescope/telescope.nvim) - Powerful search/browse for files,
