@@ -132,6 +132,8 @@ local plugins = {
 				commit = nil },
 			{ 'lewis6991/gitsigns.nvim',                      -- Git Signs
 				commit = nil },
+			{ 'petertriho/nvim-scrollbar',                    -- Buffer scroll bar
+				commit = nil, },
 			{ 'simrat39/symbols-outline.nvim',                -- Symbols outliner
 				commit = nil },
 			{ 'moll/vim-bbye',                                -- Buffer deletion done right

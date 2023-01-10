@@ -221,18 +221,6 @@ U.section('right', {
 		},
 	}
 })
-U.section('right', {
-	LinePercentage = {
-		condition = function() return vim.bo.buftype ~= 'terminal' end,
-		provider = function()
-			return string.format("%.0f", vim.fn.line('.')*100 / vim.fn.line('$')) .. '%'
-		end,
-		highlight = {
-			function() return mode.primary end,
-			function() return mode.dark end,
-		},
-	}
-})
 
 U.section('short_line_left', {
 	ShortBufferLabel = {
