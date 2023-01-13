@@ -26,7 +26,7 @@ end
 
 function M.try_attach(client, bufnr)
 	if client.name == "astro" then
-		print("Navic does not play nice with astro")
+		print("nvim-navic does not play nice with astro")
 		return
 	end
 
