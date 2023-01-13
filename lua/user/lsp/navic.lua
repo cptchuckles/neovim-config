@@ -25,6 +25,11 @@ function M.setup()
 end
 
 function M.try_attach(client, bufnr)
+	if client.name == "astro" then
+		print("Navic does not play nice with astro")
+		return
+	end
+
 	if client.server_capabilities.documentSymbolProvider then
 		require('nvim-navic').attach(client, bufnr)
 		vim.wo[vim.fn.bufwinid(bufnr)].winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
