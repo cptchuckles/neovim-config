@@ -7,7 +7,6 @@ end
 tree.setup {
 	disable_netrw = true,
 	hijack_cursor = true,
-	open_on_setup = true,
 	reload_on_bufenter = true,
 	prefer_startup_root = true,
 	hijack_directories = {
@@ -94,4 +93,20 @@ vim.api.nvim_create_autocmd('BufEnter', {
 	desc = 'Refresh NvimTree on BufEnter',
 	pattern = 'NvimTree*',
 	callback = function() require('nvim-tree.api').tree.reload() end,
+})
+
+-- Recipe for opening on startup:
+vim.api.nvim_create_autocmd('VimEnter', {
+	group = vim.api.nvim_create_augroup('NvimTreeAutoOpen', { clear = true }),
+	desc = 'Open nvim-tree on startup',
+	callback = function(opts)
+		local directory = vim.fn.isdirectory(opts.file) == 1
+		if not directory then
+			return
+		end
+
+		vim.cmd.cd(opts.file)
+
+		require('nvim-tree.api').tree.open()
+	end,
 })
