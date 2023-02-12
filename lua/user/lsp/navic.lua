@@ -12,7 +12,8 @@ function M.setup()
 		icons[k] = v .. ' '
 	end
 
-	icons.Package = " " -- block scopes are "packages", which looks weird with my default package icon
+	-- block scopes are "packages", which looks weird with my default package icon
+	icons.Package = " "
 
 	navic.setup {
 		icons = icons,
@@ -26,8 +27,7 @@ end
 
 function M.try_attach(client, bufnr)
 	if client.name == "astro" then
-		print("nvim-navic does not play nice with astro")
-		return
+		return -- nvim-navic does not play nice with astro
 	end
 
 	if client.server_capabilities.documentSymbolProvider then
