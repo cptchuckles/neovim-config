@@ -226,7 +226,11 @@ U.section('short_line_left', {
 	ShortBufferLabel = {
 		condition = U.buffer_not_empty,
 		provider = function()
-			return vim.bo.buftype == 'nofile' and vim.bo.filetype or vim.fn.expand('%:.')
+			local content = vim.bo.buftype == 'nofile' and vim.bo.filetype or vim.fn.expand('%:.')
+			if content == 'NvimTree' then
+				content = vim.fn.expand('%:p:h'):gsub(vim.fn.getenv('HOME'), '~')
+			end
+			return content
 		end,
 		highlight = {
 			function() return "black" end,
