@@ -148,7 +148,7 @@ U.section('right', {
 			return U.buffer_not_empty() and vim.bo.buftype ~= 'terminal'
 		end,
 		provider = function()
-			return (vim.bo.expandtab and (icons.space .. vim.bo.shiftwidth) or icons.tab) .. ' '
+			return (vim.bo.expandtab and icons.space or icons.tab) .. vim.bo.shiftwidth .. ' '
 		end,
 		highlight = {
 			function() return mode.secondary end,
