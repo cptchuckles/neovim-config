@@ -191,7 +191,15 @@ U.section('right', {
 		condition = function()
 			return U.buffer_not_empty() and vim.bo.buftype ~= 'terminal'
 		end,
-		provider = function() return ' ' .. vim.bo.filetype .. ' ' end,
+		provider = function()
+			local ft = vim.bo.filetype
+			if ft == 'typescriptreact' then
+				ft = 'tsx'
+			elseif ft == 'javascriptreact' then
+				ft = 'jsx'
+			end
+			return ' ' .. ft .. ' '
+		end,
 		highlight = {
 			function() return mode.primary end,
 			function() return mode.dark end,
