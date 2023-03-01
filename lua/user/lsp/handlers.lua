@@ -1,27 +1,12 @@
 local M = {}
 
 M.on_attach = function(client, bufnr)
-	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
-	end
-
-	-- if client.server_capabilities.signatureHelpProvider then
-	-- 	require('lsp-overloads').setup(client, {
-	-- 		keymaps = {
-	-- 			previous_signature = '<A-K>',
-	-- 			next_signature     = '<A-J>',
-	-- 			previous_parameter = '<A-L>',
-	-- 			next_parameter     = '<A-H>',
-	-- 		},
-	-- 	})
-	-- end
-
-	require('user.lsp.navic').try_attach(client, bufnr)
-
 	if pcall(function() return vim.api.nvim_buf_get_var(bufnr, 'UserLspAttached') == 1 end) then
 		return
 	end
 	vim.api.nvim_buf_set_var(bufnr, 'UserLspAttached', 1)
+
+	require('user.lsp.navic').try_attach(client, bufnr)
 
 	require('user.settings.keymaps').lsp_setup(client, bufnr)
 end
