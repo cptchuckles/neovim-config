@@ -200,15 +200,6 @@ local function file_settings()
 			vim.opt_local.formatoptions:remove('l')
 		end,
 	})
-	vim.api.nvim_create_autocmd('BufWritePre', {
-		group = aug_file_settings,
-		desc = 'Format HTML/XML using built-in indentation upon save',
-		pattern = { '*.html', '*.xml' },
-		callback = function()
-			local macro = vim.api.nvim_replace_termcodes('gg=G<C-o>', true, false, true)
-			vim.api.nvim_feedkeys(macro, 'n', false)
-		end,
-	})
 end
 
 M.setup = function()
