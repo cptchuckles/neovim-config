@@ -26,6 +26,9 @@ illuminate.configure {
 		sh = {  -- lsp and treesitter are ass (don't match function refs to defs, can't find next)
 			providers = { 'regex' },
 		},
+		python = {
+			providers = { 'treesitter', 'regex' },
+		}
 	},
 	-- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
 	filetypes_denylist = {
