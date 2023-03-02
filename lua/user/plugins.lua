@@ -15,7 +15,7 @@ end
 
 -- Autocommand that resyncs packer whenever you save the plugins.lua file
 vim.api.nvim_create_autocmd('BufWritePost', {
-	group = vim.api.nvim_create_augroup('packer_user_config', { clear = true }),
+	group = vim.api.nvim_create_augroup('PackerUserConfig', { clear = true }),
 	desc = 'Update the plugin list every time you save plugins.lua',
 	pattern = vim.fn.stdpath('config') .. '/lua/user/plugins.lua',
 	callback = function(opts)
