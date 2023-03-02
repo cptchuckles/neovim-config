@@ -175,11 +175,7 @@ M.symbols_outline = {
 	fold_reset     = 'R',
 }
 
-M.nvim_tree = {
-	['[d'] = function() require('nvim-tree.api').node.navigate.diagnostics.prev() end,
-	[']d'] = function() require('nvim-tree.api').node.navigate.diagnostics.next() end,
-}
-
+M.nvim_tree = require('user.settings.keymaps.nvim_tree')
 M.gitsigns  = require('user.settings.keymaps.gitsigns')
 M.lsp_setup = require('user.settings.keymaps.lsp')
 M.telescope = require('user.settings.keymaps.telescope')
