@@ -9,23 +9,33 @@ O.handlers = {
 	["textDocument/definition"] = require('omnisharp_extended').handler,
 }
 
-O.filetypes = { 'cs', 'vb', 'razor', 'cshtml' }
+O.filetypes = { 'cs', 'vb' }
 
-local base_cmd = { "omnisharp" }
-
-local razor_dir = vim.fn.getenv("HOME") .. "/.razor"
-if vim.fn.isdirectory(razor_dir) then
-	vim.list_extend(base_cmd, {
-		"--plugin",
-		razor_dir .. "/OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll"
-	})
-end
+local base_cmd = { 'omnisharp' }
 
 O.cmd = base_cmd
+
+local razor_dir = vim.fn.getenv("HOME") .. "/.razor"
+local have_razor = vim.fn.isdirectory(razor_dir)
 
 O.on_new_config = function(new_config, new_root_dir)
 	-- Reset command to prevent repetitive argument buildup
 	new_config.cmd = vim.list_extend({}, base_cmd)
+
+	if have_razor then
+		if #vim.fn.glob(new_root_dir .. '/**/*.razor') > 0 or
+			#vim.fn.glob(new_root_dir .. '/**/*.cshtml') > 0
+		then
+			vim.list_extend(new_config.cmd, {
+				"--plugin",
+				razor_dir .. "/OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll",
+			})
+			vim.list_expand(new_config.filetypes, {
+				'razor',
+				'cshtml',
+			})
+		end
+	end
 
 	table.insert(new_config.cmd, '-z') -- https://github.com/OmniSharp/omnisharp-vscode/pull/4300
 	vim.list_extend(new_config.cmd, { '-s', new_root_dir })
