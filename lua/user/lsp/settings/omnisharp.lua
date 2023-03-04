@@ -1,5 +1,14 @@
+local base_cmd = { 'omnisharp' }
+
+local razor_dir = vim.fn.getenv("HOME") .. "/.razor"
+local have_razor = vim.fn.isdirectory(razor_dir)
+local omnisharp_razor_plugin =
+	razor_dir .. "/OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll"
+
 local O = {}
 
+O.cmd = base_cmd
+O.filetypes = { 'cs', 'vb' }
 O.organize_imports_on_format = true
 O.enable_import_completion = true
 O.enable_roslyn_analyzers = true
@@ -8,15 +17,6 @@ O.analyze_open_documents_only = true
 O.handlers = {
 	["textDocument/definition"] = require('omnisharp_extended').handler,
 }
-
-O.filetypes = { 'cs', 'vb' }
-
-local base_cmd = { 'omnisharp' }
-
-O.cmd = base_cmd
-
-local razor_dir = vim.fn.getenv("HOME") .. "/.razor"
-local have_razor = vim.fn.isdirectory(razor_dir)
 
 O.on_new_config = function(new_config, new_root_dir)
 	-- Reset command to prevent repetitive argument buildup
@@ -28,7 +28,7 @@ O.on_new_config = function(new_config, new_root_dir)
 		then
 			vim.list_extend(new_config.cmd, {
 				"--plugin",
-				razor_dir .. "/OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll",
+				omnisharp_razor_plugin,
 			})
 			vim.list_expand(new_config.filetypes, {
 				'razor',
