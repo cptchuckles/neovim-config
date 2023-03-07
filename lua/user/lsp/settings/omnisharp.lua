@@ -30,7 +30,7 @@ O.on_new_config = function(new_config, new_root_dir)
 				"--plugin",
 				omnisharp_razor_plugin,
 			})
-			vim.list_expand(new_config.filetypes, {
+			vim.list_extend(new_config.filetypes, {
 				'razor',
 				'cshtml',
 			})
