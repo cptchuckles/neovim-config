@@ -1,6 +1,7 @@
 -- Core modules
 require 'user.plugins'
 require 'user.settings'
+require 'user.filetype'
 
 -- Default configurations
 require 'impatient'
