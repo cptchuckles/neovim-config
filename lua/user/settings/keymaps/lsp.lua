@@ -41,19 +41,21 @@ return function(client, bufnr)
 		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 
-	map('n', 'K',      vim.lsp.buf.hover,            { desc = "LSP show information about symbol under cursor" })
-	map('n', 'g<C-]>', try_fancy("lsp_references"),  { desc = "LSP list references" })
-	map('n', '<A-a>',  vim.lsp.buf.code_action,      { desc = "LSP code actions" })
-	map('n', '<A-i>',  vim.diagnostic.open_float,    { desc = "Show line diagnostics" })
-	map('n', '<C-]>', (function()
-		if client.name == 'omnisharp' then
-			-- Override general <C-]> mapping for default vim one,
-			-- since omnisharp_extended doesn't work with Telescope or Trouble
-			return vim.lsp.buf.definition
-		else
-			return try_fancy("lsp_definitions")
-		end
-	end)(), { desc = "LSP go to definition" })
+	--- Custom actions from Hoffs/omnisharp-extended-lsp.nvim should be used when the client is Omnisharp
+	---@param method_name string
+	---@param opts? table
+	---@return function
+	local function maybe_omnisharp(method_name, opts)
+		return client.name == 'omnisharp'
+			and require('omnisharp_extended')[((opts or {}).telescope and 'telescope_' or '') .. method_name]
+			or try_fancy(method_name)
+	end
+
+	map('n', 'K',      vim.lsp.buf.hover,         { desc = "LSP show information about symbol under cursor" })
+	map('n', '<A-a>',  vim.lsp.buf.code_action,   { desc = "LSP code actions" })
+	map('n', '<A-i>',  vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+	map('n', 'g<C-]>', maybe_omnisharp('lsp_references',  { telescope = true }), { desc = "LSP list references" })
+	map('n', '<C-]>',  maybe_omnisharp('lsp_definitions', { telescope = true }), { desc = "LSP go to definition" })
 
 	map({ 'n', 'i' }, '<A-s>', vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 
@@ -61,10 +63,10 @@ return function(client, bufnr)
 	map('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
 	map('n', '<leader>dD', nice_diagnostics { scope = 'workspace' }, { desc = "Show workspace diagnostics" })
-	map('n', '<leader>dd', nice_diagnostics { scope = 'document' }, { desc = "Show document diagnostics" })
-	map('n', '<leader>de', try_fancy("lsp_declarations"), { desc = "LSP go to declaration of symbol" })
-	map('n', '<leader>di', try_fancy("lsp_implementations"), { desc = "LSP list implementations" })
-	map('n', '<leader>dr', vim.lsp.buf.rename, { desc = "LSP rename symbol" })
+	map('n', '<leader>dd', nice_diagnostics { scope = 'document' },  { desc = "Show document diagnostics" })
+	map('n', '<leader>de', try_fancy('lsp_declarations'),            { desc = "LSP go to declaration of symbol" })
+	map('n', '<leader>di', try_fancy('lsp_implementations'),         { desc = "LSP list implementations" })
+	map('n', '<leader>dr', vim.lsp.buf.rename,                       { desc = "LSP rename symbol" })
 
 	-- Formatting commands
 	vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(opts)
