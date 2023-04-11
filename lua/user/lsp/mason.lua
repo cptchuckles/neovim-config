@@ -10,11 +10,6 @@ if not mason_lsp_ok then
 	return
 end
 
-local base_opts = {
-	on_attach    = require('user.lsp.handlers').on_attach,
-	capabilities = require('user.lsp.handlers').capabilities,
-}
-
 mason.setup {
 	ui = {
 		border = "rounded",
@@ -31,7 +26,7 @@ mason_lsp.setup {
 mason_lsp.setup_handlers {
 	-- Automatically invoke lspconfig setup for every installed LSP server
 	function (server_name)
-		local opts = base_opts
+		local opts = vim.tbl_deep_extend("force", {}, require('user.lsp.handlers'))
 		local has_settings, settings = pcall(require, 'user.lsp.settings.'..server_name)
 		if has_settings then
 			opts = vim.tbl_deep_extend("force", opts, settings)

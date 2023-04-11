@@ -1,7 +1,9 @@
 local lspconfig = require('lspconfig')
 local configure = require('lspconfig.configs')
 
-local rzls = vim.fn.getenv('HOME') .. '/.razor/rzls'
+local razor_dir = os.getenv('DOTNET_RAZOR_PATH') or os.getenv('HOME') .. '/.razor'
+local rzls = razor_dir .. '/rzls'
+
 if not vim.fn.filereadable(rzls) then
 	return false
 end
