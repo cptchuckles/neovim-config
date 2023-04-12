@@ -10,6 +10,9 @@ let g:mapleader="\\"
 " Niceties
 nnoremap <leader>s <Cmd>set hls!<CR>
 nnoremap <A-l> <Cmd>ls<CR>:b
+nnoremap <C-q> :bd%<CR>
+nnoremap ZZ :wqa<CR>
+nnoremap ZQ :qa!<CR>
 
 " Window navigation
 nnoremap <C-j> <C-w>j
