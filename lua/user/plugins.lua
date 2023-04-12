@@ -101,16 +101,14 @@ local plugins = {
 				commit = nil },
 			{ 'kyazdani42/nvim-web-devicons',                 -- more icons and shit
 				commit = nil },
-			{ 'NMAC427/guess-indent.nvim',                    -- Auto-detect buffer indentation
-				commit = nil,
-				config = function()
-					require('guess-indent').setup {}
-				end,
-			},
 			{ 'norcalli/nvim-colorizer.lua',                  -- Colorize hex color codes
 				commit = nil },
 		},
 		editing = {
+			{ 'NMAC427/guess-indent.nvim',                    -- Auto-detect buffer indentation
+				commit = nil,
+				config = function() require('guess-indent').setup {} end,
+			},
 			{ 'jlcrochet/vim-razor',                          -- Attempt to edit razor with neovim
 				commit = nil },
 			{ 'numToStr/Comment.nvim',                        -- Auto-commenting
