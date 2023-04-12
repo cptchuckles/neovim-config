@@ -20,6 +20,19 @@ nnoremap <C-q> :bd%<CR>
 nnoremap ZZ :wqa<CR>
 nnoremap ZQ :qa!<CR>
 
+function Rename(from)
+	call inputsave()
+	let l:to = call("input", ["Rename `" . a:from . "`: "])
+	call inputrestore()
+	if strlen(l:to) == 0
+		return
+	endif
+	exe "%substitute/\\V\\<" . a:from . "\\>/" . l:to . "/Ige"
+	exe "normal" "\<C-o>"
+endfunction
+nnoremap <leader>dr "ryiw:call Rename("r")<CR>
+vnoremap <C-r> "ry:call Rename("r")<CR>
+
 " Window navigation
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
