@@ -39,12 +39,12 @@ tree.setup {
 		width = "20%",
 		adaptive_size = false,
 		preserve_window_proportions = true,
-		hide_root_folder = true,
 	},
 	renderer = {
 		add_trailing = true,
 		group_empty = true,
 		full_name = true,
+		root_folder_label = false,
 		indent_markers = {
 			enable = true,
 			inline_arrows = true,
