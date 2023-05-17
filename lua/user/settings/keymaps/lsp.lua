@@ -1,10 +1,12 @@
-local function try_fancy(action)
-	local function try(f)
-		return function()
-			return pcall(function() f() end)
-		end
+---@param f fun()
+local function try(f)
+	return function()
+		return pcall(f)
 	end
+end
 
+---@param action string
+local function try_fancy(action)
 	local try_telescope = try(function()
 		require('telescope.builtin')[action]({ show_line = false })
 	end)
