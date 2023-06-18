@@ -79,6 +79,7 @@ local plugins = {
 		--  { 'ThePrimeagen/refactoring.nvim',                   -- Refactoring
 		-- 	commit = nil },
 		{ 'j-hui/fidget.nvim',                                -- LSP Progress fidget spinner
+			tag = 'legacy',
 			commit = nil },
 	},
 
