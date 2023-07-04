@@ -37,4 +37,11 @@ M.setup = function(opts)
   vim.api.nvim_command('colorscheme ' .. opts.scheme)
 end
 
+vim.api.nvim_create_user_command("Habamax", function ()
+  vim.cmd [[
+    colorscheme habamax
+    hi Normal guibg=NONE
+  ]]
+end, {})
+
 return M
