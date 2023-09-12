@@ -29,3 +29,13 @@ gitsigns.setup {
 if package.preload.scrollbar then
 	require('scrollbar.handlers.gitsigns').setup()
 end
+
+local aug_gitsigns = vim.api.nvim_create_augroup('AttachGitsigns', { clear = true })
+vim.api.nvim_create_autocmd('BufEnter', {
+	group = aug_gitsigns,
+	desc = "Attach gitsigns upon opening a buffer",
+	pattern = '*',
+	callback = function(opts)
+		gitsigns.attach(opts.bufnr)
+	end,
+})
