@@ -65,6 +65,8 @@ local plugins = {
 			commit = nil },
 		{ 'hrsh7th/cmp-nvim-lsp',                             -- LSP support for nvim-cmp
 			commit = nil },
+		{ 'hrsh7th/cmp-nvim-lsp-signature-help',              -- LSP Signature help
+			commit = nil },
 		{ 'Issafalcon/lsp-overloads.nvim',                    -- signature overload cycler
 			commit = nil },
 		{ 'williamboman/mason.nvim',                          -- LSP/DAP/Format/Lint manager
