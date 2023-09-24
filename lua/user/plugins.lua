@@ -106,6 +106,8 @@ local plugins = {
 				commit = nil },
 			{ 'norcalli/nvim-colorizer.lua',                  -- Colorize hex color codes
 				commit = nil },
+			{ 'hiphish/rainbow-delimiters.nvim',              -- Color-code brackets and parens and shit
+				commit = nil },
 		},
 		editing = {
 			{ 'NMAC427/guess-indent.nvim',                    -- Auto-detect buffer indentation
@@ -160,8 +162,6 @@ local plugins = {
 			end,
 		},
 		{ 'nvim-treesitter/playground',                       -- TSPlayground to see the AST of a file
-			commit = nil },
-		{ 'mrjones2014/nvim-ts-rainbow',                      -- Color-code brackets and parens and shit
 			commit = nil },
 		{ 'nvim-treesitter/nvim-treesitter-textobjects',      -- Text objects
 			commit = nil },

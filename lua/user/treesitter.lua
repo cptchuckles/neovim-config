@@ -99,23 +99,7 @@ ts.setup {
 		enable = true,
 	},
 
-	-- third-party plugins
-	rainbow = {
-		enable = true,
-		extended_mode = true,
-		max_file_lines = nil,
-	},
-
 	matchup = {
 		enable = true,
 	},
 }
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-	group = vim.api.nvim_create_augroup('TSRainbowRefresh', { clear = true }),
-	pattern = '*.*',
-	callback = function()
-		vim.api.nvim_command [[TSToggle rainbow]]
-		vim.api.nvim_command [[TSToggle rainbow]]
-	end,
-})
