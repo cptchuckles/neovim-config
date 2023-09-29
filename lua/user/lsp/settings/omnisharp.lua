@@ -4,14 +4,14 @@ local razor_dir = os.getenv('DOTNET_RAZOR_PATH') or (os.getenv('HOME') .. '/.raz
 local omnisharp_razor_plugin =
 	razor_dir .. '/OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll'
 
-local O = {}
-
-O.cmd = base_cmd
-O.filetypes = { 'cs', 'vb' }
-O.organize_imports_on_format = true
-O.enable_import_completion = true
-O.enable_roslyn_analyzers = true
-O.analyze_open_documents_only = true
+local O = {
+	cmd = base_cmd,
+	filetypes = { 'cs', 'vb' },
+	organize_imports_on_format = true,
+	enable_import_completion = true,
+	enable_roslyn_analyzers = true,
+	analyze_open_documents_only = true,
+}
 
 O.on_new_config = function(new_config, new_root_dir)
 	-- Reset command to prevent repetitive argument buildup
