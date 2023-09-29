@@ -9,10 +9,6 @@ M.on_attach = function(client, bufnr)
 	require('user.lsp.navic').try_attach(client, bufnr)
 
 	require('user.settings.keymaps').lsp_setup(client, bufnr)
-
-	if client.name == "omnisharp" then
-		client.server_capabilities.semanticTokensProvider = nil
-	end
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
