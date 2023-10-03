@@ -133,6 +133,7 @@ local plugins = {
 		},
 		layout = {
 			{ 'lukas-reineke/indent-blankline.nvim',          -- Indentation fanciness
+				tag = 'v2.20.8',
 				commit = nil },
 			{ 'lewis6991/gitsigns.nvim',                      -- Git Signs
 				commit = nil },
