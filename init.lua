@@ -21,6 +21,7 @@ require 'user.symbols-outline'
 require 'user.telescope'
 require 'user.trouble'
 require 'user.web-tools'
+require 'user.sniprun'
 
 -- Buffer Enhancements
 require 'user.treesitter'

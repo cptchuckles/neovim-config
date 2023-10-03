@@ -189,7 +189,10 @@ local plugins = {
 			config = function() require 'user.peek' end,
 		},
 		{ 'ray-x/web-tools.nvim',                             -- Live server for web development
-			commit = nil }
+			commit = nil },
+		{ 'michaelb/sniprun',                                 -- Code runner
+			run = 'sh ./install.sh',
+			commit = nil },
 	},
 }
 
