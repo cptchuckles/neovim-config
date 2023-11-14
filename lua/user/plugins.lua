@@ -102,6 +102,8 @@ local plugins = {
 				commit = nil },
 			{ 'folke/tokyonight.nvim',                        -- TokyoNight theme
 				commit = nil },
+			{ 'catppuccin/nvim',                               -- Catppussin'
+				commit = nil },
 			{ 'kyazdani42/nvim-web-devicons',                 -- more icons and shit
 				commit = nil },
 			{ 'norcalli/nvim-colorizer.lua',                  -- Colorize hex color codes
