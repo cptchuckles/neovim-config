@@ -13,5 +13,6 @@ return {
 		-- additional:
 		"cshtml",
 		"razor",
+		"htmldjango",
 	},
 }
