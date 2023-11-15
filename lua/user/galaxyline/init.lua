@@ -229,6 +229,17 @@ U.section('right', {
 		},
 	}
 })
+U.section('right', {
+	LineCount = {
+		provider = function()
+			return '(' .. vim.fn.line('$') .. ')'
+		end,
+		highlight = {
+			function() return mode.primary end,
+			function() return mode.dark end,
+		},
+	}
+})
 
 U.section('short_line_left', {
 	ShortBufferLabel = {
