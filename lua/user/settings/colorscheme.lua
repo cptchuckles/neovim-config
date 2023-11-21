@@ -26,6 +26,16 @@ local function make_theme_augroup()
   ]]
 end
 
+vim.api.nvim_create_user_command("ClearColorscheme", function(opts)
+	vim.cmd(string.format([[
+		colorscheme %s
+		hi Normal guibg=NONE
+		hi NormalNC guibg=NONE
+		hi NvimTreeNormal guibg=NONE
+		hi NvimTreeNormalNC guibg=NONE
+	]], opts.fargs[1] or vim.g.colors_name))
+end, {nargs='?'})
+
 ---@class colorschemeOptions
 ---@field public scheme string?
 
@@ -34,14 +44,7 @@ M.setup = function(opts)
   opts = opts or {}
   opts.scheme = opts.scheme or 'default'
   make_theme_augroup()
-  vim.api.nvim_command('colorscheme ' .. opts.scheme)
+  vim.api.nvim_command('ClearColorscheme ' .. opts.scheme)
 end
-
-vim.api.nvim_create_user_command("Habamax", function ()
-  vim.cmd [[
-    colorscheme habamax
-    hi Normal guibg=NONE
-  ]]
-end, {})
 
 return M
