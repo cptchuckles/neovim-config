@@ -6,11 +6,21 @@ end
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
-luasnip.filetype_extend("ruby", {
-	"jekyll",
-	"rails",
-})
+local extensions = {
+	ruby = {
+		"jekyll",
+		"rails",
+	},
+	javascript = {
+		"jsdoc",
+	},
+	cpp = {
+		"unreal",
+	},
+}
 
-luasnip.filetype_extend("cpp", { "unreal" })
+for lang, tbl in pairs(extensions) do
+	luasnip.filetype_extend(lang, tbl)
+end
 
 return luasnip
