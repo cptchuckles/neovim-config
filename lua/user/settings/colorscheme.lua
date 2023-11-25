@@ -26,26 +26,44 @@ local function make_theme_augroup()
   ]]
 end
 
+local function get_groups(group_name)
+  local hl = vim.api.nvim_exec2("highlight", { output = true })
+  local groups = {}
+  for line in hl.output:gmatch("[^\n]+") do
+    local gs = line:match(group_name .. "%g+")
+    if gs then
+      vim.list_extend(groups, { gs })
+    end
+  end
+  return groups
+end
+
 vim.api.nvim_create_user_command("ClearColorscheme", function(opts)
-	vim.cmd(string.format([[
-		colorscheme %s
-		hi Normal guibg=NONE
-		hi NormalNC guibg=NONE
-    hi NormalFloat guibg=NONE
-    hi FloatBorder guibg=NONE
-    hi FloatWinBorder guibg=NONE
-    hi ColorColumn guibg=NONE
-    hi SignColumn guibg=NONE
-		hi NvimTreeNormal guibg=NONE
-		hi NvimTreeNormalNC guibg=NONE
-    hi NvimTreeWinSeparator guibg=NONE
-	]], opts.fargs[1] or vim.g.colors_name))
-end, {nargs='?'})
+  local cmd_string = string.format("colorscheme %s", opts.fargs[1] or vim.g.colors_name)
+
+  for _, group in ipairs(get_groups "GitSigns") do
+    cmd_string = cmd_string .. "\n \\| hi " .. group .. " guibg=NONE"
+  end
+
+  vim.cmd(cmd_string .. [[
+
+    \| hi Normal guibg=NONE
+    \| hi NormalNC guibg=NONE
+    \| hi NormalFloat guibg=NONE
+    \| hi FloatBorder guibg=NONE
+    \| hi FloatWinBorder guibg=NONE
+    \| hi ColorColumn guibg=NONE
+    \| hi SignColumn guibg=NONE
+    \| hi NvimTreeNormal guibg=NONE
+    \| hi NvimTreeNormalNC guibg=NONE
+    \| hi NvimTreeWinSeparator guibg=NONE
+  ]])
+end, { nargs = '?' })
 
 ---@class colorschemeOptions
 ---@field public scheme string?
 
----@param opts colorschemeOptions
+---@param opts colorschemeOptions?
 M.setup = function(opts)
   opts = opts or {}
   opts.scheme = opts.scheme or 'default'
