@@ -31,8 +31,14 @@ vim.api.nvim_create_user_command("ClearColorscheme", function(opts)
 		colorscheme %s
 		hi Normal guibg=NONE
 		hi NormalNC guibg=NONE
+    hi NormalFloat guibg=NONE
+    hi FloatBorder guibg=NONE
+    hi FloatWinBorder guibg=NONE
+    hi ColorColumn guibg=NONE
+    hi SignColumn guibg=NONE
 		hi NvimTreeNormal guibg=NONE
 		hi NvimTreeNormalNC guibg=NONE
+    hi NvimTreeWinSeparator guibg=NONE
 	]], opts.fargs[1] or vim.g.colors_name))
 end, {nargs='?'})
 
