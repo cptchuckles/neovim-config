@@ -22,29 +22,34 @@ local function make_theme_augroup()
       \|  highlight! link IlluminatedWordText LspReferenceText
       \|  highlight! link IlluminatedWordRead LspReferenceRead
       \|  highlight! link IlluminatedWordWrite LspReferenceWrite
+      \|  let g:clear_colorscheme = 0
     augroup end
   ]]
 end
 
 vim.api.nvim_create_user_command("ClearColorscheme", function(opts)
-  local cmd_string = string.format("colorscheme %s", opts.fargs[1] or vim.g.colors_name)
+  vim.cmd(string.format("colorscheme %s", opts.fargs[1] or vim.g.colors_name))
 
-  for _, group in ipairs(vim.fn.getcompletion("GitSigns", "highlight")) do
-    cmd_string = cmd_string .. "\n \\| hi " .. group .. " guibg=NONE"
+  vim.g.clear_colorscheme = 1
+
+  for _, group in ipairs(vim.fn.getcompletion("Git", "highlight")) do
+    vim.cmd("hi " .. group .. " guibg=NONE")
+  end
+  for _, group in ipairs(vim.fn.getcompletion("Diff", "highlight")) do
+    vim.cmd("hi " .. group .. " guibg=NONE")
   end
 
-  vim.cmd(cmd_string .. [[
-
-    \| hi Normal guibg=NONE
-    \| hi NormalNC guibg=NONE
-    \| hi NormalFloat guibg=NONE
-    \| hi FloatBorder guibg=NONE
-    \| hi FloatWinBorder guibg=NONE
-    \| hi ColorColumn guibg=NONE
-    \| hi SignColumn guibg=NONE
-    \| hi NvimTreeNormal guibg=NONE
-    \| hi NvimTreeNormalNC guibg=NONE
-    \| hi NvimTreeWinSeparator guibg=NONE
+  vim.cmd([[
+    hi Normal guibg=NONE
+    hi NormalNC guibg=NONE
+    hi NormalFloat guibg=NONE
+    hi FloatBorder guibg=NONE
+    hi FloatWinBorder guibg=NONE
+    hi ColorColumn guibg=NONE
+    hi SignColumn guibg=NONE
+    hi NvimTreeNormal guibg=NONE
+    hi NvimTreeNormalNC guibg=NONE
+    hi NvimTreeWinSeparator guibg=NONE
   ]])
 end, { nargs = '?' })
 
