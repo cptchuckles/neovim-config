@@ -26,22 +26,10 @@ local function make_theme_augroup()
   ]]
 end
 
-local function get_groups(group_name)
-  local hl = vim.api.nvim_exec2("highlight", { output = true })
-  local groups = {}
-  for line in hl.output:gmatch("[^\n]+") do
-    local gs = line:match(group_name .. "%g+")
-    if gs then
-      vim.list_extend(groups, { gs })
-    end
-  end
-  return groups
-end
-
 vim.api.nvim_create_user_command("ClearColorscheme", function(opts)
   local cmd_string = string.format("colorscheme %s", opts.fargs[1] or vim.g.colors_name)
 
-  for _, group in ipairs(get_groups "GitSigns") do
+  for _, group in ipairs(vim.fn.getcompletion("GitSigns", "highlight")) do
     cmd_string = cmd_string .. "\n \\| hi " .. group .. " guibg=NONE"
   end
 
