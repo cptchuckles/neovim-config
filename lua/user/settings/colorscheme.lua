@@ -42,6 +42,7 @@ vim.api.nvim_create_user_command("ClearColorscheme", function(opts)
   vim.cmd([[
     hi Normal guibg=NONE
     hi NormalNC guibg=NONE
+    hi EndOfBuffer guibg=NONE
     hi NormalFloat guibg=NONE
     hi FloatBorder guibg=NONE
     hi FloatWinBorder guibg=NONE
