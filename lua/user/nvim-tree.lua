@@ -5,7 +5,7 @@ if not status_ok then
 end
 
 tree.setup {
-	disable_netrw = true,
+	disable_netrw = false,
 	hijack_cursor = true,
 	reload_on_bufenter = true,
 	prefer_startup_root = true,
