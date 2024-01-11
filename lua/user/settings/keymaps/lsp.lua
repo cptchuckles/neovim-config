@@ -58,6 +58,8 @@ return function(client, bufnr)
 	map('n', '<A-i>',  vim.diagnostic.open_float, { desc = "Show line diagnostics" })
 	map('n', 'g<C-]>', maybe_omnisharp('lsp_references',  { telescope = true }), { desc = "LSP list references" })
 	map('n', '<C-]>',  maybe_omnisharp('lsp_definitions', { telescope = true }), { desc = "LSP go to definition" })
+	map('n', '<leader>di', maybe_omnisharp('lsp_implementations', { telescope = true}),
+		{ desc = "LSP list implementations" })
 
 	map({ 'n', 'i' }, '<A-s>', vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 
@@ -67,7 +69,6 @@ return function(client, bufnr)
 	map('n', '<leader>dD', nice_diagnostics { scope = 'workspace' }, { desc = "Show workspace diagnostics" })
 	map('n', '<leader>dd', nice_diagnostics { scope = 'document' },  { desc = "Show document diagnostics" })
 	map('n', '<leader>de', try_fancy('lsp_declarations'),            { desc = "LSP go to declaration of symbol" })
-	map('n', '<leader>di', try_fancy('lsp_implementations'),         { desc = "LSP list implementations" })
 	map('n', '<leader>dr', vim.lsp.buf.rename,                       { desc = "LSP rename symbol" })
 
 	-- Formatting commands
