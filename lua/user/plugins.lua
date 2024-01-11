@@ -53,7 +53,7 @@ local plugins = {
 		{ 'rafamadriz/friendly-snippets',                     -- A bunch of snippets
 			commit = nil },
 		{ 'L3MON4D3/LuaSnip',                                 -- Snippet engine
-			dependencies = { 'rafamadriz/friendly-snippets' },
+			requires = { 'rafamadriz/friendly-snippets' },
 			commit = nil },
 		{ 'saadparwaiz1/cmp_luasnip',                         -- Snippet completion
 			commit = nil },
@@ -71,6 +71,23 @@ local plugins = {
 		{ 'Issafalcon/lsp-overloads.nvim',                    -- signature overload cycler
 			commit = nil },
 		{ 'williamboman/mason.nvim',                          -- LSP/DAP/Format/Lint manager
+			opts = {
+				registries = {
+					'github:nvim-java/mason-registry',
+					'github:mason-org/mason-registry',
+				},
+			},
+			commit = nil },
+		{ 'nvim-java/nvim-java',                              -- Java support
+			requires = {
+				'nvim-java/lua-async-await',
+				'nvim-java/nvim-java-core',
+				'nvim-java/nvim-java-test',
+				'nvim-java/nvim-java-dap',
+				'MunifTanjim/nui.nvim',
+				'neovim/nvim-lspconfig',
+				'mfussenegger/nvim-dap',
+			},
 			commit = nil },
 		{ 'williamboman/mason-lspconfig.nvim',                -- Setup lspconfig for mason-installed LSPs
 			commit = nil },

@@ -9,3 +9,6 @@ local user_default = {
 require('user.lsp.custom')(user_default)
 
 lspconfig.gdscript.setup(user_default)
+
+require('java').setup()
+lspconfig.jdtls.setup(user_default)
