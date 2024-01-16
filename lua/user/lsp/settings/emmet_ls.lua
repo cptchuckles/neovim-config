@@ -14,5 +14,6 @@ return {
 		"cshtml",
 		"razor",
 		"htmldjango",
+		"jsp",
 	},
 }
