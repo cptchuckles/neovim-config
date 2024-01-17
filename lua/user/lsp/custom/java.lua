@@ -28,6 +28,7 @@ return function(config)
 				return
 			end
 
+			print("Building " .. vim.fn.expand('%:t:r'))
 			vim.fn.execute(compiler, "silent")
 		end,
 	})
