@@ -4,7 +4,7 @@ if not status_ok then
 	return
 end
 
-gl.short_line_list = { 'NvimTree', 'Outline', 'Trouble', 'qf' }
+gl.short_line_list = { 'NvimTree', 'Outline', 'trouble', 'qf' }
 
 local theme = require 'user.galaxyline.theme'
 local colors      = theme.modecolors

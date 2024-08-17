@@ -31,7 +31,7 @@ local function nice_diagnostics(opts)
 	opts = opts or {}
 	opts.scope = opts.scope or 'document'
 	return function()
-		if not pcall(function() vim.api.nvim_command('Trouble ' .. opts.scope .. '_diagnostics') end) then
+		if not pcall(function() vim.api.nvim_command('Trouble diagnostics ' .. (opts.scope == "document" and "filter.buf=0" or "")) end) then
 			vim.diagnostic.setqflist { open = true }
 		end
 	end

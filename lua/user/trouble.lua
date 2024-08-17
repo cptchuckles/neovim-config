@@ -16,13 +16,15 @@ trouble.setup {
 		"lsp_references",
 	},
 
-	action_keys = {
-		jump        = '<cr>',
-		preview     = '<tab>',
-		close_folds = 'W',
-		open_folds  = 'E',
-		toggle_fold = { 'h', 'l' },
+	keys = {
+		["<cr>"] = "jump",
+		["<tab>"] = "preview",
+		W = "fold_close_recursive",
+		E = "fold_open_recursive",
+		h = "fold_toggle",
+		l = "fold_toggle",
 	},
+
 	signs = {
 		error       = "",
 		warning     = "",
