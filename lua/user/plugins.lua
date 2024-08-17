@@ -80,6 +80,7 @@ local plugins = {
 			commit = nil },
 		{ 'nvim-java/nvim-java',                              -- Java support
 			requires = {
+				'nvim-java/spring-boot.nvim',
 				'nvim-java/lua-async-await',
 				'nvim-java/nvim-java-core',
 				'nvim-java/nvim-java-refactor',
