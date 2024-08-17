@@ -125,7 +125,7 @@ U.section('mid', {
 			return U.buffer_not_empty() and vim.bo.buftype ~= 'terminal'
 		end,
 		provider = function()
-			if next(vim.lsp.buf_get_clients()) == nil then return '' end
+			if next(vim.lsp.get_clients()) == nil then return '' end
 			local all = vim.diagnostic.get(0)
 			local errs = vim.tbl_filter(function(d)
 				return d.severity == vim.diagnostic.severity.ERROR

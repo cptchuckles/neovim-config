@@ -59,7 +59,7 @@ local function easy_close_window()
 				return
 			end
 			vim.api.nvim_command [[wincmd p]]
-			vim.api.nvim_win_close(winid, { force = true })
+			vim.api.nvim_win_close(winid, true)
 		end
 	end
 	local function keymap_opts(bufnr)
@@ -177,7 +177,7 @@ local function terminal_settings()
 				return
 			end
 			vim.api.nvim_command [[wincmd p]]
-			vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), { force = true })
+			vim.api.nvim_win_close(vim.fn.bufwinid(opts.buf), true)
 			vim.api.nvim_command("bdelete! " .. opts.buf)
 		end,
 	})
