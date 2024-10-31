@@ -25,11 +25,7 @@ trouble.setup {
 		l = "fold_toggle",
 	},
 
-	signs = {
-		error       = "",
-		warning     = "",
-		hint        = "ﯧ",
-		information = "",
-		other       = '◊',
-	},
+	icons = {
+		kinds = require('user.settings.icons'),
+	}
 }
