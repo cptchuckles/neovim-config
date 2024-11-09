@@ -10,8 +10,8 @@ local actions = require('telescope.actions')
 telescope.setup {
 	defaults = {
 		winblend = 10,
-		prompt_prefix = ' ',
-		selection_caret = ' ',
+		prompt_prefix = ' ',
+		selection_caret = ' ',
 		sorting_strategy = 'ascending',
 
 		layout_strategy = 'flex',
