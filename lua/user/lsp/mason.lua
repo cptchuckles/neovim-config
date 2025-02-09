@@ -27,9 +27,17 @@ mason_lsp.setup {
 	},
 }
 
+local environment_conditions = {
+	jdtls = {"NVIM_USE_JAVA", "1"},
+}
+
 mason_lsp.setup_handlers {
 	-- Automatically invoke lspconfig setup for every installed LSP server
 	function (server_name)
+		local env_var = environment_conditions[server_name]
+		if env_var ~= nil and os.getenv(env_var[1]) ~= env_var[2] then
+			return
+		end
 		local opts = vim.tbl_deep_extend("force", {}, require('user.lsp.handlers'))
 		local has_settings, settings = pcall(require, 'user.lsp.settings.'..server_name)
 		if has_settings then
