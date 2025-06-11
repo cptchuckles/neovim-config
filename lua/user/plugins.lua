@@ -96,9 +96,7 @@ local plugins = {
 		{ 'Hoffs/omnisharp-extended-lsp.nvim',                -- Omnisharp specific bullshit
 			branch = 'feat/sourcegen-support',
 			commit = nil },
-		{ 'jose-elias-alvarez/null-ls.nvim',                  -- Null LS
-			commit = nil },
-		--  { 'ThePrimeagen/refactoring.nvim',                   -- Refactoring
+		--  { 'ThePrimeagen/reactoring.nvim',                   -- Refactoring
 		-- 	commit = nil },
 		{ 'j-hui/fidget.nvim',                                -- LSP Progress fidget spinner
 			tag = 'legacy',
