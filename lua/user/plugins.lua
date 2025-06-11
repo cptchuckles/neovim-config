@@ -92,7 +92,7 @@ local plugins = {
 			},
 			commit = nil },
 		{ 'williamboman/mason-lspconfig.nvim',                -- Setup lspconfig for mason-installed LSPs
-			commit = nil },
+			commit = 'f995805bbfea692653bfedb9e42872107b84ef72' },
 		{ 'Hoffs/omnisharp-extended-lsp.nvim',                -- Omnisharp specific bullshit
 			branch = 'feat/sourcegen-support',
 			commit = nil },
